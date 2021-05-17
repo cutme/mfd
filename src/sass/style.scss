@@ -1,0 +1,60 @@
+@import 'settings/colors.scss';
+@import 'settings/global.scss';
+
+@import 'tools/clear';
+@import 'tools/functions';
+@import 'tools/mixins';
+@import 'tools/custom-select';
+@import 'tools/swiper';
+
+@import 'generic/reset';
+@import 'generic/box-sizing';
+
+@import 'elements/extends';
+@import 'elements/fonts';
+@import 'elements/form';
+@import 'elements/media';
+@import 'elements/page';
+@import 'elements/typography';
+
+@import 'objects/article';
+@import 'objects/btn';
+@import 'objects/cols';
+@import 'objects/container';
+@import 'objects/hamburger';
+@import 'objects/header';
+@import 'objects/hscroll';
+@import 'objects/icons';
+@import 'objects/morebtn';
+@import 'objects/nav';
+@import 'objects/right';
+@import 'objects/section';
+@import 'objects/tabs';
+@import 'objects/wrap';
+
+@import 'components/careers';
+@import 'components/contact';
+@import 'components/details';
+@import 'components/esg1';
+@import 'components/esg2';
+@import 'components/fleet1';
+@import 'components/fleet2';
+@import 'components/footer';
+@import 'components/hero';
+@import 'components/map';
+@import 'components/nav';
+@import 'components/loader';
+@import 'components/membership';
+@import 'components/topbar';
+@import 'components/parallax';
+@import 'components/partnership';
+@import 'components/services';
+@import 'components/team';
+@import 'components/usps';
+@import 'components/value0';
+@import 'components/value1';
+@import 'components/value2';
+@import 'components/vision1';
+@import 'components/vision2';
+
+@import 'trumps/trumps';

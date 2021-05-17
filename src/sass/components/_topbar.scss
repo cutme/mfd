@@ -1,0 +1,78 @@
+.c-topbar {
+    @include z-index(topbar);
+    @extend %abs;
+    left: 0; bottom: 1px;
+    width: 100%;
+    height: 135px;
+    background-color: $c-gray-01;
+    
+    transition: all .5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translate3d(0, 100%, 0);
+    opacity: 0;
+    
+    &.is-green {
+        background-color: $c-green-01;
+        color: black;
+    }
+    
+    @media ( max-width: $base + px ) {
+    	@include responsive-height(base(135), rem(100));
+    }
+    
+    @media ( max-width: $tablet - 1px ) {
+        position: fixed;
+        bottom: auto;
+        top: 0;
+    	border-bottom: none;
+    }
+    
+    &.is-fixed {
+        position: fixed;
+        left: 0;
+        top: 0;
+    }
+    
+    .is-loaded & {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    
+    .c-nav {
+        @media ( min-width: $menu + 1px ) {
+	        margin: 0 0 0 auto;
+        }
+    }
+    
+    .o-logo {
+        display: inline-block;
+        
+        .desktop {
+            display: none;
+            width: 362px;
+            //height: 49px;
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-width(base(362), rem(100));
+            }
+            
+            @media ( min-width: $tablet + px ) {
+            	display: block;
+            }
+        }
+        
+        .mobile {
+            width: 80px;
+            //height: 32px;
+
+            @media ( min-width: $tablet + px ) {
+            	display: none;
+            }
+        }
+    }
+    
+    .o-container {
+        @extend %flex;
+        @extend %flex-y;
+        height: 100%;
+    }
+}

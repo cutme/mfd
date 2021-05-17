@@ -1,0 +1,8 @@
+.o-nav {
+    @extend %flex;
+    padding-top: 40px;
+    
+    @media ( max-width: $tablet + px ) {
+    	@include responsive-padding-top(tablet(40), rem(0));
+    }
+}

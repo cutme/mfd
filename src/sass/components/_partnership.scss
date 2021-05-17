@@ -1,0 +1,173 @@
+.c-partnership {
+    background-color: $c-green-01;
+    padding-top: 120px;
+    color: black;
+    
+    @media ( max-width: $base + px ) {
+    	@include responsive-padding-top(base(120), rem(40));
+    }
+    
+    @media ( max-width: $tablet - 1px ) {
+    	padding: {
+        	top: 40px;
+        	bottom: 50px;
+        }
+    }
+    
+    &__logotypes {
+        @extend %flex;
+        //@extend %flex-x;
+        width: 100%;
+        margin-top: 100px;
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-margin-top(base(100), rem(20));
+        }
+        
+        @media ( max-width: $tablet  - 1px ) {
+            flex-wrap: wrap;
+        }
+
+        figure {
+            div {
+                @extend %flex;
+                @extend %flex-xy;
+                height: 180px;
+                padding: 20px 0;
+                
+                @media ( max-width: $base + px ) {
+                	@include responsive-height(base(180), rem(100));
+                }
+                
+                @media ( max-width: $tablet  - 1px ) {
+                    padding: 0;
+                    justify-content: flex-start;
+                }
+            }
+        }
+        
+        figcaption {
+            
+            @media ( min-width: $tablet + px ) {
+            	text-align: center;
+            }
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-font(base(24), rem(14));
+            }
+        }
+
+        li {
+            width: 33.33%;
+            padding: 30px 3% 100px 3%;
+            
+            @media ( max-width: $tablet  - 1px ) {
+            	width: 50%;
+            	padding: 0 10% 30px 0;
+            }
+
+            @media ( max-width: $smartphone_portrait + px ) {
+            	width: 100%;
+            	padding: 0;
+            }
+
+            &:not(:last-child) {
+                @media ( min-width: $tablet + px ) {
+                	border-right: 1px solid black;
+                }
+            }
+            
+            img {
+                @media ( max-width: $tablet  - 1px ) {
+                    width: auto;
+                    max-width: none;
+                }
+            }       
+
+            &:nth-of-type(1) {
+                img {
+                    @media ( max-width: $tablet  - 1px ) {
+                        height: 67px;
+                    }
+                }
+            }
+            
+            &:nth-of-type(2) {
+                @media ( min-width: $smartphone_portrait + 1px ) and ( max-width: $tablet - 1px ) {
+                    padding-left: 15px;
+                }
+
+                img {
+                    @media ( max-width: $tablet  - 1px ) {
+                        height: 35px;
+                    }
+                }
+            }
+            
+            &:nth-of-type(3) {
+                img {
+                    @media ( max-width: $tablet  - 1px ) {
+                        height: 32px;
+                    }
+                }
+            }
+        }       
+    }
+    
+    .o-cols {
+        &__item {
+            &--image {
+                img {
+                    @media ( max-width: $base + px ) {
+                    	width: grid(514, 610);
+                    }
+                    
+                    @media ( max-width: $tablet - 1px ) {
+                    	margin: 0 auto;
+                    }
+                                    
+                    @media ( max-width: $tablet_portrait  - 1px ) {
+                        max-width: 70%;
+                    }
+                }
+            }
+
+            &--text {
+                padding-top: 80px;
+                
+                @media ( max-width: $base + px ) {
+                	@include responsive-padding-top(base(80), rem(40));
+                }
+                
+                @media ( max-width: $smartphone_portrait + px ) {
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+    
+    .o-article {
+        p {
+            padding-right: grid(140, 915);
+        }
+    }
+
+    .o-header {
+        h2 {
+            margin-bottom: .6em;
+        }
+    }
+    
+    .o-section {
+        margin-top: 90px;
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-margin-top(base(90), rem(0));
+        }
+        
+        @media ( max-width: $tablet - 1px ) {
+            margin-top: 0;
+           // margin-bottom: 0;
+        }
+    }
+}

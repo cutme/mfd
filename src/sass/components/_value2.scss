@@ -1,0 +1,264 @@
+.c-value2 {
+    @extend %rel;
+    overflow: hidden;
+    
+    @media ( min-width: $tablet + px ) {
+    	min-height: 100vh;
+    }
+
+    &__chars {
+        @extend %abs; z-index: 1;
+        @extend %flex;
+        @extend %anim;
+        transition-duration: .5s;
+        left: 120px; top: 140px;
+        width: 100%;
+        
+        @media ( max-width: $tablet_portrait + px ) {
+        	left: 0; top: 0;
+        	margin-left: 80px;
+        	margin-top: 280px;
+        	
+    		@include responsive-margin-left(tablet_portrait(80), rem(20));
+    		@include responsive-margin-top(tablet_portrait(280), rem(220));
+        }
+        
+        @media ( max-width: $smartphone + px ) {
+    		margin-left: 46px;    		
+    	}
+
+        li {
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke-color: $c-gray-01;
+            text-align: center;
+
+            text-transform: uppercase;
+            font: {
+                size: rem(700);
+                weight: $bold;
+            }
+            line-height: 1em;
+            user-select: none;
+
+            @media ( max-width: $base + px ) {
+                @include responsive-font(base(700), rem(200));
+            }
+        }
+        
+        &.step-0 {
+            transform: translate3d(0, 0, 0);
+
+            @media ( max-width: 1400px ) {
+            	transform: translate3d(base(-100), 0, 0);
+            }
+            
+            @media ( max-width: 900px ) {
+            	transform: translate3d(base(-130), 0, 0);
+            }
+
+            li {
+                &:nth-of-type(1) {
+                    -webkit-text-stroke-width: 2px;
+                    -webkit-text-stroke-color: $c-green-01;
+                }
+            }
+        }
+        
+        &.step-1 {
+            transform: translate3d(-520px, 0, 0);
+            
+            @media ( max-width: $base + px ) {
+            	transform: translate3d(base(-520), 0, 0);
+            }
+            
+            @media ( max-width: 1400px ) {
+            	transform: translate3d(base(-580), 0, 0);
+            }
+
+            @media ( max-width: $tablet + px ) {
+            	transform: translate3d(base(-630), 0, 0);
+            }
+            
+            @media ( max-width: 900px ) {
+            	transform: translate3d(base(-680), 0, 0);
+            }
+            
+            @media ( max-width: $smartphone + px ) {
+                transform: translate3d(-264px, 0, 0);
+            }
+
+            li {
+                &:nth-of-type(2) {
+                    -webkit-text-stroke-width: 2px;
+                    -webkit-text-stroke-color: $c-green-01;
+                }
+            }
+        }
+        
+        &.step-2 {
+            transform: translate3d(-1160px, 0, 0);
+            
+            @media ( max-width: $base + px ) {
+            	transform: translate3d(base(-1160), 0, 0);
+            }
+            
+            @media ( max-width: 1400px ) {
+            	transform: translate3d(base(-1200), 0, 0);
+            }
+            
+            @media ( max-width: $tablet + px ) {
+            	transform: translate3d(base(-1250), 0, 0);
+            }
+
+            @media ( max-width: 900px ) {
+            	transform: translate3d(base(-1280), 0, 0);
+            }
+            
+            @media ( max-width: $smartphone + px ) {
+                transform: translate3d(-408px, 0, 0);
+            }
+
+
+            li {
+                &:nth-of-type(3) {
+                    -webkit-text-stroke-width: 2px;
+                    -webkit-text-stroke-color: $c-green-01;
+                }
+            }
+        }
+    }
+    
+    &__slidebg {
+        @extend %abs; z-index: -1;
+        left: 225px; top: 0;
+        width: 720px; height: 100%;
+
+        @media ( max-width: $base + px ) {
+        	left: base(225);
+        	width: base(720);
+        }
+        
+        @media ( max-width: $tablet_portrait + px ) {
+        	left: 0;
+        	width: 100%; height: 360px;
+        	
+        	@media ( max-width: $tablet_portrait + px ) {
+        		@include responsive-height(tablet_portrait(360), rem(300));
+        	}
+        }
+        
+        .swiper-slide {
+            @extend %gray;
+            background: {
+                size: cover;
+                position: center;
+            }
+        }
+
+        .swiper-container {
+            height: 100%;
+        }
+    }
+
+    &__slidecontent {
+        @extend %rel; z-index: 10;
+        width: 100%;
+        user-select: none;
+        
+        h3 {
+            @extend %lead--2;
+            margin-bottom: .5em;
+            text-transform: uppercase;
+            
+            @media ( min-width: $tablet_portrait + 1px ) {
+                transform: translateX(-150px);	
+            }
+        }
+        
+        dl {
+            @extend %flex;
+            margin-bottom: 40px;
+
+            dt {
+                width: 40%;
+                padding-right: 15px;
+                font-weight: $regular;
+            }
+            
+            dd {
+                width: 60%;
+            }
+            
+            dt, dd {
+                @media ( max-width: $base + px ) {
+                	@include responsive-font(base(24), rem(14));
+                }
+            }
+        }
+        
+        .swiper-container {
+            overflow: visible;
+        }
+    }
+    
+    .o-cols {
+        @media ( max-width: $smartphone + px ) {
+        	display: block;
+        }
+        
+        &__item {
+           
+                @media ( max-width: $smartphone + px ) {
+                    width: 100%;
+                }
+
+        }
+    }
+
+    .o-container {
+        @extend %rel;
+        padding: {
+            top: 290px;
+            bottom: 130px;
+        }
+        
+        @media ( min-width: $tablet + px ) {
+        	min-height: 100vh;
+        }
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-padding-top(base(290), rem(50));
+        	@include responsive-padding-bottom(base(130), rem(50));
+        }
+        
+        @media ( max-width: $tablet_portrait + px ) {
+        	@include responsive-padding-top(tablet_portrait(430), rem(440));
+        }
+        
+        @media ( max-width: $tablet + px ) {
+        	
+        }
+    }
+    
+    .o-nav {
+        
+        
+        @media ( max-width: $smartphone + px ) {
+        	padding: 0;
+        }
+    }
+    
+    .o-section {
+        top: 0;
+        margin-top: 170px;
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-margin-top(base(170), rem(50));
+        }
+
+        @media ( max-width: $tablet - 1px ) {
+        	display: none;
+        }
+    }
+}

@@ -1,0 +1,90 @@
+.c-membership {
+    @extend %rel;
+    padding-bottom: 80px;
+    
+    @media ( max-width: $base + px ) {
+    	@include responsive-padding-bottom(base(80), rem(40));
+    }
+
+    .o-cols {
+        &__item {
+            margin-bottom: 160px;
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-margin-bottom(base(160), rem(40));
+            }
+            
+            @media ( max-width: $tablet_portrait - 1px ) {
+                width: 50%;
+            }
+        }
+        
+        figure {
+            height: 100%;
+            text-align: center;
+            
+            div {
+                @extend %flex;
+                @extend %flex-xy;
+                padding: 0 20px;
+                height: 100%;
+            }
+
+            img {
+                display: inline-block;
+                margin-bottom: 40px;
+                
+                @media ( max-width: $tablet_portrait - 1px ) {
+                    max-width: 60%;
+                }
+            }
+        }
+
+        figcaption {
+            font-size: rem(20);
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-font(base(20), rem(14));
+            }
+        }
+    }
+    
+    .o-header {
+        display: inline-block;
+        margin-bottom: 180px;
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-margin-bottom(base(180), rem(70));
+        }
+        
+        
+
+        &--block {
+            &:before {
+                left: auto;
+                right: 80px;
+            }
+        }
+    }
+
+    .o-section {
+        margin-top: 84px;
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-margin-top(base(84), rem(0));
+        }
+                
+        @media ( min-width: $tablet_portrait + px ) and ( max-width: $tablet - 1px ) {
+        	position: absolute;
+        	top: 12px;
+        }
+    }
+    
+    .o-wrap {
+        padding-left: 160px;
+        
+        @media ( max-width: $tablet_portrait + px ) {
+            padding-left: 0;
+        }
+    }
+}

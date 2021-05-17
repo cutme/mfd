@@ -1,0 +1,187 @@
+.c-contact {
+    @extend %rel; z-index: 10;
+    padding-top: 120px;
+    color: black;
+    
+	@media ( max-width: $base + px ) {
+    	@include responsive-padding-top(base(120), rem(30));
+    }
+    
+    address {
+        p {
+            @extend %lead--3;
+            font-weight: $thin;
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-font(base(45), rem(25));
+            }
+        }
+        
+        a {
+            @extend %ulink;
+            
+            &:before, &:after {
+                background-color: black;
+            }
+        }
+    }
+    
+    .o-cols {        
+        
+        &__item {
+            &:first-of-type,
+            &:last-of-type {
+                padding: {
+                    left: 160px;          
+                    right: 0;
+                }
+                
+                @media ( max-width: $base + px ) {
+                	@include responsive-padding-left(base(160), rem(0));
+                }
+                
+                @media ( max-width: $tablet - 1px ) {
+                	padding-left: 15px;
+                }
+                
+                @media ( max-width: $smartphone_portrait + px ) {
+                	padding-left: 0;
+                }
+            }
+            
+            &:first-of-type {
+                padding-right: 15px;
+            }
+        }
+
+        &--header,
+        &--map {
+            margin-bottom: 100px;
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-margin-bottom(base(100), rem(50));
+            }
+        }
+        
+        &--header {
+            .o-cols__item {
+                &:last-of-type {
+                    
+                    @media ( min-width: $tablet_portrait + px ) {
+                        padding-right: 160px;
+                    }
+                }
+            }
+            
+            .o-header {
+                @media ( max-width: $tablet_portrait + px ) {
+                	margin-bottom: 1em;
+                }
+            }
+            
+            @media ( max-width: $tablet_portrait - 1px ) {
+            	display: block;
+            }
+        }
+        
+        &--dropdown {
+            padding-bottom: 140px;
+            
+            @media ( max-width: $tablet_portrait + px ) {
+            	display: block;
+            }
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-padding-bottom(base(140), rem(50));
+            }
+            
+            address {
+                padding-top: 10px;
+                
+                @media ( max-width: $tablet_portrait + px ) {
+                    padding-top: 40px;
+                }
+            }
+        }
+        
+        &--map {
+            
+            @media ( max-width: $smartphone + px ) {
+            	display: block;
+            }
+            
+            h3 {
+                @extend %lead--3;
+                text-transform: uppercase;
+                font-weight: $thin;
+                
+                @media ( max-width: $base + px ) {
+                	@include responsive-font(base(45), rem(25));
+                }
+
+                &:after {
+                    content: '/';
+                }
+            }
+            
+            .o-cols {
+                @media ( max-width: $tablet_portrait - 1px ) {
+                    display: block;
+                    margin-bottom: 20px;
+                }
+            }
+
+            .o-cols__item {
+                
+                @media ( max-width: $smartphone + px ) {
+                    width: 100%;
+                }
+                
+                .c-map {
+                    @media ( max-width: $smartphone + px ) {   
+                        width: calc(100% + 20px);
+                        margin: 0 0 0 -20px;
+                    }
+                }
+
+                &:first-of-type {
+                    
+                    @media ( min-width: $tablet_portrait + px ) {
+                    	display: flex;
+                    	flex-direction: column;
+                    }
+                    
+                    @media ( max-width: $tablet_portrait - 1px ) {
+                        padding-bottom: 15px;
+                    }
+                    
+                    .o-article {
+                        
+                        @media ( min-width: $tablet_portrait + px ) {
+                            margin: auto 0 0 0;
+                            padding-right: 160px;
+                        }
+                    }
+                    
+                    .o-cols {
+                       // @extend %flex-spacebetween;
+
+                        .o-cols__item {
+                            padding-left: 0;
+                            
+                            
+                            &:last-of-type {
+                                width: auto;
+                                margin: 0 0 0 auto;
+                            }
+                        }
+                    }
+                }
+            }
+        }        
+    }
+    
+    .o-section {
+        margin-top: 10px;
+    }
+}

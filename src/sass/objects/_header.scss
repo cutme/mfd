@@ -1,0 +1,72 @@
+.o-header {
+    
+    h1 {
+        @extend %lead--1;
+        line-height: 1.1em;
+    }
+
+    h1, h2 {
+        text-transform: uppercase;
+        font-weight: $bold;  
+
+        span {
+            &:not(.nowrap) {
+                -webkit-text-stroke-width: 2px;
+                
+                @media ( max-width: $tablet - 1px ) {
+                    -webkit-text-stroke-width: 1px;                	
+                }
+                            
+                .bg-gray & {
+                    -webkit-text-fill-color: transparent;
+                    -webkit-text-stroke-color: $c-green-01;
+                }
+    
+                .bg-green & {
+                    -webkit-text-fill-color: $c-green-01;
+                    -webkit-text-stroke-color: black;
+                }
+            }
+        }
+    }
+
+    h2 {
+        @extend %lead--2;
+    }
+
+    &--block {
+        @extend %rel;
+        margin-bottom: 1em;
+        
+        &:before {
+            @extend %abs-pseudo;
+            left: -30px; top: 0; z-index: -1;
+            width: 127px;
+            height: calc(100%);
+            background-color: $c-gray-02;
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-width(base(127), rem(80));
+            }
+        }
+    }
+    
+    &--top {
+        padding-top: 25px;
+        padding-bottom: 70px;
+            
+        @media ( max-width: $base + px ) {
+        	@include responsive-padding-bottom(base(70), rem(0));
+        }
+    }
+    
+    &--bottom {
+        padding-top: 70px;
+        padding-bottom: 30px;
+        
+        @media ( max-width: $base + px ) {
+            @include responsive-padding-top(base(70), rem(50));
+        	@include responsive-padding-bottom(base(30), rem(0));
+        }
+    }
+}

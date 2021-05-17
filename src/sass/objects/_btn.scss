@@ -1,0 +1,53 @@
+.o-btn {
+    @extend %anim;
+    display: inline-flex;
+    @extend %flex-xy;
+    @extend %rel;
+    height: 40px;
+    border-radius: 42px;
+    white-space: nowrap;
+    padding: 0 30px;
+    font: {
+        family: $text;
+        weight: $bold;
+    }
+    color: white;
+    cursor: pointer;
+    
+    &:hover {
+        .desktop & {
+        }
+    }
+   
+    &--major {
+        height: 50px;
+    }
+    
+    &--minor {
+        height: 36px;
+    }
+
+
+    // Colors
+    
+    
+
+    span {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+	}
+	
+	[class^="icon-"] {
+    	
+	}
+
+}
+
+a.o-btn,
+button.o-btn {
+//    .desktop & {
+    
+        
+//    }
+}

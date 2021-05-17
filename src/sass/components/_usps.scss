@@ -1,0 +1,52 @@
+.c-usps {
+    padding: {
+        top: 140px;
+        bottom: 160px;
+    }
+    overflow: hidden;
+    
+    @media ( min-width: $tablet + px ) {
+        border-bottom: 1px solid black;
+    }
+
+    @media ( max-width: $base + px ) {
+    	@include responsive-padding-top(base(160), rem(50));
+    	@include responsive-padding-bottom(base(160), rem(100));
+    }
+    
+    .o-cols {
+        padding-bottom: 120px;
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-padding-bottom(base(120), rem(70));
+        }
+
+        &__item {
+            &--image {
+                
+                img {
+                    align-self: baseline;
+
+                    @media ( max-width: $base + px ) {
+                    	width: grid(431, 755);
+                    }
+                    
+                    @media ( max-width: $tablet - 1px ) {
+                        margin: 0 auto;
+                    }
+                    
+                    @media ( max-width: $tablet_portrait - 1px ) {
+                    	max-width: 50%;
+                    	margin-bottom: 50px;
+                    }
+                }
+            }
+        }
+    }
+    
+    .o-article {
+        p {
+            padding-right: grid(140, 915);
+        }
+    }
+}

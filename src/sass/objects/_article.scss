@@ -1,0 +1,9 @@
+.o-article {
+    p {
+        line-height: 1.5em;
+
+        @media ( max-width: $base + px ) {
+        	@include responsive-font(base(24), rem(14));
+        }
+    }
+}

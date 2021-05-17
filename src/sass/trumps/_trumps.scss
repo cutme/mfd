@@ -1,0 +1,47 @@
+a[href*="youtube"] {
+   
+}
+
+/*
+img[src*="pin"] {
+    opacity: .4 !important;
+}
+*/
+
+.is-hidden {
+    display: none;
+}
+
+
+
+// Text
+
+.aligncenter {
+    text-align: center;
+}
+
+
+// Backgrounds
+
+.bg-green {
+    background-color: $c-green-01;
+    color: black;
+}
+
+.bg-gray {
+    &--light {
+        background-color: $c-gray-02;
+    }
+}
+
+
+.nowrap {
+    white-space: nowrap;
+}
+
+
+.sec {
+    position:relative;
+    width:100%;
+    min-height:100vh;
+}

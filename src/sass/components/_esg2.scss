@@ -1,0 +1,124 @@
+.c-esg2 {
+    background-color: $c-gray-01;
+    padding: {
+        top: 140px;
+        bottom: 140px;
+    }
+    
+    @media ( min-width: $tablet + px ) {
+        height: 100%;
+        margin-top: 135px;
+        border-top: 1px solid black;
+        display: flex;
+        align-items: center;
+    }
+    
+    @media ( min-width: $tablet + px )  and ( max-width: $base + px ) {
+    	@include responsive-margin-top(base(135), rem(100));
+    }
+    
+    @media ( max-width: $base + px ) {
+    	@include responsive-padding-top(base(140), rem(50));
+    	@include responsive-padding-bottom(base(140), rem(50));
+    }
+
+    .o-cols { 
+        margin: 0;
+       
+        &__item {
+            padding-bottom: 40px;
+            
+            @media ( max-width: $smartphone_portrait + px ) {
+                padding-bottom: 20px;
+            }
+
+            &:first-of-type {
+                padding-left: 0;
+
+                @media ( min-width: $tablet + px ) {
+                    border-right: 2px solid $c-gray-02;
+                    padding-left: grid(125, $base - 2 * 104);
+                    padding-right: grid(104, $base - 2 * 104);;                	
+                }
+            }
+            
+            &:last-of-type {
+                @media ( min-width: $smartphone_portrait + 1px ) {
+                    padding-left: 15px;
+                }
+
+                @media ( min-width: $tablet + px ) {
+                    padding-left: grid(104, $base - 2 * 104);
+                    padding-right: 70px;
+                }
+            }
+        }
+        
+        &--first {
+            @extend %rel;
+
+            &:after {
+                @extend %abs-pseudo;
+                @extend %abs-x;
+                top: 100%;
+                width: 206px;
+                height: 82px;
+                background-color: $c-gray-01;
+                transform: translate3d(-50%, -50%, 0);
+                
+                @media ( max-width: $base + px ) {
+                	@include responsive-width(base(206), rem(0));
+                	@include responsive-height(base(82), rem(0));
+                }
+                
+                @media ( max-width: $tablet - 1px ) {
+                	width: 30px;
+                	height: 30px;
+                }
+                
+                @media ( max-width: $smartphone_portrait + px ) {
+                    display: none;
+                }
+            }
+        }
+        
+        &--second {            
+            .o-cols__item {
+                padding-top: 80px;
+                border-top: 2px solid $c-gray-02;
+                
+                @media ( max-width: $base + px ) {
+                	@include responsive-padding-top(base(80), rem(20));
+                }
+                
+                &:last-of-type {
+                    padding-right: 70px;
+                }
+            }
+        }
+    }
+    
+    .o-header {
+        @media ( max-width: $smartphone_portrait + px ) {
+            margin-bottom: 1em;
+        }
+    }
+    
+    .o-section {
+        margin-top: 10px;
+        
+        @media ( max-width: $tablet  - 1px ) {
+        	display: none;
+        }
+    }
+    
+    .o-wrap {
+        
+        @media ( min-width: $tablet + 1px ) {
+            padding: {
+                left: 74px;
+                right: 74px;
+            }
+        }
+    }
+}

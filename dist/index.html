@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="pl-PL" class="no-js">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta charset="UTF-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <meta name="robots" content="noindex, nofollow">
+    <title>MDF Rail</title>
+    
+    <style>        
+        .c-loader {
+            position: absolute; left: 0; top: 0; 
+            z-index: 200; 
+            width: 100%; 
+            height: 100%; 
+            background-color: #34494C; 
+        }        
+
+        .c-loader__bar {
+        	position: absolute;
+        	z-index: 10;
+        	top: 0;
+        	left: 50%;
+            width: 2px;
+            height: 0;
+            background: #03FF69;
+        	transform: translateX(-50%);
+    	    transition: width 0.3s ease-out, height 0.3s ease-out 0.2s;
+        }
+    </style>
+    
+    <script>
+           
+        window.RealProgress = (function () {
+            var exports = {
+                onResourceLoad: null,
+                onProgress: null,
+                onLoad: null
+            };
+        
+            var _total = 0
+            ,   _loaded = 0
+            ,   _windowLoaded = false
+            ,   _boundElements = []
+            ,   _pendingResources = []
+            ,   _options = {
+                    regex: function (tag, attr) {
+                        return new RegExp("<" + tag + "[^>]*" + attr + "\s*\=\s*[\'\"]([^\'\"]+)[\'\"][^>]*>", "gi");
+                    },
+                    untracked: [],
+                    tags: {
+                        "link": "href",
+                        "iframe": "src",
+                        "source": "src",
+                        "script": "src",
+                        "img": "src"
+                    }
+                };
+        
+            function _isUntracked(subject) {
+                var list = _options.untracked;
+        
+                for (var i = 0; i < list.length; i++) {
+                    if (
+                        (
+                            typeof list[i] == "string" &&
+                            list[i] == subject
+                        ) ||
+                        (
+                            typeof list[i] == "object" &&
+                            list[i] instanceof RegExp &&
+                            typeof subject == "string" &&
+                            subject.match(list[i])
+                        )
+                    ) {
+                        return true;
+                    }
+                }
+        
+                return false;
+            }
+        
+            function _bindElements() {
+                var elems, attr;
+        
+                for (var t in _options.tags) {
+                    elems = document.getElementsByTagName(t);
+        
+                    for (var i = 0; i < elems.length; i++) {
+                        attr = elems[i].getAttribute(_options.tags[t]);
+        
+                        if (_boundElements.indexOf(elems[i]) === -1) {
+                            _boundElements.push(elems[i]);
+                            elems[i].addEventListener("load", _onLoadHandler(attr, t));
+                        }
+                    }
+                }
+            }
+        
+            function _onLoadHandler(attr, tag) {
+                var hasAttr = (typeof attr == "string")
+                ,   tracked = !_isUntracked(attr);
+        
+                if (tracked && hasAttr) {
+                    _pendingResources.push(attr);
+                }
+        
+                return function () {
+                    if (tracked && hasAttr) {
+                        _loaded++;
+                        _dispatchProgress();
+        
+                        if (typeof exports.onResourceLoad == "function") {
+                            exports.onResourceLoad(attr);
+                        }
+        
+                        var index = _pendingResources.indexOf(attr);
+                        if (index > -1) {
+                            _pendingResources.splice(index, 1);
+                        }
+                    }
+        
+                    if (tag == "script") {
+                        setTimeout(_bindElements, 0);
+                    }
+                };
+            }
+        
+            function _getResources(html) {
+                var match, regex;
+        
+                for (var tag in _options.tags) {
+                    regex = _options.regex(tag, _options.tags[tag]);
+        
+                    while (1) {
+                        match = regex.exec(html);
+        
+                        if (match != null && match.length && !_isUntracked(match[1])) {
+                            _total++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        
+            function _dispatchProgress() {
+                if (typeof exports.onProgress == "function") {
+                    exports.onProgress(_windowLoaded ? 1 : (_total > 0 ? (_loaded / _total) : 0));
+                }
+            }
+        
+            exports.init = function (opts) {
+                if (typeof opts == "object") {
+                    for (var k in opts) {
+                        _options[k] = opts[k];
+                    }
+                }
+        
+                var req = new XMLHttpRequest();
+                req.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        _getResources(this.responseText);
+                        _dispatchProgress();
+                    }
+                };
+                req.open("GET", document.location.href);
+                req.send(null);
+        
+                window.addEventListener("load", function () {
+                    _windowLoaded = true;
+                    _dispatchProgress();
+        
+                    if (typeof exports.onLoad == "function") {
+                        exports.onLoad(_pendingResources);
+                    }
+                
+                    _boundElements = [];
+                });
+        
+                setTimeout(_bindElements, 0);
+            };
+        
+            return exports;
+        })();
+        
+        (function () {
+            var _loaded = []
+            ,   _progress = 0
+            ,   _loadedPara = null
+            ,   _loadingBar = null;
+        
+            function render() {
+                _loadingBar = _loadingBar || document.getElementById("bar");
+        
+                if (_loadingBar) {
+                    _loadingBar.style.height = (_progress * 100) + "%";
+                }
+            }
+        
+            RealProgress.onResourceLoad = function (name) {
+                _loaded.push(name.split("/").pop());
+            };
+        
+            RealProgress.onProgress = function (progress) {
+                _progress = progress;
+                render();
+            };
+        
+            RealProgress.onLoad = function (uncaptured) {                
+                 setTimeout(function() {
+                    
+                    const loading = document.getElementById('loading');
+            
+                    document.documentElement.removeAttribute('style');
+                    document.documentElement.classList.add('is-loaded');
+            
+                    //window.anims();
+                    
+                    setTimeout(function() {
+                       document.documentElement.classList.add('show-logo');
+                       document.documentElement.classList.add('is-ready');
+                       loading.remove();
+                    }, 500);
+                    
+                }, 350);
+
+            };
+        })(); 
+        
+        RealProgress.init({
+            untracked: [
+                "js/app_.js",
+            ]
+        });
+    </script>
+      
+    <script>
+        document.documentElement.className = document.documentElement.className.replace("no-js","js");
+        document.documentElement.setAttribute('style', 'overflow: hidden');
+    </script>
+<link href="css/style.css" rel="stylesheet"></head>
+
+
+<body>
+<noscript>Your browser does not support JavaScript!</noscript>
+
+    
+    <div class="c-loader" id="loading">
+        <div id="bar" class="c-loader__bar"></div>
+    </div>
+
+    
+    <div class="c-topbar js-topbar">
+        <div class="o-container">
+            <a href="index.html" class="o-logo">
+                <img src="img/logos/mfd--white.svg" alt="mfdrail" class="desktop">
+                <img src="img/logos/mfd--simple.svg" alt="mfdrail" class="mobile">
+            </a>
+            
+            
+        <nav class="c-nav js-nav">
+            <ul class="c-nav__menu js-menu">
+                <li>
+                    <a href="#about">About</a>
+                </li>
+                
+                <li class="current-item">
+                    <a href="#fleet">Fleet</a>
+                </li>
+                
+                <li>
+                    <a href="#services">Services</a>
+                </li>
+                
+                <li>
+                    <a href="#membership">Memberships</a>
+                </li>
+                
+                <li>
+                    <a href="#career">Career</a>
+                </li>
+            </ul>
+            
+            <ul class="c-nav__lang">
+                <li class="current-item">
+                    <a href="#">en</a>
+                </li>
+                
+                <li>
+                    <a href="#">de</a>
+                </li>
+            </ul>
+        </nav>
+
+            
+            <div class="o-hamburger js-hamburger"></div>
+        </div>
+    </div>
+
+    
+    <div class="c-hero bg-gray">
+        <div class="c-hero__lead o-header">
+            <h1>
+                Modal
+                <span>Flexible</span>
+                Digital
+            </h1>
+        </div>
+
+        <div class="c-hero__image">
+            <div class="c-hero__dashes"></div>
+            
+            
+            <div class="c-hero__img">
+                <img src="img/hero/campbell.jpg" alt="campbell" width="940" height="860">
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="o-right" id="vision">
+        
+    <div class="c-vision1 bg-gray" id="about">
+        <div class="o-container"> 
+            <h2 class="o-section">Vision &amp; Values</h2>
+           
+            <div class="o-wrap o-wrap--2">
+                <div class="o-cols o-cols--2">
+                    <div class="o-cols__item">
+                        <header class="o-header o-header--block o-header--top">
+                            <h2>
+                                <span class="nowrap">Our vision</span><br>
+                                is <span>your</span>
+                                horizon
+                            </h2>
+                        </header>
+                        
+                        <div class="o-article">
+                            <p>As a team of intermodal specialists, we provide a modern, highly available intermodal railcar fleet and are one of the best-capitalized and most sustainable start-ups in the sector. We are committed to providing the highest level of support, technological availability, and service to our customers.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="o-cols__item o-cols__item--image">
+                        <img src="img/vision/eye.svg" width="608" alt="eye">
+                    </div>
+                </div>               
+            </div>
+        </div>
+    </div>
+
+        
+        <div class="o-right__page">
+            
+    <div class="c-vision2 bg-gray js-vision">
+        <div class="o-container"> 
+            <h2 class="o-section">Vision &amp; Values</h2>
+           
+            <div class="o-wrap o-wrap--2">
+                <div class="o-cols o-cols--2">
+                    <div class="o-cols__item">
+                        <div class="o-article">
+                            <p>What we stand for as a company.</p>
+                        </div>
+                        
+                        <ol class="c-vision2__slogans js-slogans">
+                            <li>Customer-first</li>
+                            <li>Passion</li>
+                            <li>Excellence</li>
+                            <li>Transparency</li>
+                            <li>Sustainability</li>
+                            <li>Safety</li>
+                            <li>Integrity</li>                            
+                        </ol>
+                    </div>
+
+                    <div class="o-cols__item">
+                        <ul class="c-vision2__info js-info">
+                            <li>
+                                <p>We consider our customers in everything we do. Going the extra mile is a matter of course to us.</p>
+                            </li> 
+                            
+                            <li>
+                                <p>We care about what we do and how we do it. Every day, we use our passion for progress to address today’s and tomorrow’s challenges.</p>
+                            </li>  
+                            
+                            <li>
+                                <p>We are doing things with due consideration both for intent and impact and aiming to close the gap between them.</p>
+                            </li>
+                            
+                            <li>
+                                <p>We speak our mind, contribute authentically with pure motives.</p>
+                            </li>
+                            
+                            <li>
+                                <p>We are continuously rethinking our approach to the way we do business. We do not just think about tomorrow, but way beyond.</p>
+                            </li>
+
+                            <li>
+                                <p>Safety is not just a priority at MFD Rail, but a deeply held core value.</p>
+                            </li>
+
+                            <li>
+                                <p>We work with integrity in everything we do and act responsibly, reliably, respectfully, and live up to our standards.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>               
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </div>
+    
+    
+    <div class="c-parallax js-parallax" id="parallax">
+        <div class="c-parallax__img js-img"></div>
+    </div>
+
+    
+    <div class="c-partnership bg-green" id="partnership">
+        <div class="o-container">
+            <h2 class="o-section">Partnership</h2>
+
+            <div class="o-cols o-cols--2_3">
+                <div class="o-cols__item o-cols__item--image">
+                    <img src="img/partnership/circles.svg" alt="circles" width="514.48" height="486.74">
+                </div>
+                
+                <div class="o-cols__item o-cols__item--text">                        
+                    <article class="o-article">
+                        <header class="o-header">
+                            <h2>We are well
+                                <span>capitalized</span>
+                            </h2>
+                        </header>
+                        
+                        <p>MFD Rail, Oaktree Capital Management, L.P., and KfW IPEX-Bank have partnered to develop a leading rail car leasing company in the intermodal wagon segment over the next years.</p>
+                    </article>
+                </div>
+            </div>
+            
+            <ul class="c-partnership__logotypes">
+                <li>
+                    <figure>
+                        <div>
+                            <img src="img/logos/oaktree.png" alt="oaktree" width="436" height="114">
+                        </div>
+
+                        <figcaption>$150 bn assets under management, industry leading Private Equity House with significant rail experience.</figcaption>
+                    </figure>
+                </li>
+                
+                <li>
+                    <figure>
+                        <div>
+                            <img src="img/logos/mfd--black.svg" alt="mfdrail" width="498" height="68.65">
+                        </div>
+                        
+                        <figcaption>Over 75 years of joint industry expertise.</figcaption>
+                    </figure>
+                </li>
+                
+                <li>
+                    <figure>
+                        <div>
+                            <img src="img/logos/kfw.svg" alt="kfw">
+                        </div>
+                        
+                        <figcaption>Leading lender with profound sector expertise.</figcaption>
+                    </figure>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <div class="c-usps bg-gray" id="usps">
+        <div class="o-container">
+            <h2 class="o-section">Usps</h2> 
+
+            <div class="o-cols o-cols--2_3 o-cols--reverse">
+                <div class="o-cols__item o-cols__item--image">
+                    <img src="img/usps/symbol.svg" width="431" height="518.2911376953125" alt="symbol">
+                </div>
+                
+                <div class="o-cols__item o-cols__item--text">
+                    <article class="o-article">
+                        <header class="o-header o-header--block o-header--top">
+                            <h2>Dare to be
+                                <span>different</span>
+                            </h2>
+                        </header>
+                        
+                        <p>We understand that the world is constantly changing. We are never satisfied with repeating today, what made us successful yesterday. With our heads turned towards the future, we remain prepared to keep on changing, courageous and surprising.</p>
+                    </article>
+                </div>
+            </div>            
+        </div>
+
+        <div class="o-hscroll">
+            <ul class="o-hscroll__marquee o-hscroll__marquee--1">
+                <li>
+                  <span>Fresh blood</span> <span>Greenfield approach</span> <span>Expertise</span> <span>Pure play intermodal</span> <span>Flexible leases</span>
+                  <span>Fresh blood</span> <span>Greenfield approach</span> <span>Expertise</span> <span>Pure play intermodal</span> <span>Flexible leases</span>
+                </li>
+            </ul>
+            
+            <ul class="o-hscroll__marquee o-hscroll__marquee--2">
+                <li>
+                    <span>Fresh blood</span> <span>Greenfield approach</span> <span>Expertise</span> <span>Pure play intermodal</span> <span>Flexible leases</span>
+                    <span>Fresh blood</span> <span>Greenfield approach</span> <span>Expertise</span> <span>Pure play intermodal</span> <span>Flexible leases</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    
+    <div class="c-team bg-gray">
+        <div class="o-container">
+            <h2 class="o-section">Team</h2>
+
+            <div class="o-cols">
+                <div class="o-cols__item o-cols__item--text">
+                    <h3>We are<br> 
+                    passionate<br>
+                    about your<br>
+                    success.
+                    </h3>
+                </div>
+                
+                <div class="o-cols__item">
+                    <ul class="c-team__people">
+                        <li>
+                            <figure>
+                                <div class="photo">
+                                    <img src="img/team/fabian.jpg" alt="fabian" width="307" height="497">
+                                </div>
+                                
+                                <figcaption>
+                                    <p>FABIAN STADLER</p>
+                                    <p>CEO / Managing Partner</p>
+                                </figcaption>
+                            </figure>
+                        </li>
+                        
+                        <li>
+                            <figure>
+                                <div class="photo">
+                                    <img src="img/team/detlef.jpg" alt="detlef" width="307" height="497">
+                                </div>
+                                
+                                <figcaption>
+                                    <p>DETLEF<br> SCHLICKELMANN</p>
+                                    <p>COO / Managing Partner</p>
+                                </figcaption>
+                            </figure>
+                        </li>
+                        
+                        <li>
+                            <figure>
+                                <span class="photo">
+                                    <img src="img/team/wolfram.jpg" alt="wolfram" width="307" height="497">
+                                </span>
+                                
+                                <figcaption>
+                                    <p>WOLFRAM BAHLE</p>
+                                    <p>CSO / Managing Partner</p>
+                                </figcaption>
+                            </figure>
+                        </li>
+
+                        <li>
+                            <figure>
+                                <span class="photo">
+                                    <img src="img/team/markus.jpg" alt="markus" width="307" height="497">
+                                </span>
+                                
+                                <figcaption>
+                                    <p>MARKUS BASLER</p>
+                                    <p>CFO / Managing Partner</p>
+                                </figcaption>
+                            </figure>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="o-right" id="esg">
+        
+    <div class="c-esg1 bg-gray">
+        <h2 class="o-section">ESG</h2>
+        
+        <div class="o-cols o-cols--2">
+            <div class="o-cols__item">
+                <img src="img/esg/trains.jpg" alt="trains" width="945" height="725">
+            </div>
+            
+            <div class="o-cols__item">
+                <article class="o-article">
+                    <header class="o-header o-header--block o-header--bottom">
+                        <h2>We are
+                            <span>sustainable</span>
+                        </h2>
+                    </header>
+                    
+                    <p>We support the European Rail Freight Vision 2030 of the Rail Freight Forward Initiative, which sets a target of increasing rail transport in European freight transport to 30% by 2030 – up from its current level of around 18%.</p>
+                </article>
+            </div>
+        </div>        
+    </div>
+
+        
+        <div class="o-right__page">
+            
+    <div class="c-esg2 bg-gray">
+        <div class="o-container">
+            <h2 class="o-section">ESG</h2>
+
+            <div class="o-wrap">
+                <div class="o-cols o-cols--2 o-cols--first">
+                    <div class="o-cols__item">
+                        <header class="o-header">
+                            <h2>We are
+                                <span>esg</span>
+                            </h2>
+                        </header>
+                    </div>
+                    
+                    <div class="o-cols__item">
+                        <div class="o-article">
+                            <p>We are committed to ensuring that our business is environmentally responsible, energy-efficient, carbon-neutral, and makes its best effort to achieve continuous improvements.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="o-cols o-cols--2 o-cols--second">
+                    <div class="o-cols__item">
+                        <div class="o-article">
+                            <p>We ensure proper labor and working conditions, safeguard the health and safety of our employees, and promote diversity as well as social development of the community in which we operate.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="o-cols__item">
+                        <div class="o-article">
+                            <p>We comply with all applicable laws including those laws and best practice standards intended to prevent extortion, bribery, and financial crime.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </div>
+
+    
+    <div class="c-value0">
+        <h2 class="o-section">Value proposition</h2>
+
+        <div class="c-value0__photo">
+            <img src="img/value/landscape.jpg" alt="landscape" width="1929" height="860">
+        </div>
+    </div>
+
+    
+    <div class="o-right" id="value">
+        
+    <div class="c-value1 bg-gray">
+        <div class="o-container">
+            <h2 class="o-section">Value proposition</h2>
+
+            <div class="o-wrap o-wrap--2 o-wrap--desktop">
+                <div class="o-cols o-cols--2">
+                    <div class="o-cols__item">
+                        <header class="o-header">
+                            <h2>Reach<br>
+                                <span>further</span>
+                            </h2>
+                        </header>
+                    </div>
+                    
+                    <div class="o-cols__item">
+                        <div class="o-article">
+                            <p>Lease out modern, safe, and high-quality intermodal wagons to customers.
+Bring transparency and flexibility into leasing and maintenance concepts.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="o-cols o-cols--2">
+                    <div class="o-cols__item">
+                        <div class="o-article">
+                            <p>Represent the preferred alternative to the lessor market.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="o-cols__item">
+                        <div class="o-article">
+                            <p>Standardized fleet, automated processes, and a highly scalable organization lead to low transaction costs and hence competitive pricing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="o-wrap o-wrap--2 o-wrap--mobile">
+                <div class="o-cols o-cols--2">
+                    <div class="o-cols__item">
+                        <header class="o-header o-header--block o-header--top">
+                            <h2>Reach<br>
+                                <span>further</span>
+                            </h2>
+                        </header>
+                    </div>
+                    
+                    <div class="o-cols__item">
+                        <div class="o-article">
+                            <p>Represent the preferred alternative to the lessor market.</p>
+                            
+                            <p>Lease out modern, safe, and high-quality intermodal wagons to customers.
+Bring transparency and flexibility into leasing and maintenance concepts.</p>
+
+                            <p>Standardized fleet, automated processes, and a highly scalable organization lead to low transaction costs and hence competitive pricing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="o-right__page">
+            
+    <div class="c-value2 bg-gray--light">
+        <div class="o-container">
+            <h2 class="o-section">Value proposition</h2>
+
+            <div class="c-value2__slidebg">
+                <div class="swiper-container js-valueBgSlider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" style="background-image: url(../img/value/slide-m.jpg)"></div>
+                        <div class="swiper-slide" style="background-image: url(../img/value/slide-f.jpg)"></div>
+                        <div class="swiper-slide" style="background-image: url(../img/value/slide-d.jpg)"></div>
+                    </div>
+                </div>
+            </div>  
+            
+            <div class="c-value2__slidecontent">
+                <div class="o-cols o-cols--2">
+                    <div class="o-cols__item"></div>
+                    
+                    <div class="o-cols__item">
+                        <div class="swiper-container js-valueContentSlider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <h3>Modal</h3>
+                                    
+                                    <dl>
+                                        <dt>Intermodal</dt>
+                                        <dd>Improving the modal split for rail with modern intermodal railcars.</dd>
+                                    </dl>
+                                    
+                                    <dl>
+                                        <dt>Multimodal</dt>
+                                        <dd>Multimodal transport chains with different traffic modes.</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Modal Split</dt>
+                                        <dd>Modern intermodal railcars like 60’, 80’, 90’ container flats, double pocket railcars, and other railcar types.</dd>
+                                    </dl>
+                                </div>
+                                
+                                <div class="swiper-slide">
+                                    <h3>Flexible</h3>
+ 
+                                    <dl>
+                                        <dt>Flexible Leases</dt>
+                                        <dd>Attractively priced lease concepts based on different lease models in combination with flex modules.</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Flex Modules</dt>
+                                        <dd>Premium customers with long-term, volume-based lease contracts can combine our lease models with a flex module of their choice.</dd>
+                                    </dl>
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <h3>Digital</h3>
+                                    
+                                    <dl>
+                                        <dt>Digital Interchange</dt>
+                                        <dd>24/7 connected railcar fleet delivering real-time operational and condition-based data.</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Digital Processes</dt>
+                                        <dd>Digital, workflow-driven end-to-end processes.</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Digitized</dt>
+                                        <dd>Customer and Supplier systems integrations on all touchpoints with MFD Rail.</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            
+                            <nav class="o-nav">
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <ul class="c-value2__chars step-0 js-valuechars">
+                <li>m</li>
+                <li>f</li>
+                <li>d</li>
+            </ul>
+        </div>        
+    </div>
+
+        </div>
+    </div>
+    
+    
+    <div class="c-fleet1 bg-gray" id="fleet">
+        <div class="o-container">
+            <h2 class="o-section">Fleet</h2>
+
+            <div class="o-wrap o-wrap--1">
+                
+                <header class="o-header o-header--desktop">
+                    <h2>We are <span>intermodal</span></h2>
+                </header>
+                
+                <div class="o-cols">
+                    <div class="o-cols__item">
+                        
+                        <header class="o-header o-header--mobile">
+                            <h2>We are <span>intermodal</span></h2>
+                        </header>
+                        
+                        <div class="o-article">
+                            <p>We build a homogenous and modern portfolio consisting of new, high-quality, and noise-reduced railcars for intermodal transportation.</p>
+                            
+                            <p>&nbsp;</p>
+    
+                            <p>As the pure play intermodal specialist, we know what we are talking about.</p>
+                            
+                            <p>&nbsp;</p>
+
+                            <p>We are committed to highest level of support, availability and customer service.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="o-cols__item">
+                       <img src="img/fleet/train.jpg" alt="train" width="945" height="672">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="c-fleet2 bg-green">
+        <div class="o-container">
+            <h2 class="o-section">Fleet</h2>
+
+            <div class="o-wrap">
+                <header class="o-header">
+                    <p>Our portfolio - new, modern, reliable.</p>
+                </header>                
+            </div>            
+        </div>
+        
+        <div class="c-fleet2__nav">
+        	<div class="swiper-container js-fleetNavSlider">
+                <div class="swiper-wrapper">
+                    
+                    <div class="swiper-slide">DPW</div>
+                    <div class="swiper-slide">90'</div>
+                    <div class="swiper-slide">80'</div>
+                    <div class="swiper-slide">60'</div>
+                    <div class="swiper-slide">52'</div>
+                    <div class="swiper-slide">40'</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="c-fleet2__content">
+        	<div class="swiper-container js-fleetContentSlider">
+                <div class="swiper-wrapper">
+                    
+                    <div class="swiper-slide">
+                        <img src="img/fleet/scheme.png" alt="scheme" width="1752" height="265">
+
+                        <div class="c-fleet2__details">
+                            <dl>
+                                <dt>
+                                    Available as:<br>
+                                    <strong>Sdggmrss</strong>
+                                </dt>
+                                
+                                <dd>
+                                    <p>Length over buffer: <strong>34.200m</strong></p>
+                                    <p>Axle load: <strong>22,5t</strong></p>
+                                    <p>Number of axles:	<strong>6</strong></p>
+                                    <p>Tareweight:	<strong>36t</strong></p>
+                                    <p>Max. Loading To.: <strong>99t</strong></p>
+                                </dd>
+                            </dl>
+                            
+                            <a href="#" class="o-morebtn o-morebtn--black">
+                                <span>Download the full spec</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <img src="img/fleet/scheme.png" alt="scheme" width="1752" height="265">
+                        
+                        <div class="c-fleet2__details">
+                            <dl>
+                                <dt>
+                                    Available as:<br>
+                                    <strong>Sdggmrss</strong>
+                                </dt>
+                                
+                                <dd>
+                                    <p>Length over buffer: <strong>29.590m</strong></p>
+                                    <p>Axle load: <strong>22,5t</strong></p>
+                                    <p>Number of axles:	<strong>6</strong></p>
+                                    <p>Tareweight:	<strong>28,3t</strong></p>
+                                    <p>Max. Loading To.: <strong>106,7t</strong></p>
+                                </dd>
+                            </dl>
+
+                            <a href="#" class="o-morebtn o-morebtn--black">
+                                <span>Download the full spec</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <img src="img/fleet/scheme.png" alt="scheme" width="1752" height="265">
+                        
+                        <div class="c-fleet2__details">
+                            <dl>
+                                <dt>
+                                    Available as:<br>
+                                    <strong>Sggrss</strong>
+                                </dt>
+
+                                <dd>
+                                    <p>Length over buffer: <strong>26.390m</strong></p>
+                                    <p>Axle load: <strong>22,5t</strong></p>
+                                    <p>Number of axles:	<strong>6</strong></p>
+                                    <p>Tareweight:	<strong>26,72t</strong></p>
+                                    <p>Max. Loading To.: <strong>108,2t</strong></p>
+                                </dd>
+                            </dl>
+
+                            <a href="#" class="o-morebtn o-morebtn--black">
+                                <span>Download the full spec</span>
+                            </a>
+                        </div>
+                        
+                        <div class="c-fleet2__details">
+                            <dl>
+                                <dt>
+                                    <strong>Sggnss</strong>
+                                </dt>
+
+                                <dd>
+                                    <p>Length over buffer: <strong>25.940m</strong></p>
+                                    <p>Axle load: <strong>22,5t</strong></p>
+                                    <p>Number of axles:	<strong>4</strong></p>
+                                    <p>Tareweight:	<strong>21,5t</strong></p>
+                                    <p>Max. Loading To.: <strong>68,5t</strong></p>
+                                </dd>
+                            </dl>
+
+                            <a href="#" class="o-morebtn o-morebtn--black">
+                                <span>Download the full spec</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <img src="img/fleet/scheme.png" alt="scheme" width="1752" height="265">
+                        
+                        <div class="c-fleet2__details">
+                            <dl>
+                                <dt>
+                                    Available as:<br>
+                                    <strong>Sgnss</strong>
+                                </dt>
+
+                                <dd>
+                                    <p>Length over buffer: <strong>19.640m</strong></p>
+                                    <p>Axle load: <strong>22,5t</strong></p>
+                                    <p>Number of axles:	<strong>4</strong></p>
+                                    <p>Tareweight:	<strong>20,3t</strong></p>
+                                    <p>Max. Loading To.: <strong>69,7t</strong></p>
+                                </dd>
+                            </dl>
+
+                            <a href="#" class="o-morebtn o-morebtn--black">
+                                <span>Download the full spec</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <img src="img/fleet/scheme.png" alt="scheme" width="1752" height="265">
+                        
+                        <div class="c-fleet2__details">
+                            <dl>
+                                <dt>
+                                    Available as:<br>
+                                    <strong>Sggmnss</strong>
+                                </dt>
+
+                                <dd>
+                                    <p>Length over buffer: <strong>17.350m</strong></p>
+                                    <p>Axle load: <strong>22,5t</strong></p>
+                                    <p>Number of axles:	<strong>4</strong></p>
+                                    <p>Tareweight:	<strong>16,5t</strong></p>
+                                    <p>Max. Loading To.: <strong>73,5t</strong></p>
+                                </dd>
+                            </dl>
+
+                            <a href="#" class="o-morebtn o-morebtn--black">
+                                <span>Download the full spec</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <img src="img/fleet/scheme.png" alt="scheme" width="1752" height="265">
+                        
+                        <div class="swiper-slide">
+                            <img src="img/fleet/scheme.png" alt="scheme" width="1752" height="265">
+                            
+                            <div class="c-fleet2__details">
+                                <dl>
+                                    <dt>
+                                        Available as:<br>
+                                        <strong>Sgmmnss</strong>
+                                    </dt>
+
+                                    <dd>
+                                        <p>Length over buffer: <strong>13.540m</strong></p>
+                                        <p>Axle load: <strong>22,5t</strong></p>
+                                        <p>Number of axles:	<strong>4</strong></p>
+                                        <p>Tareweight:	<strong>16,2t</strong></p>
+                                        <p>Max. Loading To.: <strong>73,5t</strong></p>
+                                    </dd>
+                                </dl>
+    
+                                <a href="#" class="o-morebtn o-morebtn--black">
+                                    <span>Download the full spec</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    
+
+    
+    
+    <div class="c-services bg-gray" id="services">
+        <div class="o-container">
+            <h2 class="o-section">Our services</h2>
+
+            <div class="o-wrap">    
+                <div class="o-cols o-cols--header">
+                    <div class="o-cols__item">
+                        <div class="c-services__lead">
+                            <div class="o-article">
+                                <p>No matter what you’re shipping, we have the solution that meets your needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="o-cols__item">
+                    </div>
+                </div>
+                
+                <div class="o-cols o-cols--services o-tabs js-tabs">
+                    <div class="o-cols__item">
+                        <ul class="o-tabs__nav js-nav">
+                            <li class="js-tab is-active">Lease models</li>
+                            <li class="js-tab">Flex modules</li>
+                            <li class="js-tab">ECM</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="o-cols__item">
+                        <ul class="o-tabs__content js-content">
+                            <li class="js-tab is-active is-visible">
+                                <article class="o-article">
+                                    <p>Benefit from highly available and reliable railcars, low maintenance costs, regulatory compliant fleet fulfilling the latest safety standards.</p>
+                                
+<p>Enjoy lease cost transparency, no hidden margins, flexibility options to reduce your exposure in matching supply and demand of railcars.</p>
+
+                                    <p>&nbsp;</p>
+
+                                    <h4>Base</h4>
+                                    <h4>Base Plus</h4>
+                                    <h4>Comfort</h4>
+                                </article>
+                                
+                                <a href="#" class="o-morebtn o-morebtn--gray1">
+                                    <span>Check details</span>
+                                </a>
+                            </li>
+                            
+                            <li class="js-tab">
+                                <article class="o-article">
+                                    <p>Enjoy the freedom of flexibility. With our modules “breathe”, “relax”, and “exit” we provide you with the security and safety you need for concentrating on your core business. Whatever changes your business, we have a solution to give you flexibility.</p>
+
+                                    <p>&nbsp;</p>
+
+                                    <h4>Breathe</h4>
+                                    <h4>Relax</h4>
+                                    <h4>Exit</h4>
+                                </article>
+                            </li>
+                            
+                            <li class="js-tab">
+                                <article class="o-article">
+                                    <h2>ECM – ENTITY IN
+CHARGE OF MAINTENANCE</h2>
+
+                                    <p>As certified ECM for railcars according to EU regulations and registered as responsible ECM in ERADIS (European Railway Agency Database of Interoperability and Safety) we ensure the maintenance of railcars under applicable regulations. As the registered keeper and GCU signatory, MFD Rail assumes the responsibility of the keeper for all its railcars. In addition to the maintenance management function (ECM I), we independently realize the maintenance development function (ECM II) as well as the fleet maintenance management function (ECM III).</p>
+                                </article>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="c-details bg-gray js-serviceDetails">
+        <div class="o-container">
+            <h2 class="o-section">Our services</h2>
+
+            <div class="o-wrap">    
+
+                <div class="c-details__container">
+                    <div class="c-details__models c-details__models--desktop">
+
+                        <div class="c-details__header">
+                            <p>none-mileage related services</p>
+                            <p>mileage related services</p>
+                        </div>
+                        
+                        <div class="c-details__accordion">
+                            <h3>Lease model</h3>
+                            
+                            <ol class="o-accordion js-accordion js-fadeInChildren">
+                                
+                                <li class="o-accordion__item">
+                                    <header>
+                                        <h4>Capital Lease</h4>
+                                    </header>
+                                    
+                                    <div class="o-accordion__details">
+                                        <section>
+                                        </section>
+                                    </div>
+                                </li>
+    
+                                <li class="o-accordion__item js-item">
+                                    <header>
+                                        <h4>Base Lease <span class="click">(Click to see details)</span></h4>
+                                        <h4>Event Flat Rate</h4>
+                                    </header>
+                                    
+                                    <div class="o-accordion__details js-section">
+                                        <section>
+                                            <h5>Lease model for our customers who are familiar with rail freight car maintenance and want to steer wheelset costs</h5>
+                                            
+                                            <p>&nbsp;</p>
+
+<ul>
+    <li>We take care of revision and wheelset maintenance</li>
+    <li>The rental rate includestcosts for revision, the wheelset maintenance costs will be charged 
+    separately – a flat rate per wheelset event</li>
+
+    <li>You are in charge of all other required maintenance according to our maintenance manual, 
+   for your account</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>Your benefit: You maintain the railcars within your network and with an event-based wheelset flat rate, you steer the refurbishment cycles and likewise your overall wheelset costs.</p>
+
+                                        </section>
+                                        
+                                        <i class="icon-close js-close"></i>
+                                    </div>
+                                </li>
+                                
+                                <li class="o-accordion__item js-item">
+                                    <header>
+                                        <h4>BaseBase Lease Plus <span class="click">(Click to see details)</span></h4>
+                                    </header>
+                                    
+                                    <div class="o-accordion__details js-section">
+                                        <section>
+                                            <h5>Lease model for our customers who are familiar with rail freight car maintenance and want to steer wheelset costs</h5>
+                                            
+                                            <p>&nbsp;</p>
+
+<ul>
+    <li>We take care of revision and wheelset maintenance</li>
+    <li>The rental rate includestcosts for revision, the wheelset maintenance costs will be charged 
+    separately – a flat rate per wheelset event</li>
+
+    <li>You are in charge of all other required maintenance according to our maintenance manual, 
+   for your account</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>Your benefit: You maintain the railcars within your network and with an event-based wheelset flat rate, you steer the refurbishment cycles and likewise your overall wheelset costs.</p>
+
+                                        </section>
+                                        
+                                        <i class="icon-close js-close"></i>
+                                    </div>
+                                </li>
+                                
+                                <li class="o-accordion__item js-item">
+                                    <header>
+                                        <h4>Comfort Lease <span class="click">(Click to see details)</span></h4>
+                                    </header>
+                                    
+                                    <div class="o-accordion__details js-section">
+                                        <section>
+                                            <h5>Lease model for our customers who are familiar with rail freight car maintenance and want to steer wheelset costs</h5>
+                                            
+                                            <p>&nbsp;</p>
+
+<ul>
+    <li>We take care of revision and wheelset maintenance</li>
+    <li>The rental rate includestcosts for revision, the wheelset maintenance costs will be charged 
+    separately – a flat rate per wheelset event</li>
+
+    <li>You are in charge of all other required maintenance according to our maintenance manual, 
+   for your account</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>Your benefit: You maintain the railcars within your network and with an event-based wheelset flat rate, you steer the refurbishment cycles and likewise your overall wheelset costs.</p>
+
+                                        </section>
+                                        
+                                        <i class="icon-close js-close"></i>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                        
+                        <div class="c-details__levels">
+                            
+                            <h3>Service -level</h3>
+
+                            <ul>
+                                <li>
+                                    <h4>Usage of Railcar</h4>
+                                </li>
+                                
+                                <li>
+                                    <h4>Keepership</h4>
+                                    <h4>Entity in Charge<br> of Maintenance</h4>
+                                    <h4>Overhaul Management</h4>
+                                </li>
+                                
+                                <li>
+                                    <h4>Wheelset Management</h4>
+                                    <h4>Maintenance Management</h4>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="c-details__models c-details__models--mobile">
+
+                        <div class="swiper-container js-servicestSlider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide swiper-slide--1">
+
+                                   <div class="o-cols o-cols--header">
+                                        <div class="o-cols__item">
+                                            <h3>Lease model</h3>
+                                        </div>
+                                        
+                                        <div class="o-cols__item">
+                                            <h3>Service level</h3>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="row row--1">
+                                        <div class="c-details__header">
+                                            <p>mileage related services</p>
+                                        </div>
+                                        
+                                        <div class="o-cols o-cols--a">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Capital Lease</h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Usage of Railcar</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="o-cols o-cols--b">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Base Lease <span class="click">(Click to see details)</span></h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Keepership</h4>
+                                                    
+                                                    <h4>Entity in Charge of&nbsp;Maintenance</h4>
+                                                    
+                                                    <h4>Overhaul Management</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row row--2">
+                                        <div class="c-details__header">
+                                            <p>none-mileage related services</p>
+                                        </div>
+
+                                        <div class="o-cols o-cols--c">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Base Lease Plus <span class="click">(Click to see details)</span></h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Wheelset Management</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="o-cols o-cols--d">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Comfort Lease <span class="click">(Click to see details)</span></h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Maintenance Management</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="swiper-slide swiper-slide--2">
+                                                                            
+                                   <div class="o-cols o-cols--header">
+                                        <div class="o-cols__item">
+                                            <h3>Lease model</h3>
+                                        </div>
+                                        
+                                        <div class="o-cols__item">
+                                            <h3>Service level</h3>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="row row--1">
+                                        <div class="c-details__header">
+                                            <p>mileage related services</p>
+                                        </div>
+                                        
+                                        <div class="o-cols o-cols--a">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Capital Lease</h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Usage of Railcar</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="o-cols o-cols--b">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Base Lease <span class="click">(Click to see details)</span></h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Keepership</h4>
+                                                    
+                                                    <h4>Entity in Charge of&nbsp;Maintenance</h4>
+                                                    
+                                                    <h4>Overhaul Management</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row row--2">
+                                        <div class="c-details__header">
+                                            <p>none-mileage related services</p>
+                                        </div>
+
+                                        <div class="o-cols o-cols--c">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Base Lease Plus <span class="click">(Click to see details)</span></h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Wheelset Management</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="o-cols o-cols--d">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Comfort Lease <span class="click">(Click to see details)</span></h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Maintenance Management</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="swiper-slide swiper-slide--3">
+                                                                            
+                                   <div class="o-cols o-cols--header">
+                                        <div class="o-cols__item">
+                                            <h3>Lease model</h3>
+                                        </div>
+                                        
+                                        <div class="o-cols__item">
+                                            <h3>Service level</h3>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="row row--1">
+                                        <div class="c-details__header">
+                                            <p>mileage related services</p>
+                                        </div>
+                                        
+                                        <div class="o-cols o-cols--a">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Capital Lease</h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Usage of Railcar</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="o-cols o-cols--b">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Base Lease <span class="click">(Click to see details)</span></h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Keepership</h4>
+                                                    
+                                                    <h4>Entity in Charge of&nbsp;Maintenance</h4>
+                                                    
+                                                    <h4>Overhaul Management</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row row--2">
+                                        <div class="c-details__header">
+                                            <p>none-mileage related services</p>
+                                        </div>
+
+                                        <div class="o-cols o-cols--c">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Base Lease Plus <span class="click">(Click to see details)</span></h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Wheelset Management</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="o-cols o-cols--d">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Comfort Lease <span class="click">(Click to see details)</span></h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Maintenance Management</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="swiper-slide swiper-slide--4">
+                                                                            
+                                   <div class="o-cols o-cols--header">
+                                        <div class="o-cols__item">
+                                            <h3>Lease model</h3>
+                                        </div>
+                                        
+                                        <div class="o-cols__item">
+                                            <h3>Service level</h3>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="row row--1">
+                                        <div class="c-details__header">
+                                            <p>mileage related services</p>
+                                        </div>
+                                        
+                                        <div class="o-cols o-cols--a">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Capital Lease</h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Usage of Railcar</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="o-cols o-cols--b">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Base Lease <span class="click">(Click to see details)</span></h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Keepership</h4>
+                                                    
+                                                    <h4>Entity in Charge of&nbsp;Maintenance</h4>
+                                                    
+                                                    <h4>Overhaul Management</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row row--2">
+                                        <div class="c-details__header">
+                                            <p>none-mileage related services</p>
+                                        </div>
+
+                                        <div class="o-cols o-cols--c">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Base Lease Plus <span class="click">(Click to see details)</span></h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Wheelset<br> Management</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="o-cols o-cols--d">
+                                            <div class="o-cols__item">
+                                                <header>
+                                                    <h4>Comfort Lease <span class="click">(Click to see details)</span></h4>
+                                                </header>
+                                            </div>
+                                            
+                                            <div class="o-cols__item">
+                                                <div class="c-details__levels">
+                                                    <h4>Maintenance<br> Management</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <nav class="o-nav">
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </nav>
+                        </div>
+                        
+                        <div class="c-details__levels" style="display: none">                            
+
+                            <ul>
+                                <li>
+                                    <h4>Usage of Railcar</h4>
+                                </li>
+                                
+                                <li>
+                                    <h4>Keepership</h4>
+                                    <h4>Entity in Charge<br> of Maintenance</h4>
+                                    <h4>Overhaul Management</h4>
+                                </li>
+                                
+                                <li>
+                                    <h4>Wheelset Management</h4>
+                                    <h4>Maintenance Management</h4>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="c-membership bg-gray" id="membership">
+        <div class="o-container">
+            <h2 class="o-section">Membership</h2> 
+
+            <div class="o-wrap">
+                <header class="o-header o-header--block o-header--bottom">
+                    <h2>Being part of<br>
+                        is <span>priceless</span></h2>
+                </header>                
+            </div>
+            
+            <div class="o-cols o-cols--4">
+                <div class="o-cols__item">
+                    <figure>
+                        <div>
+                            <img src="img/logos/vap.svg" width="251" height="91" alt="vap">
+                        </div>
+
+                        <figcaption>Association representing the wagon<br> keeper’s interest</figcaption>
+                    </figure>
+                </div>
+                
+                <div class="o-cols__item">
+                    <figure>
+                        <div>
+                            <img src="img/logos/rsrd.svg" width="269" height="89" alt="rsrd">
+                        </div>
+
+                        <figcaption>Rolling Stock Reference Database</figcaption>
+                    </figure>
+                </div>
+                
+                <div class="o-cols__item">
+                    <figure>
+                        <div>
+                            <img src="img/logos/uirr.svg" width="148" height="141" alt="uirr">
+                        </div>
+
+                        <figcaption>Union International Rail Road</figcaption>
+                    </figure>
+                </div>
+                
+                <div class="o-cols__item">
+                    <figure>
+                        <div>
+                            <img src="img/logos/gcu.svg" width="344" height="78" alt="gcu">
+                        </div>
+
+                        <figcaption>General Contract of Use for wagons</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="c-contact bg-green">
+        <div class="o-container">
+            <h2 class="o-section">Contact</h2>
+
+            <div class="o-cols o-cols--2 o-cols--header">
+                <div class="o-cols__item">
+                    <header class="o-header">
+                        <h2><span class="nowrap"><span>Get</span> closer</span><br>
+                            to us</h2>
+                    </header>
+                </div>
+                
+                <div class="o-cols__item">
+                    <div class="o-article">
+                        <p>For all general inquiries please contact us via one of these channels.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="o-cols o-cols--2 o-cols--map">
+                <div class="o-cols__item">                    
+                    <div class="o-cols">
+                        <div class="o-cols__item">
+                            <h3>Office</h3>
+                        </div>
+                        
+                        <div class="o-cols__item">
+                            <address>
+                                <p>Grundstrasse 12</p>
+                                <p>CH-6343</p>
+                                <p>Rotkreuz</p>
+                            </address>
+                        </div>
+                    </div>
+                    
+                    <div class="o-article">
+                        <p>For specific information please use the contact data for each of the departments listed below</p>
+                    </div>
+                </div>
+                
+                <div class="o-cols__item">
+                    <div class="c-map">
+                        <img src="img/placeholders/map.png" alt="map" width="789" height="539">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="o-cols o-cols--2 o-cols--dropdown">
+                <div class="o-cols__item">                    
+                    <select>
+                        <option>Sales</option>
+                        <option>Operations</option>
+                        <option>Finance</option>
+                        <option>Fleet</option>
+                        <option>Accounting</option>
+                        <option>Technics</option>
+                        <option>Administration</option>
+                        
+                    </select>
+                </div>
+                
+                <div class="o-cols__item">
+                    <address>
+                        <p>Wolfram Bahle</p>
+                        <p>&nbsp;</p>
+                        <p><a href="mailto:wbahle@mfdrail.ch">wbahle@mfdrail.ch</a></p>
+                        <p><a href="tel:004141531242">+41 41 531 24 2</a></p>
+
+                    </address>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        
+    <div class="c-careers bg-green" id="career">
+        <div class="o-container">
+            <h2 class="o-section">Careers</h2>
+
+            <div class="o-cols o-cols--2">
+                <div class="o-cols__item">
+                    <div class="o-article">
+                        <p>Move your career forward. Your talent and personality fuel our success as a team. Be inspired and apply to join us online. We have our eyes firmly on the future, and we look forward to receiving your application.</p>
+
+                        <p>&nbsp;</p>
+
+                        <p><a href="mailto:HR@mfdrail.ch">HR@mfdrail.ch</a></p>
+                    </div>
+                </div>
+                
+                <div class="o-cols__item">
+                    <ul class="c-careers__links">
+                        <li>
+                            <a href="#">linkedin</a>
+                        </li>
+                        
+                        <li>
+                            <a href="#">jobs.ch</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+    
+    <footer class="c-footer">
+        <div class="o-container">
+            <h2 class="o-section">
+                <img src="img/logos/mfd--simple.svg" width="125" height="50" alt="mfd">
+            </h2> 
+
+            <div class="o-wrap o-wrap--2">
+                <div class="o-cols o-cols--4">
+                    <div class="o-cols__item">
+                        <p><strong>MFD Rail GmbH</strong></p>
+                    </div>
+                    
+                    <div class="o-cols__item">
+                       <address>
+                            <p>Grundstrasse 12</p>
+                            <p>CH-6343 Rotkreuz</p>
+                       </address>
+                    </div>
+                    
+                    <div class="o-cols__item">
+                        <p>O/ <a href="tel:0041415312424">+41 41 531 24 24</a></p>
+                        <p>E/ <a href="mailto:info@mfdrail.ch">info@mfdrail.ch</a></p>
+                    </div>
+                    
+                    <div class="o-cols__item">
+                       <p><a href="#">LINKEDIN</a>/ MFD Rail</p>
+                    </div>
+                </div> 
+
+
+                <div class="o-cols o-cols--2">
+                    <div class="o-cols__item o-cols__item--copyrights">
+                        <p>Copyright &copy 2021 MFD Rail GmbH.</p>
+                        <p>All Rights Reserved</p>
+                    </div>
+                    
+                    <div class="o-cols__item o-cols__item--links">
+                        <div class="o-cols o-cols--2">
+                            <div class="o-cols__item o-cols__item--nav">
+                                <nav class="c-footer__nav">
+                                    <ul>
+                                        <li>
+                                            <a href="#">Term of Use</a>
+                                        </li>
+                                        
+                                        <li>
+                                            <a href="#">Privacy Information Notice</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                                
+                            <div class="o-cols__item o-cols__item--design">
+                                <p class="c-footer__design">
+                                    <a href="https://morgenstudio.de/pl/" rel="noopener" target="_blank">Design by MORGEN</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+
+<script src="js/app.js"></script></body>
+</html>

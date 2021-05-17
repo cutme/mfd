@@ -1,0 +1,204 @@
+.o-slant {
+    @extend %rel;
+    
+    &:after {
+        @extend %abs-pseudo;
+        right: 0; top: 0;
+        height: 100%;
+        background-repeat: no-repeat;
+        font-family: $icomoon;
+        opacity: .03;
+        z-index: -1;
+    }
+    
+    
+    &--agro-machine {
+        &:after {
+            width: 155px;
+            background-image: url(../img/icons/agro-machine-slant.svg);
+        }
+    }
+    
+    &--calendar {
+        &:after {
+            width: 155px;
+            background-image: url(../img/icons/calendar-slant.svg);
+        }
+    }
+    
+    &--car {
+        &:after {
+            width: 150px;
+            background-image: url(../img/icons/car-slant.svg);
+        }
+    }
+
+    &--car2 {
+        &:after {
+            width: 150px;
+            background-image: url(../img/icons/car2-slant.svg);
+        }
+    } 
+    
+    &--car3 {
+        &:after {
+            width: 136px;
+            background-image: url(../img/icons/car3-slant.svg);
+        }
+    } 
+    
+    &--chat {
+        &:after {
+            width: 136px;
+            background-image: url(../img/icons/chat-slant.svg);
+        }
+    }    
+    
+    &--clients {
+        &:after {
+            width: 155px;
+            background-image: url(../img/icons/clients-slant.svg);
+        }
+    }
+    
+    &--clock {
+        &:after {
+            width: 135px;
+            background-image: url(../img/icons/clock-slant.svg);
+        }
+    }
+    
+    &--constr-machine {
+        &:after {
+            width: 135px;
+            background-image: url(../img/icons/constr-machine-slant.svg);
+        }
+    }
+    
+    &--doc {
+        &:after {
+            width: 140px;
+            background-image: url(../img/icons/doc-slant.svg);
+        }
+    }
+    
+    &--id {
+        &:after {
+            width: 150px;
+            background-image: url(../img/icons/id-slant.svg);
+        }
+    }
+
+        
+    &--list {
+        &:after {
+            width: 153px;
+            background-image: url(../img/icons/list-slant.svg);
+        }
+    }
+    
+    &--mail {
+        &:after {
+            width: 130px;
+            background-image: url(../img/icons/mail-slant.svg);
+        }
+    }
+    
+    &--money {
+        &:after {
+            width: 140px;
+            background-image: url(../img/icons/money-slant.svg);
+        }
+    }
+    
+    &--percents {
+        &:after {
+            width: 125px;
+            background-image: url(../img/icons/percents-slant.svg);
+        }
+    }
+    
+    &--phone {
+        &:after {
+            width: 115px;
+            background-image: url(../img/icons/phone-slant.svg);
+        }
+    }
+    
+    &--review {
+        &:after {
+            width: 173px;
+            background-image: url(../img/icons/review-slant.svg);
+        }
+    }
+    
+    &--safe {
+        &:after {
+            width: 123px;
+            background-image: url(../img/icons/safe-slant.svg);
+        }
+    }
+    
+    &--sliders {
+        &:after {
+            width: 130px;
+            background-image: url(../img/icons/sliders-slant.svg);
+        }
+    }
+    
+    &--speakbubble {
+        &:after {
+            width: 170px;
+            background-image: url(../img/icons/speakbubble-slant.svg);
+        }
+    }
+    
+    &--support {
+        &:after {
+            width: 130px;
+            background-image: url(../img/icons/support-slant.svg);
+        }
+    }
+    
+    &--thumb {
+        &:after {
+            width: 174px;
+            background-image: url(../img/icons/thumb-slant.svg);
+        }
+    }
+    
+    &--tools {
+        &:after {
+            width: 150px;
+            background-image: url(../img/icons/tools-slant.svg);
+        }
+    }
+    
+    &--truck {
+        &:after {
+            width: 150px;
+            background-image: url(../img/icons/truck-slant.svg);
+        }
+    }
+    
+    &--umbrella {
+        &:after {
+            width: 105px;
+            background-image: url(../img/icons/umbrella-slant.svg);
+        }
+    }
+    
+    &--user {
+        &:after {
+            width: 160px;
+            background-image: url(../img/icons/user-slant.svg);
+        }
+    }
+    
+    &--wallet {
+        &:after {
+            width: 150px;
+            background-image: url(../img/icons/wallet-slant.svg);
+        }
+    }
+}

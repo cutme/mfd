@@ -1,0 +1,165 @@
+.c-fleet2 {
+    padding-top: 110px;
+    
+    @media ( max-width: $base + px ) {
+    	@include responsive-padding-top(base(110), rem(30));
+    }
+    
+    &__content {
+        justify-content: flex-end;
+
+        img {
+            margin: 0 0 30px auto;
+        }
+    }
+
+    &__details {
+        justify-content: flex-end;
+        padding: {
+            left: 30px;
+            right: 30px;
+        }
+
+        @media ( max-width: $tablet  - 1px ) {
+        	padding: 0 20px;
+        }
+        
+        @media ( min-width: $smartphone + 1px ) {
+        	display: flex;
+        	align-items: center;
+        }
+        
+        @media ( max-width: $smartphone + px ) {
+            margin-bottom: -1px;
+        }
+        
+        
+        dd {
+            @extend %flex;
+            @extend %flex-wrap;
+
+            @media ( min-width: $tablet + px ) {
+            	border-left: 1px solid black;
+                border-right: 1px solid black;
+                padding: 0 8px;
+            }
+            
+            p {
+                padding: 0 4px;
+                
+                @media ( min-width: $tablet + px ) {
+                    padding: 0 8px;
+                }
+            }
+        }
+
+        dl {
+            @extend %flex;
+            align-items: flex-end;
+            margin-right: 30px;
+            padding-bottom: 16px;
+            text-align: right;
+            font-size: rem(15);
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-font(base(15), rem(10));
+            	@include responsive-margin-right(base(30), rem(15));
+            }
+            
+            @media ( max-width: $smartphone + px ) {
+            	margin-bottom: 20px;
+            }
+        }
+        
+        dt {
+            padding-right: 16px;
+        }
+        
+        strong {
+            font-weight: $medium;
+        }
+        
+        & + .c-fleet2__details {
+            margin-top: 6px;
+            
+            dl {
+                padding-bottom: 0;
+            }
+        }
+    }
+    
+    &__nav {
+        padding-bottom: 100px;
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-padding-bottom(base(100), rem(70));
+        }
+        
+        .swiper-slide {
+            width: auto;
+            @extend %lead--2;
+            margin-right: 40px;
+            padding-right: 40px;
+            cursor: pointer;
+
+            @media ( max-width: $base + px ) {
+            	@include responsive-margin-right(base(40), rem(20));
+            	@include responsive-padding-right(base(40), rem(20));
+            }
+
+            &.swiper-slide-thumb-active {
+                -webkit-text-stroke-width: 2px;
+                -webkit-text-fill-color: $c-green-01;
+                -webkit-text-stroke-color: black;
+            }
+            
+            &:not(:last-of-type) {
+                border-right: 2px solid black;
+                
+                @media ( max-width: $tablet + px ) {
+                	border-right-width: 1px;
+                }
+            }
+        }
+    }
+
+    
+    .o-header {
+        margin-bottom: 50px;
+
+        @media ( min-width: $tablet_portrait + px ) {
+            padding-left: 160px;
+        }
+        
+        p {
+            @media ( max-width: $base + px ) {
+            	@include responsive-font(base(24), rem(14));
+            }
+        }
+    }
+    
+    .o-morebtn {
+        @media ( max-width: $smartphone + px ) {
+        	max-width: 266px;
+        }
+    }
+
+    .o-wrap {
+        @media ( min-width: $tablet_portrait + px ) {
+            padding-left: 160px;
+        }
+    }
+    
+    .o-section {
+        margin-top: 2px;
+        
+        @media ( max-width: $tablet - 1px ) {
+            position: absolute;
+        	margin: 0;
+        }
+        
+        @media ( max-width: $tablet_portrait - 1px ) {
+        	display: none;
+        }
+    }
+}

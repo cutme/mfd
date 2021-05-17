@@ -1,0 +1,47 @@
+/*
+.o-oval {
+    @extend %rel;
+    @extend %flex;
+    width: 106px;
+    flex: 106px 0 0; height: 106px;
+    border-radius: 50%;
+    border: 1px solid $c-gray-02;
+    padding: 2px;
+
+    &:before {
+        @extend %flex;
+        @extend %flex-xy;
+        position: absolute;
+        left: 2px; top: 2px;
+        width: calc(100% - 4px); height: calc(100% - 4px);
+        background-color: $c-blue-02;
+        border-radius: 50%;
+        color: $c-navy-01;
+    }
+    
+    img {
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+    
+    &.icon-car {
+        font-size: rem(40);
+    }
+    
+    &.icon-id {
+        font-size: rem(34);
+    }
+    
+    &.icon-money {
+        font-size: rem(32);
+    }
+    
+    &.icon-percents {
+        font-size: rem(40);
+    }
+    
+    &.icon-phone {
+        font-size: rem(54);
+    }
+}
+*/

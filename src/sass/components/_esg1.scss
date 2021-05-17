@@ -1,0 +1,95 @@
+.c-esg1 {
+    @extend %rel;
+    max-width: 1920px;
+    margin: 0 auto;
+    overflow: hidden;
+
+    @media ( min-width: $tablet + px ) {
+        padding-top: 135px;    	
+    }
+    
+    @media ( min-width: $tablet + px )  and ( max-width: $base + px ) {
+    	@include responsive-padding-top(base(135), rem(100));
+    }
+    
+    @media ( min-width: $tablet + px ) {
+        position: absolute; z-index: 1;
+        top: 0;
+        left: 50%; transform: translate3d(-50%, 0, 0);
+        width: 100%;
+        height: 100vh;
+    }
+
+    &__landscape {
+        @extend %gray;
+        
+        img {
+            width: 100%;
+        }
+    }
+    
+    .o-cols {
+        @media ( min-width: $tablet + px ) {
+            height: 100%;
+            border-top: 1px solid black;
+        }
+
+        @media ( max-width: $tablet_portrait - 1px ) {
+        	display: block;
+        	margin: 0 0 20px 0;
+        }
+        
+        &__item {
+            &:first-of-type {
+                @extend %gray;
+
+                @media ( max-width: $tablet_portrait - 1px ) {
+                    width: 100%;
+                    padding: 0;
+                }
+                
+                img {
+                    width: 100%;
+                    
+                    @media ( min-width: $tablet + px ) {
+                	    height: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+            
+            &:last-of-type {
+                @extend %flex;
+                @extend %flex-y;
+                padding-right: 50px;
+
+                @media ( min-width: $tablet + px ) {
+                    padding-right: 160px;
+                }
+                
+                @media ( max-width: $tablet_portrait - 1px ) {
+                    width: 100%;
+                    padding: 0 20px 0 20px;
+                }
+            }
+            
+            .o-article {
+                p {
+                    @media ( min-width: $tablet + px ) {
+                        padding-right: 30%;
+                    }
+                }
+            }
+        }
+    }
+    
+    .o-section {
+        top: 160px;
+
+        @media ( max-width: $tablet  - 1px ) {
+            position: absolute;
+            left: 20px;
+        	top: 60px;
+        }
+    }
+}

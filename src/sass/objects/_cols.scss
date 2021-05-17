@@ -1,0 +1,183 @@
+.o-cols {
+    @extend %flex;
+    @extend %flex-wrap;
+    
+    &--2 {
+        @media ( min-width: $smartphone_portrait + 1px ) {
+            margin: {
+                left: -15px;
+                right: -15px;
+            }
+        }
+        
+        @media ( max-width: $smartphone_portrait + px ) {
+        	display: block;
+        }
+    
+        .o-cols {
+            
+            &__item {
+                @media ( min-width: $smartphone_portrait + 1px ) {
+                    width: 50%;
+
+                    &:nth-of-type(1) { 
+                        padding-right: 15px;
+                        padding-left: 15px;
+                    }
+                    
+                    &:nth-of-type(2) { 
+                        padding-left: 15px;
+                        padding-right: 15px;
+                    }
+                }
+            }
+        }
+    }
+    
+    &--4 {
+        margin: 0 -15px;
+        
+        .o-cols {
+            &__item {
+                width: 25%;
+                
+                padding: {
+                    left: 15px;
+                    right: 15px;
+                }
+            }
+        }
+    }
+   
+    &--2_3 {
+        .o-cols {
+            &__item {
+                @extend %flex;
+                
+                &:nth-of-type(1) { 
+                    width: grid(770, 1920 - 60);
+                    padding-left: 160px;
+                    padding-right: 15px;
+                    
+                    @media ( max-width: $tablet  - 1px ) {
+                        width: 50%;
+                    	padding-left: 0;
+                    }
+                    
+                    @media ( max-width: $tablet_portrait - 1px ) {
+                    	width: 100%;
+                    }
+                }
+                
+                &:nth-of-type(2) {
+                    width: grid(1090, 1920 - 60);
+                    padding-left: 15px;
+                    padding-right: 160px;
+                    
+                    @media ( max-width: $tablet  - 1px ) {
+                        width: 50%;
+                    	padding-right: 0;
+                    }
+                    
+                    @media ( max-width: $tablet_portrait  - 1px ) {
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
+    }
+    
+    &--reverse {
+        flex-direction: row-reverse;
+        
+        .o-cols {
+            &__item {
+                
+                &:nth-of-type(2) {
+                    padding-left: 160px;
+                    padding-right: 15px;
+                    
+                    @media ( max-width: $tablet  - 1px ) {
+                        padding-left: 0;
+                    }
+                    
+                    @media ( max-width: $tablet_portrait - 1px ) {
+                    	width: 100%;
+                    }
+                }
+                
+                &:nth-of-type(1) {
+                    padding-left: 0;
+                    
+                }
+                
+                
+                
+                
+/*
+                @extend %flex;
+                
+                &:nth-of-type(1) {
+                    width: grid(770, 1920 - 60);
+                    padding-left: 160px;
+                    padding-right: 15px;
+                }
+                
+                &:nth-of-type(2) {
+                    width: grid(1090, 1920 - 60);
+                    padding-left: 15px;
+                    padding-right: 160px;
+                }
+*/
+            }
+        }
+
+    }
+      
+
+
+   
+/*
+    width: calc(100% + 44px);
+    margin: 0 -22px;
+    
+    @media ( max-width: $tablet_portrait + px ) {
+        width: calc(100% + 30px);
+        margin: 0 -15px;
+    }
+
+    &__item {
+        @extend %rel;
+        margin-bottom: 40px;
+        padding: 0 grid(22);
+        
+        @media ( max-width: $base + 80px ) {
+        	margin-bottom: base(40);
+        }
+        
+        @media ( max-width: $tablet_portrait + px ) {
+        	margin-bottom: 30px;
+        	padding: 0 15px;
+        }
+    }
+    
+    &--2 {
+        .o-cols__item {
+            width: calc(100% / 2);
+        }
+    }
+
+    &--3 {
+        .o-cols__item {
+            width: calc(100% / 3);
+        }
+    }
+    
+    &--4 {
+        .o-cols__item {
+            width: calc(100% / 4);
+        }
+    }
+*/
+}
+

@@ -1,0 +1,11 @@
+.o-wrap {
+	//@extend %wrap;
+	
+	&--1 {
+    	@extend %wrap--1;
+	}
+	
+	&--2 {
+    	@extend %wrap--2;
+	}
+}

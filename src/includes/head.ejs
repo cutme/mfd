@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pl-PL" class="no-js">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <meta name="robots" content="noindex, nofollow">
+    <title>MDF Rail</title>
+    
+    <style>        
+        .c-loader {
+            position: absolute; left: 0; top: 0; 
+            z-index: 200; 
+            width: 100%; 
+            height: 100%; 
+            background-color: #34494C; 
+        }        
+
+        .c-loader__bar {
+        	position: absolute;
+        	z-index: 10;
+        	top: 0;
+        	left: 50%;
+            width: 2px;
+            height: 0;
+            background: #03FF69;
+        	transform: translateX(-50%);
+    	    transition: width 0.3s ease-out, height 0.3s ease-out 0.2s;
+        }
+    </style>
+    
+    <script>
+           
+        window.RealProgress = (function () {
+            var exports = {
+                onResourceLoad: null,
+                onProgress: null,
+                onLoad: null
+            };
+        
+            var _total = 0
+            ,   _loaded = 0
+            ,   _windowLoaded = false
+            ,   _boundElements = []
+            ,   _pendingResources = []
+            ,   _options = {
+                    regex: function (tag, attr) {
+                        return new RegExp("<" + tag + "[^>]*" + attr + "\s*\=\s*[\'\"]([^\'\"]+)[\'\"][^>]*>", "gi");
+                    },
+                    untracked: [],
+                    tags: {
+                        "link": "href",
+                        "iframe": "src",
+                        "source": "src",
+                        "script": "src",
+                        "img": "src"
+                    }
+                };
+        
+            function _isUntracked(subject) {
+                var list = _options.untracked;
+        
+                for (var i = 0; i < list.length; i++) {
+                    if (
+                        (
+                            typeof list[i] == "string" &&
+                            list[i] == subject
+                        ) ||
+                        (
+                            typeof list[i] == "object" &&
+                            list[i] instanceof RegExp &&
+                            typeof subject == "string" &&
+                            subject.match(list[i])
+                        )
+                    ) {
+                        return true;
+                    }
+                }
+        
+                return false;
+            }
+        
+            function _bindElements() {
+                var elems, attr;
+        
+                for (var t in _options.tags) {
+                    elems = document.getElementsByTagName(t);
+        
+                    for (var i = 0; i < elems.length; i++) {
+                        attr = elems[i].getAttribute(_options.tags[t]);
+        
+                        if (_boundElements.indexOf(elems[i]) === -1) {
+                            _boundElements.push(elems[i]);
+                            elems[i].addEventListener("load", _onLoadHandler(attr, t));
+                        }
+                    }
+                }
+            }
+        
+            function _onLoadHandler(attr, tag) {
+                var hasAttr = (typeof attr == "string")
+                ,   tracked = !_isUntracked(attr);
+        
+                if (tracked && hasAttr) {
+                    _pendingResources.push(attr);
+                }
+        
+                return function () {
+                    if (tracked && hasAttr) {
+                        _loaded++;
+                        _dispatchProgress();
+        
+                        if (typeof exports.onResourceLoad == "function") {
+                            exports.onResourceLoad(attr);
+                        }
+        
+                        var index = _pendingResources.indexOf(attr);
+                        if (index > -1) {
+                            _pendingResources.splice(index, 1);
+                        }
+                    }
+        
+                    if (tag == "script") {
+                        setTimeout(_bindElements, 0);
+                    }
+                };
+            }
+        
+            function _getResources(html) {
+                var match, regex;
+        
+                for (var tag in _options.tags) {
+                    regex = _options.regex(tag, _options.tags[tag]);
+        
+                    while (1) {
+                        match = regex.exec(html);
+        
+                        if (match != null && match.length && !_isUntracked(match[1])) {
+                            _total++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        
+            function _dispatchProgress() {
+                if (typeof exports.onProgress == "function") {
+                    exports.onProgress(_windowLoaded ? 1 : (_total > 0 ? (_loaded / _total) : 0));
+                }
+            }
+        
+            exports.init = function (opts) {
+                if (typeof opts == "object") {
+                    for (var k in opts) {
+                        _options[k] = opts[k];
+                    }
+                }
+        
+                var req = new XMLHttpRequest();
+                req.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        _getResources(this.responseText);
+                        _dispatchProgress();
+                    }
+                };
+                req.open("GET", document.location.href);
+                req.send(null);
+        
+                window.addEventListener("load", function () {
+                    _windowLoaded = true;
+                    _dispatchProgress();
+        
+                    if (typeof exports.onLoad == "function") {
+                        exports.onLoad(_pendingResources);
+                    }
+                
+                    _boundElements = [];
+                });
+        
+                setTimeout(_bindElements, 0);
+            };
+        
+            return exports;
+        })();
+        
+        (function () {
+            var _loaded = []
+            ,   _progress = 0
+            ,   _loadedPara = null
+            ,   _loadingBar = null;
+        
+            function render() {
+                _loadingBar = _loadingBar || document.getElementById("bar");
+        
+                if (_loadingBar) {
+                    _loadingBar.style.height = (_progress * 100) + "%";
+                }
+            }
+        
+            RealProgress.onResourceLoad = function (name) {
+                _loaded.push(name.split("/").pop());
+            };
+        
+            RealProgress.onProgress = function (progress) {
+                _progress = progress;
+                render();
+            };
+        
+            RealProgress.onLoad = function (uncaptured) {                
+                 setTimeout(function() {
+                    
+                    const loading = document.getElementById('loading');
+            
+                    document.documentElement.removeAttribute('style');
+                    document.documentElement.classList.add('is-loaded');
+            
+                    //window.anims();
+                    
+                    setTimeout(function() {
+                       document.documentElement.classList.add('show-logo');
+                       document.documentElement.classList.add('is-ready');
+                       loading.remove();
+                    }, 500);
+                    
+                }, 350);
+
+            };
+        })(); 
+        
+        RealProgress.init({
+            untracked: [
+                "js/app_.js",
+            ]
+        });
+    </script>
+      
+    <script>
+        document.documentElement.className = document.documentElement.className.replace("no-js","js");
+        document.documentElement.setAttribute('style', 'overflow: hidden');
+    </script>
+</head>
+

@@ -1,0 +1,246 @@
+%abs {
+	position: absolute;
+	z-index: 5;
+}
+
+%abs-pseudo {
+	position: absolute;
+	top: 0;
+	display: block;
+	content: ' ';
+}
+
+%anim {
+//    .is-ready & {
+        transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+//    }
+}
+
+%animfix {
+	-webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+}
+
+%antialias {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+%abs-x {
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+%abs-y {
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+%abs-xy {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+%clear {
+	clear: both;
+	
+	&:after {
+		clear: both;
+		display: block;
+		content: '';
+	}
+}
+
+%container {
+    @extend %rel;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 30px;
+    
+    @media ( max-width: $tablet  - 1px ) {
+    	padding: 0 20px;
+    }
+}
+
+%flex {
+    display: flex;
+}
+
+%flex-column {
+    flex-direction: column;
+}
+
+%flex-inline {
+    display: inline-flex;
+}
+
+%flex-shrink {
+    flex-shrink: 0;
+}
+
+%flex-x {
+	justify-content: center;
+}
+
+%flex-y {
+	align-items: center;
+}
+
+%flex-spacebetween {
+	justify-content: space-between;
+}
+
+%flex-end {
+    align-items: flex-end;
+}
+
+%flex-wrap {
+    flex-wrap: wrap;
+}
+
+%flex-xy {
+	justify-content: center;
+	align-items: center;
+}
+
+%gray {
+    @extend %rel;
+    
+    &:after {
+        @extend %abs-pseudo;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        background-color: $c-gray-01;
+        mix-blend-mode: color;
+    }
+}
+
+%lead {
+    font-family: $text;
+    
+    &--1,
+    &--2 {
+        font-weight: $bold;
+    }
+    
+    &--1 {
+        line-height: 1.2em;
+        font: {
+            size: rem(120);
+        }
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-font(base(120), rem(40));
+        }
+        
+        @media ( max-width: $tablet_portrait + px ) {
+        	@include responsive-font(tablet_portrait(60), rem(40));
+        }
+    }
+    
+    &--2 {
+        line-height: 1em;
+        font-size: rem(90);
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-font(base(90), rem(40));
+        }
+    }
+    
+    &--3 {
+        line-height: 1.2em;
+        font-size: rem(45);
+        
+/*
+        @media ( max-width: $base + px ) {
+        	@include responsive-font(base(45), rem(45));
+        }
+*/
+    }
+    
+
+    &--4 {
+        line-height: 1.2em;
+        font-size: rem(30);
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-font(base(30), rem(18));
+        }
+    }
+}
+
+%rel {
+	position: relative;
+	z-index: 1;
+}
+
+%ulink {
+    @extend %rel;
+    display: inline-block;
+    
+    &:after, &:before {
+        @extend %abs;
+        @extend %abs-pseudo;
+        left: 0;
+        width: 100%;
+        transform: scale3d(0, 1, 1);
+        opacity: .5;
+    }
+
+    &:before {
+        top: 100%;
+        height: 1px;
+        transform-origin: right center;
+        transition: transform;
+        transition-duration: .5s;
+        transition-timing-function: cubic-bezier(.77,0, .175, 1);
+    }
+
+/*
+    &:after {
+        top: 0;
+    	height: 100%;
+    }
+*/
+
+    &:hover {
+        //.desktop & {
+            &:before {                
+                transform: scale3d(1, 1, 1);
+                transform-origin: left center;
+            }
+        //}
+    }
+}
+
+%wrap {
+    
+    &--1 {
+        max-width: $wrap1 + px;
+        margin: 0 auto;
+    }
+
+    &--2 {
+        margin: 0 auto;
+        padding: {
+            left: 320px;
+            right: 160px;
+        }
+        
+        @media ( max-width: $base + px ) {
+        	padding: {
+            	left: base(320);
+            	right: base(160);
+        	}
+        }
+        
+        @media ( max-width: $tablet - 1px ) {
+        	padding-left: 0;
+        	padding-right: 0;
+        }
+    }
+
+}

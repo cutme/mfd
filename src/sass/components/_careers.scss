@@ -1,0 +1,103 @@
+.c-careers {
+    @extend %rel; z-index: 1;
+    padding-bottom: 100px;
+    color: black;
+    
+    @media ( max-width: $base + px ) {
+    	@include responsive-padding-bottom(base(100), rem(50));
+    }
+    
+    &__links {
+        
+        @media ( max-width: $smartphone_portrait + px ) {
+        	padding-left: 50%;
+        }
+        
+        a {
+            @extend %rel;
+            display: block;
+            padding-left: 160px;
+            text-transform: uppercase;
+            font: {
+                size: rem(50);
+                weight: $thin;
+            }
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-font(base(50), rem(25));
+            	@include responsive-padding-left(base(160), rem(60));
+            }
+            
+            &:before {
+                @extend %abs-pseudo;
+                @extend %anim;
+                left: 0; top: 50%;
+                transform: translate3d(0, -50%, 0);
+                font-family: $icomoon;
+                content: "\e900";
+            }
+            
+            &:hover {
+                &:before {
+                    .desktop & {
+                        transform: translate3d(100%, -50%, 0);
+                    }
+                }
+            }
+        }
+        
+        li {
+            &:not(:last-child) {
+                margin-bottom: 20px;
+            }
+        }
+    }
+    
+    .o-article {
+        a {
+            @extend %ulink;
+            font: {
+                size: rem(30);
+                weight: $regular;
+            }
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-font(base(30), rem(20));
+            }
+            
+            &:before {
+                background-color: black;
+            }
+        }
+    }
+    
+    .o-cols {
+        
+        &__item {
+            &:first-of-type,
+            &:last-of-type {
+                padding-left: 160px;
+                
+                @media ( max-width: $base + px ) {
+                	@include responsive-padding-left(base(160), rem(0));
+                }
+                
+                @media ( max-width: $tablet - 1px ) {
+                	padding-left: 15px;
+                }
+                
+                @media ( max-width: $smartphone_portrait + px ) {
+                	padding-left: 0;
+                }
+                
+            }
+        }
+    }
+    
+    .o-section {
+        
+        @media ( min-width: $tablet + px ) {
+            margin-top: 2px;	
+        }
+    }
+}

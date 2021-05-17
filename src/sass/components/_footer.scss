@@ -1,0 +1,188 @@
+.c-footer {
+    background-color: black;
+    padding-top: 60px;
+    letter-spacing: .5px;
+    font: {
+        weight: $thin;
+    }
+    
+    @media ( max-width: $base + px ) {
+    	@include responsive-padding-top(base(60), rem(30));
+    }
+
+    a {
+        white-space: nowrap;
+
+        &:hover {
+            color: $c-green-01;
+        }
+        
+    	&[href^="tel:"] {
+        	white-space: nowrap;
+    	}
+    }
+    
+    strong {
+        font-weight: $regular;
+    }
+    
+    &__nav {
+        ul {
+            
+            @media ( min-width: $tablet_portrait + px ) {
+                display: flex;
+            }
+            
+            li {
+                @media ( min-width: $tablet_portrait + px ) {
+                    padding: 0 15px;
+                    
+                    &:first-of-type {
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
+    }
+    
+    .o-cols {
+        padding-bottom: 60px;
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-padding-bottom(base(60), rem(40));
+        }
+        
+        .o-cols {
+            padding-bottom: 0;
+        }
+        
+        &:first-of-type {
+            font-size: rem(20);
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-font(base(20), rem(14));
+            }
+        }
+        
+        &:last-of-type {
+            font-size: rem(15);
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-font(base(15), rem(13));
+            }
+        }
+        
+        &--2 {
+            @media ( max-width: $smartphone_portrait + px ) {
+                display: flex;
+            }
+
+            .o-cols__item {
+                
+                &--copyrights {
+                    @media ( max-width: $tablet - 1px ) {
+                        width: 25%;
+                    }
+                    
+                    @media ( max-width: $tablet_portrait - 1px ) {
+                        width: 100%;
+                        padding-bottom: 20px;
+                    }
+
+                    p {
+                        @media ( min-width: $tablet + px ) {
+                        	display: inline;
+                        }
+                    }
+                }
+                
+                &--links {
+                    @media ( max-width: $tablet - 1px ) {
+                        width: 75%;
+                    }
+                    
+                    @media ( max-width: $tablet_portrait - 1px ) {
+                        width: 100%;
+                    }
+                    
+                    .o-cols {
+                        .o-cols__item {
+                            
+                            &--design {
+                                width: calc(100% / 3);
+                                margin: 0 0 0 auto;
+                                
+                                @media ( max-width: $tablet_portrait - 1px ) {
+                                    display: flex;
+                                    width: 50%;
+                                    align-items: flex-end;
+                                    padding-left: 15px;
+                                }
+                            }
+                            
+                            &--nav {
+                                @media ( max-width: $tablet_portrait - 1px ) {
+                                    width: 50%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        &--4 {
+           
+        	.o-cols__item {
+            	
+            	&:nth-of-type(1) {
+                	@media ( max-width: $tablet_portrait - 1px ) {
+                    	width: 100%;
+                    	padding-bottom: 20px;
+                    }
+            	}
+            	
+            	&:nth-of-type(2) {
+                    @media ( max-width: $tablet_portrait - 1px ) {
+                    	width: 50%;
+                    }
+            	}
+            	
+            	&:nth-of-type(3) {
+                    @media ( max-width: $tablet - 1px ) {
+                        width: 25%;
+                        margin: 0 0 0 auto;   
+                    }
+
+                    @media ( max-width: $tablet_portrait - 1px ) {
+                    	width: 50%;
+                    }
+            	}
+            	
+            	&:nth-of-type(4) {
+                    @media ( max-width: $tablet - 1px ) {
+                        width: 50%;
+                        margin: 20px 0 0 auto;
+                        padding-left: calc(25% + 15px);
+                    }
+                    
+                    @media ( max-width: $tablet_portrait - 1px ) {
+                    	width: 50%;
+                    	padding-left: 15px;
+                    }
+            	}
+            }
+        }
+    }
+    
+    .o-section {
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-width(base(125), rem(89));
+        }
+        
+        @media ( max-width: $tablet - 1px ) {
+        	margin-bottom: 25px;
+        }
+    }
+}

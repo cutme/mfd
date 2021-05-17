@@ -1,0 +1,59 @@
+body {
+	@include antialias;
+	line-height: 1.4;
+	text-rendering: optimizeSpeed;
+	font: {
+		family: $text;
+		size: #{$base-font-size}px;
+		weight: $light;
+	}
+	color: white;
+}
+
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+
+a {
+	color: inherit;
+	cursor: pointer;
+	text-decoration: none;
+	
+	.is-ready & {
+        @extend %anim;
+    }
+	
+	&:hover,
+    &:active,
+    &:focus {
+        outline: none;
+    }
+}
+
+
+
+strong {
+    font-weight: $bold;
+}
+
+::selection {
+//	color: white;
+}
+
+
+hr {
+    border: 0;
+    width: 100%;
+    height: 1px;
+    margin: 80px 0;
+    
+    @media ( max-width: $base + 80px ) {
+    	@include responsive-margin-top(base(80), rem(20));
+    	@include responsive-margin-bottom(base(80), rem(40));
+    }
+}
+
+
+

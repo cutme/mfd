@@ -1,0 +1,14 @@
+.o-pictogram {
+    @extend %abs; z-index: 2;
+    @extend %flex;
+    @extend %flex-xy;
+    left: -1px; top: -1px;
+    width: 60px; height: 60px;
+    background-color: $c-blue-02;
+    border-radius: 20px 0;
+    color: $c-navy-01;
+    
+    &.icon-video {
+        font-size: rem(20);
+    }
+}

@@ -1,0 +1,250 @@
+button, input, textarea {
+	background-color: transparent;
+	border: none;
+	border-color: inherit;
+	border-radius: 0;
+	font-family: $text;
+	color: inherit;
+}
+
+button {
+	cursor: pointer;
+}
+
+input, textarea {
+	width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+	text-rendering: optimizeLegibility; 
+	font: {
+		family: $text;
+		size: rem(14);
+		weight: $bold;
+	}
+	cursor: text;
+}
+
+input {
+	&[disabled],
+	&[readonly] {
+		opacity: .5;
+	}
+}
+
+input {
+	&[type=text],
+	&[type=email],
+	&[type=tel] {
+		width: 100%;
+	}
+}
+
+textarea {
+	overflow: auto;
+	resize: none;
+}
+
+:invalid {
+  box-shadow: none;
+}
+
+:-moz-submit-invalid {
+  box-shadow: none;
+}
+
+:-moz-ui-invalid {
+  box-shadow:none;
+}
+
+      
+/*
+
+*/
+
+/*
+
+
+::-webkit-input-placeholder { color: $c-navy-01; opacity: .2; }
+:-moz-placeholder { color: $c-navy-01; opacity: .2; }
+::-moz-placeholder { color: $c-navy-01; opacity: .2; }
+:-ms-input-placeholder { color: $c-navy-01; opacity: .2; }
+*/
+
+
+input[type=text],
+input[type=email],
+input[type=tel],
+input[type=url],
+textarea {
+    height: 60px;
+    border-radius: 15px;
+    background-color: white;
+    padding: 0 30px;
+    font: {
+        family: $text;
+        size: rem(15);
+    }
+
+    .is-loaded & {
+        @extend %anim;
+    }
+    
+    .has-error & {
+//        border-color: $c-red;
+    }
+}
+
+textarea {
+    padding: {
+        top: 20px;
+        bottom: 20px;
+    }
+    height: 190px;
+}
+
+.form-row {
+    @media ( min-width: $smartphone_portrait + 1px ) {
+        display: flex;
+        margin: 0 -15px;
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+    padding: 0 15px;
+    
+    @media ( min-width: $smartphone_portrait + 1px ) {
+        display: flex;
+        flex-wrap: wrap;
+        flex: 1;
+        margin-bottom: 30px;
+    }
+        
+    &.text-center {
+        justify-content: center;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: .5em;
+        padding-left: 30px;
+        font: {
+            size: rem(12);
+            weight: $bold;
+        }
+    }    
+}
+
+
+
+label {
+    cursor: pointer;
+    
+    &.white {
+        color: white;
+    }
+}
+
+input[type=checkbox],
+input[type=radio] {
+    display: none;
+    
+    & + label {
+        display: flex;
+        align-items: center;
+        
+        @media ( max-width: + $smartphone_portrait + px ) {
+            align-items: flex-start;
+        }
+        
+        .icon-tick {
+            @extend %flex-xy;
+            @extend %rel;
+            flex-shrink: 0;
+            display: inline-flex;
+            background-color: white;
+            font-size: rem(10);
+            color: var(--primary-color);
+            cursor: pointer;
+            
+            &:before {
+                @extend %abs;
+                @extend %flex;
+                @extend %flex-xy;
+                left: 0; top: 0;
+                width: 100%; height: 100%;
+                opacity: 0;
+                transform: translateY(0,-3px,0);
+            }
+        }
+
+        span {
+            padding-left: 20px;
+            text-align: left;
+            font-weight: $regular;
+        }
+    }
+    
+    &:checked {
+        & + label {
+            .icon-tick {
+                &:before {
+                    opacity: 1;
+                    transform: translate3d(0,0,0);
+                }
+            }
+        }
+    }
+}
+
+input[type=checkbox] {
+
+    & + label {
+        
+        .icon-tick {            
+            height: 40px;
+            width: 40px;
+            border-radius: 15px;
+            
+            & + span {
+                font-size: rem(12)
+            }
+        }
+    }
+}
+
+/*
+input[type=radio] {
+
+    & + label {
+        
+        i {            
+            &.big {
+                width: 40px; height: 40px;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.3);
+                border: none;
+                border-radius: 50%;
+                
+                &:before {
+                    @extend %abs-xy;
+                    transform: translate3d(-50%, -50%, 0);
+                    content: ' ';
+                    width: 20px;
+                    height: 20px;
+                    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.05), 0 8px 16px rgba(0, 0, 0, 0.05);
+                    background-color: var(--primary-color);
+                    border-radius: 50%;
+                }
+                
+                & + span {
+                    font-size: rem(24);
+                    font-weight: $bold;
+                }
+            }
+        }
+    }
+}
+*/
+
+
+

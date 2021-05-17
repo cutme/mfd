@@ -1,0 +1,95 @@
+.c-value1 {
+    border-bottom: 1px solid black;
+    padding: {
+        top: 80px;
+        bottom: 20px;
+    }
+    padding-top: 155px;
+
+    @media ( min-width: $tablet + px ) {
+        position: absolute; z-index: 1;
+        left: 50%; transform: translate3d(-50%, 0, 0);
+        width: 100%;
+        height: 100vh;
+    }
+    
+    @media ( min-width: $tablet + px ) and ( max-width: $base + px ) {
+    	@include responsive-padding-top(base(80), rem(40));
+    	@include responsive-padding-top(base(155), rem(40));
+    }
+    
+    .o-cols {
+        margin-bottom: 40px;
+
+        @media ( min-width: $tablet + px ) {
+            margin-bottom: 80px;	
+        }
+
+        &:first-of-type {
+            .o-cols {
+                &__item {
+                    &:last-of-type {
+                        @extend %flex;
+                        
+                        .o-article {
+                            margin: auto 0 0 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    .o-container {
+        @extend %flex;
+        @extend %flex-y;
+    }
+    
+    .o-header {
+        @extend %rel;
+            
+        @media ( max-width: $tablet - 1px ) {
+            padding-top: 25px;
+        	@include responsive-padding-bottom(base(70), rem(0));
+        }
+        
+        &:before {
+            @extend %abs-pseudo;
+            left: -30px; top: 0; z-index: -1;
+            width: 127px;
+            height: calc(100%);
+            background-color: $c-gray-02;
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-width(base(127), rem(80));
+            }
+            
+            @media ( min-width: $tablet + px ) {
+            	display: none;
+            }
+        }
+    }
+    
+    .o-section {
+        top: 0;
+        margin-top: 10px;
+        
+        @media ( max-width: $tablet - 1px ) {
+        	display: none;
+        }
+    }
+    
+    .o-wrap {
+        &--desktop {
+            @media ( max-width: $tablet - 1px ) {
+            	display: none;
+            }
+        }
+        
+        &--mobile {
+            @media ( min-width: $tablet + px ) {
+            	display: none;
+            }
+        }
+    }
+}

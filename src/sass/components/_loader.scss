@@ -1,0 +1,8 @@
+.c-loader {
+    transition: all 500ms ease-out;
+    opacity: 1;
+    
+    .is-loaded & {
+        opacity: 0;
+    }
+}

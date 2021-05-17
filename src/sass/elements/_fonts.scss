@@ -1,0 +1,6 @@
+@include font-face-db( "icomoon", "icomoon", normal);
+@include font-face-db( "HelveticaNeue", "HelveticaNeue-BoldExt", $bold);
+@include font-face-db( "HelveticaNeue", "HelveticaNeue-Light", $light);
+@include font-face-db( "HelveticaNeue", "HelveticaNeue-Extended", $regular);
+@include font-face-db( "HelveticaNeue", "HelveticaNeue-Medium", $medium);
+@include font-face-db( "HelveticaNeue", "HelveticaNeue-Thin", $thin);

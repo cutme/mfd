@@ -1,0 +1,146 @@
+.c-vision2 {
+    @extend %rel; z-index: 2;
+    background-color: $c-gray-01;
+    padding: {
+        top: 180px;
+        bottom: 200px;
+    }
+    overflow: hidden;
+    
+    @media ( max-width: $base + px ) {
+//    	@include responsive-padding-top(base(150), rem(30));
+    	@include responsive-padding-top(base(180), rem(30));
+    	@include responsive-padding-bottom(base(200), rem(50));
+    }
+    
+    &:before {
+        @extend %abs-pseudo; z-index: 100;
+        right: 0; top: 0;
+        width: 873px;
+        height: 482px;
+        background: {
+            image: url(../img/vision/dashes.svg);
+            repeat: no-repeat;
+            size: 100%;
+        }
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-width(base(873), rem(200));
+        }
+    }
+    
+    .o-article {
+        margin-bottom: 140px;
+        
+        @media ( max-width: $base + px ) {
+        	@include responsive-margin-bottom(base(140), rem(40));
+        }
+    }
+    
+    &__info {
+        @extend %flex;
+        height: 100%;
+        align-items: flex-end;
+        max-width: 440px;
+        padding-bottom: 5%;
+        
+        @media ( max-width: $tablet - 1px ) {
+        	padding-left: 20px;
+        	padding-right: 20px;
+        }
+        
+        @media ( max-width: $smartphone_portrait + px ) {
+        	padding: {
+            	top: 30px;
+            	left: 65px;
+        	}
+        }
+        
+        li {
+            @extend %anim;
+            transform: translate3d(10px, 0, 0);
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-font(base(24), rem(14));
+            }
+
+            &:not(.is-active) {
+                display: none;
+            }
+            
+            &:not(.is-visible) {
+                opacity: 0;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+    }
+    
+    &__slogans {
+        counter-reset: section;
+        
+        @media ( max-width: $tablet + px ) {
+        	padding-left: 70px;
+        }
+        
+        li {
+            @extend %anim;
+            margin-bottom: .1em;
+            cursor: pointer;
+            color: $c-gray-02;
+            opacity: .35;
+            
+            &:before {
+                @extend %abs;
+                @extend %anim;
+                left: -80px; top: 0;
+                counter-increment: section;
+                opacity: 0;
+                
+                @media ( max-width: $tablet - 1px ) {
+                	left: -50px;
+                }
+            }                
+
+            &:hover {
+                color: white;
+                opacity: 1;
+                    
+                &:before {
+                    opacity: 1;
+                }
+            }
+        }
+            
+        li {
+            @extend %lead--3;
+            @extend %rel;
+            text-transform: uppercase;
+            font-weight: $bold;
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-font(base(45), rem(20));
+            }
+            
+            &:before {
+                content: counter(section, decimal) "/";
+                -webkit-text-stroke-width: 1px;
+                -webkit-text-fill-color: transparent;
+                -webkit-text-stroke-color: $c-green-01;
+            }
+        }
+    }
+    
+    .o-cols {
+        &--2 {
+            .o-cols__item {
+                &:nth-of-type(2) {
+                    
+                }
+            }
+        }
+    }
+    
+    .o-section {
+        margin-top: 10px;
+    }
+}

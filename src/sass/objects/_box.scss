@@ -1,0 +1,145 @@
+.o-box {
+    @extend %rel;
+    @extend %flex;
+    @extend %flex-y;
+    height: 100%;
+    border-radius: 20px;
+    background-color: white;
+    border: 1px solid $c-gray-02;
+    padding: 25px 40px;
+    text-align: center;
+    
+    @media ( max-width: $tablet + px ) {
+    	padding: 25px;
+    }
+    
+    figcaption {
+        @extend %rel;
+        z-index: 10;
+    }
+
+    h3 {
+        @extend %lead--3;
+        font-weight: $bold;
+        line-height: 1.36em;
+        margin-bottom: .5em;
+        color: $c-blue-01;
+    }
+    
+    &:not(.o-box--noshadow) {
+        &:before {
+            @extend %shadow;
+        }
+    }
+        
+    &__arrow {
+        width: 130px; height: 100%;
+        margin: 0 0 0 auto;
+        background: {
+            image: url(../img/icons/arrow-double.svg);
+            repeat: no-repeat;
+            position: right center;
+        }
+    }
+    
+    &__categories {
+        @extend %abs;
+        left: 0; bottom: 0;
+        padding: 30px;
+        font-weight: $bold;
+        color: white;
+        
+    }
+    
+    &__photo {
+        @extend %rel;
+        width: grid(321, 598);
+        
+        &:after {
+            @extend %abs-pseudo; z-index: 1;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+            opacity: .5;
+        }            
+
+        .copy {
+            @extend %abs; z-index: 2;
+            left: 0; bottom: 0;
+            width: 100%;
+            font-weight: $bold;
+            padding: 30px;
+            text-align: left;
+            color: white;
+        }
+    }
+    
+    &--with-photo {
+        @extend %flex;
+        @extend %rel;
+        text-align: center;
+
+        figure {
+            @extend %flex;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        figcaption {
+            @extend %flex;
+            @extend %flex-column;
+            @extend %flex-spacebetween;
+            flex: 1;
+            padding: 25px 25px 40px 25px;
+            border-radius: 20px;
+            
+            p {
+                line-height: 1.76em;
+            }
+        }
+        
+        img {
+            object-fit: cover;
+            height: 100%;
+            
+            @media ( max-width: $tablet_portrait + px ) {
+                width: 100%;
+            }
+        }
+        
+        .o-oval {
+            margin: 0 auto 20px auto;
+        }         
+    }
+
+    .o-btn {
+        width: 100%;
+        max-width: 200px;
+        margin: {
+            left: auto;
+            right: auto;
+        }
+        padding: 0 10px;
+    }
+    
+    .o-oval {
+        margin: 0 auto 20px auto;
+        font-size: rem(46);
+    }
+}
+
+a.o-box {
+    &:hover {
+        .desktop & {
+            .o-btn--navy {
+                background-color: $c-navy-01h;
+            }
+            
+            &:before {
+                opacity: 1;
+            }
+        }
+    }
+}

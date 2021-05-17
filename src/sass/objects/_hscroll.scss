@@ -1,0 +1,47 @@
+.o-hscroll {
+    @extend %rel;
+
+    &__marquee {
+        margin: 0 auto;
+        white-space: nowrap;
+        overflow: hidden;
+        position: absolute;
+        
+        li {
+            display: inline-block;
+            padding-left: 100%;    
+            animation: marquee 40s linear infinite;
+            line-height: 1em;
+            font-size: rem(45);
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-font(base(45), rem(25));
+            }
+        }
+        
+        &--1 {
+            li {
+                animation-delay: -20s;
+            }
+        } 
+        
+        span {
+            display: inline-block;
+            margin-left: 0;
+            padding: 0 35px 0 25px;
+            border-right: 2px solid white;
+            font-weight: $regular;
+        }
+    }
+}
+
+
+
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}

@@ -1,0 +1,60 @@
+.o-morebtn {
+    @extend %flex;
+    @extend %flex-y;
+    min-width: 282px;
+    height: 85px;
+    padding: 0 30px;
+
+    @media ( max-width: $base + px ) {
+    	@include responsive-height(base(85), rem(69));
+    	@include responsive-min-width(base(282), rem(266));
+    }
+    
+    @media ( max-width: $tablet + px ) {
+    	padding: 0 25px;
+    }
+
+    span {
+        @extend %flex;
+        @extend %flex-y;
+        font-size: rem(20);
+
+        @media ( max-width: $base + px ) {
+        	@include responsive-font(base(20), rem(14));
+        }
+
+        &:after {
+            @extend %anim;
+            margin-left: 30px;
+            font-family: $icomoon;
+            font-size: rem(55);
+            content: "\e900";
+            
+            @media ( max-width: $base + px ) {
+            	@include responsive-font(base(55), rem(40));
+            	@include responsive-margin-left(base(30), rem(15));
+            }
+        }
+    }
+    
+    &:hover {
+        span {
+            &:after {
+                transform: translate3d(10px, 0, 0);
+            }
+        }
+    }
+    
+    &--black {
+        background-color: black;
+        color: white;
+    }
+
+    &--gray {
+        background-color: $c-gray-02;
+    }
+    
+    &--gray1 {
+        background-color: $c-gray-01;
+    }
+}

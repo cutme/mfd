@@ -1,0 +1,34 @@
+.o-accordion {
+    
+    li {
+        @extend %rel;
+        cursor: pointer;
+
+        & > div {
+            height: 0;
+            overflow: hidden;
+            
+            section {
+                padding: 40px;
+                
+                @media ( max-width: $base + 80px ) {
+                	@include  responsive-padding(base(40), rem(20));
+                }
+            }
+        }
+        
+        &.is-active {
+            & > div {
+                height: auto;
+            }
+        }
+        
+        &.is-rollout {
+            &:after {
+                opacity: 1;
+                transform: scaleY(-1);
+            }
+        }
+    }
+}
+
