@@ -31,26 +31,10 @@ import customSelect from 'custom-select';
         const init = function() {
     
             const cstSel = customSelect(select);
-/*
             
-            const radioAndSelect = function() {
-            
-                const el = document.getElementsByClassName('js-radioAndSelect');
-               
-                for (let j = 0; j < el.length; j++) {
-    
-                    const radio = el[j].getElementsByTagName('input');
-        
-                    for (let i = 0; i < radio.length; i++) {
-                        radio[i].addEventListener('change', function(e) {
-                            
-                            let changed = el[j].getElementsByClassName('is-changed')[0];
-                            changed ? changed.classList.remove('is-changed') : false;
-                        });
-                    }
-                }
-            };
-*/
+            const departments = document.getElementsByClassName('js-departments')[0],
+                  departments__address = departments.getElementsByTagName('li');
+
 
             for (let i = 0; i < select.length; i ++) {
 
@@ -63,14 +47,24 @@ import customSelect from 'custom-select';
                     e.target.parentNode.removeAttribute('style');
                 });
                 
+                // Contact Departments section
+                
                 cstSel[i].select.addEventListener('change', (e) => { 
-                    console.log(e.currentTarget);
-                    //e.target.parentNode.parentNode.classList.add('is-changed');
+                    let target = cstSel[i].value;
+                    
+                    for (let i = 0; i < departments__address.length; i++) {
+                        
+                        if (departments__address[i].classList.contains('is-active') ) {
+                            departments__address[i].classList.remove('is-active', 'is-visible');
 
+                            departments__address[target].classList.add('is-active');
+                            setTimeout(function() {
+                                departments__address[target].classList.add('is-visible');
+                            }, 10);
+                        }                        
+                    }
                 });
             }
-            
-            //radioAndSelect();
         };
                 
         select ? init() : false;

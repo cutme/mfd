@@ -144,9 +144,7 @@
         &.is-selected.has-focus {
             border-bottom-color: transparent;
 
-            &:after {
-                opacity: 1;
-            }
+            opacity: .6;
         }
         
         &.disabled {
