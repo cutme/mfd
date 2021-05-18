@@ -22,12 +22,14 @@ document.addEventListener('DOMContentLoaded',function() {
         
         if (gs === true) {
             if (window.innerWidth <= 1023) {            
+/*
                 if (topbarGsap !== undefined) {
                     ScrollTrigger.getById("topbar").kill(true);                
                     gs = false;
                 
                     console.log('disable gsap topbar');
                 }
+*/
                 
                 if (visionTimeline !== undefined) {
                     ScrollTrigger.getById("vision").kill(true);                
@@ -51,7 +53,7 @@ document.addEventListener('DOMContentLoaded',function() {
         } else {
             if (window.innerWidth > 1023) {
                
-                document.getElementsByClassName('js-topbar')[0] ? topbar() : false;
+                //document.getElementsByClassName('js-topbar')[0] ? topbar() : false;
                 
                 
                 document.getElementById('vision') ? vision() : false;
@@ -97,7 +99,8 @@ document.addEventListener('DOMContentLoaded',function() {
         });
     };
     
-    const topbar = function() {
+   /*
+ const topbar = function() {
         topbarGsap = ScrollTrigger.create({
             id: 'topbar',
             trigger: ".js-topbar",
@@ -107,6 +110,7 @@ document.addEventListener('DOMContentLoaded',function() {
             end:"bottom bottom"
         });
     };
+*/
     
     const value = function() {
         gsap.set('#value .o-right__page', { xPercent: 100 })
