@@ -7,3 +7,43 @@
     }
 }
 */
+
+.gcontainer {
+    .icon-close {
+        @extend %abs;
+        right: 15px; top: 25px;
+        font-size: rem(31);
+    }
+}
+
+.glightbox-mobile {
+    .goverlay {
+        background: rgba(52, 73, 76, 0.8) !important;
+    }
+}
+
+.gslide-inline {
+    
+    .inline-inner {
+        @extend %rel;
+        
+        &--green {
+            background-color: $c-green-01;
+            color: black;
+        }
+        
+        &--gray {
+            background-color: $c-gray-02;
+        }
+    }
+    
+    .ginlined-content {
+        height: auto !important;
+        
+    }
+}
+
+.gslide-media {
+    height: auto !important;
+    background: transparent !important;
+}

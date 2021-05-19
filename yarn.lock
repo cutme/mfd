@@ -3776,6 +3776,11 @@ gifsicle@^4.0.0:
     execa "^1.0.0"
     logalot "^2.0.0"
 
+glightbox@^3.0.8:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/glightbox/-/glightbox-3.0.8.tgz#2ac153ae66c41412694a945e8372ab86adbaf8fc"
+  integrity sha512-b+IywITiEW4/rKey4sYcH7jCEgvsYpak2SUruxDiLkrtddDYJjuN9U7EQ0ToTKZNuFgmkn+zgYyKL/0sjgDJOQ==
+
 glob-parent@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-3.1.0.tgz#9e6af6299d8d3bd2bd40430832bd113df906c5ae"

@@ -109,6 +109,15 @@
                     opacity: 1;
                 }
             }
+            
+            &.is-active {
+                color: white;
+                opacity: 1;
+                    
+                &:before {
+                    opacity: 1;
+                }
+            }
         }
             
         li {

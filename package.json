@@ -47,6 +47,7 @@
         "detect-browser": "^4.6.0",
         "ejs-compiled-loader": "^1.1.0",
         "express": "^4.17.1",
+        "glightbox": "^3.0.8",
         "gsap": "^3.5.1",
         "inview": "^0.0.14",
         "load-google-maps-api": "^2.0.2",

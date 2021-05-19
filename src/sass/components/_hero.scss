@@ -53,8 +53,8 @@
     
     &__lead {
         padding: 20px 0 0 30px;
-        transition: opacity .5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        opacity: 0;
+        //transition: opacity .5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        //opacity: 0;
         
         @media ( max-width: $tablet - 1px ) {
         	padding: {
@@ -66,22 +66,16 @@
         }
         
         .show-logo & {
-           opacity: 1;
+          // opacity: 1;
         }        
     }
     
     &__img {
         @extend %gray;
-        
-        /*
-background: {
-            image: url(../img/hero/campbell.jpg);
-            size: cover;
-        }
-*/
-        transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        transform: translate3d(100%, 0, 0);
-        opacity: 0;
+
+        //transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        //transform: translate3d(100%, 0, 0);
+        //opacity: 0;
         
         img {
             @media ( min-width: $tablet + px ) {
@@ -91,8 +85,8 @@ background: {
         }
         
         .is-loaded & {
-            transform: translate3d(0, 0, 0);
-            opacity: 1;
+            //transform: translate3d(0, 0, 0);
+           // opacity: 1;
         }
     }
 

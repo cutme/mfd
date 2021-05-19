@@ -41,6 +41,60 @@ $accordion: 1352;
             }
         }
     }
+    
+    &__article {
+        
+        .o-accordion & {
+            padding: 24px 68px 40px 50px;
+            background-color: $c-gray-02;
+        }
+        
+        .gcontainer & {
+            
+            padding: {
+                top: 20px;
+                bottom: 30px;
+                
+            }
+
+            h5 {
+                font-size: rem(18);
+            }
+            
+            p, li {
+                font-size: rem(14);
+            }
+        }
+        
+        @media ( max-width: $base + px ) {
+            @include responsive-padding-left(base(60), rem(20));
+            @include responsive-padding-right(base(60), rem(30));
+        }
+
+        h5 {
+            padding-right: 10%;
+            font-weight: $regular;
+        }
+
+        ul {
+            li {
+                @extend %rel;
+                padding-left: 20px;
+                
+                &:before {
+                    @extend %abs-pseudo;
+                    left: 0; top: 0;
+                    content: '– ';
+                }
+            }
+        }
+        
+        .icon-close {
+            @extend %abs;
+            right: 20px; top: 20px;
+            font-size: rem(31);
+        }
+    }
 
     &__container {
         @extend %flex;
@@ -275,6 +329,10 @@ $accordion: 1352;
                             right: 20px;
                         }
                     }
+                    
+                    &--level {
+                        padding-left: 15px;
+                    }
                 }
                 
                 &--header {
@@ -296,7 +354,7 @@ $accordion: 1352;
                     .o-cols__item {
                         
                         &:first-of-type {
-                            padding-left: 0;
+                            //padding-left: 0;
                         }
                         
                         header {
@@ -309,6 +367,7 @@ $accordion: 1352;
                 
                 &--b {
                     border-bottom: 1px solid rgba(white, .2);
+                    
                     .o-cols__item {
                         &:first-of-type {
                             align-items: flex-end;
@@ -362,6 +421,21 @@ $accordion: 1352;
             }
             
             .swiper-slide {
+                
+                .row {
+                    .o-cols {
+                        &--header {
+                            display: block;
+                            width: 50%;
+                        }                        
+                    }
+                    
+                    .glightbox {
+                        display: block;
+                        width: 50%;
+                    }
+                }
+                
                 &--1 {
                     
                     .o-cols--a {
@@ -381,10 +455,8 @@ $accordion: 1352;
                 
                 &--2 {
                     .o-cols--a {
-                        .o-cols__item {
-                            &:first-of-type {
-                                background-color: $c-gray-02;
-                            } 
+                        .glightbox {
+                            background-color: $c-gray-02;
                         }
                     }
                     
@@ -407,10 +479,8 @@ $accordion: 1352;
                     .o-cols--a,
                     .o-cols--b,
                     .o-cols--c {
-                        .o-cols__item {
-                            &:first-of-type {
-                                background-color: $c-gray-02;
-                            } 
+                        .glightbox {
+                            background-color: $c-gray-02;
                         }
                     }
 
@@ -427,24 +497,17 @@ $accordion: 1352;
                     .o-cols--a,
                     .o-cols--b,
                     .o-cols--c {
-                        .o-cols__item {
-                            &:first-of-type {
-                                background-color: $c-green-01;
-                            } 
+                        .glightbox {
+                            background-color: $c-green-01;
                         }
                     }
                     
                     .o-cols--d {
                         .o-cols__item {
-                            
-                            &:first-of-type {
-                                color: black;
-                            }
-
                             header {
-                                width: calc(100% + 12px);
+                                width: calc(100% + 33px);
                                 background-color: $c-green-01;
-                                
+                                color: black;
                                 h4 {
                                     box-shadow: inset 0px -9px 0px 0px $c-green-01;
                                 }
@@ -462,6 +525,10 @@ $accordion: 1352;
                 }
             }
         }        
+    }
+    
+    &__popups {
+        color: black;
     }
     
     .o-accordion {
@@ -502,39 +569,7 @@ $accordion: 1352;
                 @include responsive-font(base(24), rem(14));
             }
             
-            h5 {
-                padding-right: 10%;
-                font-weight: $regular;
-            }
             
-            section {
-                padding: 24px 68px 40px 50px;
-                background-color: $c-gray-02;
-                
-                @media ( max-width: $base + px ) {
-                    @include responsive-padding-left(base(60), rem(20));
-                    @include responsive-padding-right(base(60), rem(30));
-                }
-            }
-            
-            ul {
-                li {
-                    @extend %rel;
-                    padding-left: 20px;
-                    
-                    &:before {
-                        @extend %abs-pseudo;
-                        left: 0; top: 0;
-                        content: '– ';
-                    }
-                }
-            }
-            
-            .icon-close {
-                @extend %abs;
-                right: 20px; top: 20px;
-                font-size: rem(31);
-            }
         }
         
         &__item {

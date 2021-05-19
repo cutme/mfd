@@ -33,10 +33,10 @@
     
     a {
         &:hover {
-            color: $c-green-01;
+            //color: $c-green-01;
             
             .is-green & {
-                color: black;
+               // color: black;
             }
         }
     }

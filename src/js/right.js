@@ -83,19 +83,38 @@ document.addEventListener('DOMContentLoaded',function() {
 
     const partnership = function() {
         
+        const topbar = document.getElementsByClassName('js-topbar')[0];
+        let topbar_height = topbar.clientHeight;
+        
         ScrollTrigger.create({
             id: 'partnership',
             trigger: "#partnership",
-            start: "top -100%",
-            
+            start: "top" + " -100%+=" + 104,
+            endTrigger: ".c-usps",
+
             onEnter: function() {
-                //document.getElementsByClassName('js-topbar')[0].classList.add('is-green');
+                if (!topbar.classList.contains('is-green')) {
+                    topbar.classList.add('is-green');
+                }
             },
             
             onEnterBack: function() {
-                //document.getElementsByClassName('js-topbar')[0].classList.remove('is-green');
+                if (!topbar.classList.contains('is-green')) {
+                    topbar.classList.add('is-green');
+                }
+            },
+
+            
+            onLeave: function() {
+                console.log('leave');
+                topbar.classList.remove('is-green');
             },
             
+            onLeaveBack: function() {
+                console.log('leave back');
+                
+                topbar.classList.remove('is-green');
+            }            
         });
     };
     
@@ -122,12 +141,36 @@ document.addEventListener('DOMContentLoaded',function() {
                 pin: true,
                 scrub: 1,
                 start: 'top top',
+                snap: {
+    				snapTo: "labels",
+                    delay: 0, 
+                },
             }
         })
-        .to('#value .o-right__page', { xPercent: 0 })
-        .to({}, { duration: 0.5 }) 
+        .to('#value .o-right__page', { xPercent: 0 }).addLabel('value-02')
+
     };
 
+    const vision = function() {
+        gsap.set('#vision .o-right__page', { xPercent: 100 })
+
+        visionTimeline = gsap.timeline({
+            scrollTrigger: {
+                id: 'vision',
+                trigger: "#vision",
+                pin: true,
+                scrub: 1,
+                start: "top top",
+                snap: {
+    				snapTo: "labels",
+                    delay: 0, 
+                },
+            }
+        })
+        .to('#vision .o-right__page', { xPercent: 0 }).addLabel('vision-02')
+    };
+    
+/*
     const vision = function() {
         gsap.set('#vision .o-right__page', { xPercent: 100 })
 
@@ -144,6 +187,7 @@ document.addEventListener('DOMContentLoaded',function() {
         .to('#vision .o-right__page', { xPercent: 0 })
         .to({}, { duration: 0.5 }) 
     };
+*/
 
     document.getElementById('partnership') ? partnership() : false;
     window.addEventListener('resize', checkWidth);

@@ -2,6 +2,7 @@ import css from './sass/style.scss';
 
 require('./js/accordion.js');
 require('./js/carousels.js');
+require('./js/glightbox.js');
 require('./js/gototarget.js');
 require('./js/polyfills.js');
 require('./js/helpers.js');

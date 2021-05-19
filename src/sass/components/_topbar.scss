@@ -1,18 +1,21 @@
 .c-topbar {
     @include z-index(topbar);
     @extend %abs;
+    @extend %anim;
     left: 0; bottom: 1px;
     width: 100%;
     height: 135px;
     background-color: $c-gray-01;
     
-    transition: all .5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    transform: translate3d(0, 100%, 0);
-    opacity: 0;
+    //transition: all .5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    //transform: translate3d(0, 100%, 0);
+    //opacity: 0;
     
     &.is-green {
         background-color: $c-green-01;
         color: black;
+        
+        
     }
     
     @media ( max-width: $base + px ) {
@@ -33,8 +36,8 @@
     }
     
     .is-loaded & {
-        transform: translate3d(0, 0, 0);
-        opacity: 1;
+        //transform: translate3d(0, 0, 0);
+        //opacity: 1;
     }
     
     .c-nav {
@@ -58,14 +61,61 @@
             @media ( min-width: $tablet + px ) {
             	display: block;
             }
+            
+            &--black {
+                display: none;
+                
+                .is-green & {
+                    display: block;
+                }
+            }
         }
         
         .mobile {
             width: 80px;
             //height: 32px;
 
-            @media ( min-width: $tablet + px ) {
-            	display: none;
+            &--white {
+                @media ( min-width: $tablet + px ) {
+                	display: none;
+                }
+            }
+            
+            &--black {
+                display: none;
+                
+                .is-green & {
+                    display: block;
+                }
+            }
+        }
+    }
+    
+    &.is-green {
+        .o-logo {
+            .desktop {
+                &--black {
+                    @media ( min-width: $tablet + px ) {
+                        display: block;
+                    }
+                }
+                
+                &--white {
+                    display: none;
+                }
+            }
+
+
+            .mobile {
+                &--black {
+                    @media ( max-width: $tablet - 1px ) {
+                        display: block;
+                    }
+                }
+                
+                &--white {
+                    display: none;
+                }
             }
         }
     }

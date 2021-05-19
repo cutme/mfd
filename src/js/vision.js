@@ -4,42 +4,42 @@ document.addEventListener('DOMContentLoaded',function() {
     
     const init = function(obj) {
 
-        const slogans = el.getElementsByClassName('js-slogans')[0];
-        const info = el.getElementsByClassName('js-info')[0];
+        const slogans = el.getElementsByClassName('js-slogans')[0],
+              slogans_li = slogans.getElementsByTagName('li'),
+              info = el.getElementsByClassName('js-info')[0],
+              info_li = info.getElementsByTagName('li');
 
-        const actionIn = function(e) {
-            
-            let _that = e.currentTarget;
-            let li = info.getElementsByTagName('li');
-            
-                li[cutme.Helpers.thisIndex(_that)].classList.add('is-active');
-                
-                setTimeout(function() {
-                    li[cutme.Helpers.thisIndex(_that)].classList.add('is-visible');
-                }, 100);
-        };
-        
-        const actionOut = function(e) {
-            
-            let li = info.getElementsByTagName('li');
+        const fadeOut = function() {
 
-            for (let i = 0; i < li.length; i++) {
-                li[i].classList.remove('is-visible');
-                li[i].classList.remove('is-active');
+            for (let i = 0; i < info_li.length; i++) {
+                info_li[i].classList.remove('is-visible');
+                info_li[i].classList.remove('is-active');
+            }
+            
+            for (let i = 0; i < slogans_li.length; i++) {
+                slogans_li[i].classList.remove('is-active');
             }
         };
 
-        for( let i = 0; i < slogans.getElementsByTagName('li').length; i ++ ) {
+        const actionIn = function(e) {
             
-            let li = slogans.getElementsByTagName('li')[i];
+            fadeOut();            
+            
+            let _that = e.currentTarget;
+        
+            info_li[cutme.Helpers.thisIndex(_that)].classList.add('is-active');
+            
+            setTimeout(function() {
+                info_li[cutme.Helpers.thisIndex(_that)].classList.add('is-visible');
+            }, 100);
+        };
 
-            li.addEventListener('mouseover', actionIn);
-            li.addEventListener('mouseleave', actionOut);
+        for( let i = 0; i < slogans_li.length; i ++ ) {
+            slogans_li[i].addEventListener('mouseover', actionIn);
+            slogans_li[i].addEventListener('mouseleave', fadeOut);
         }
     };
 
-
     el ? init() : false;
-    
     
 }, false);
