@@ -37,12 +37,23 @@
             <% include ./src/includes/value-2 %>
         </div>
     </div>
-    
+
     <% include ./src/includes/fleet-1 %>
     <% include ./src/includes/fleet-2 %>
+
+    <div class="c-servicescontainer" id="servicescontainer">
+        
+        <div class="c-servicescontainer__viewport js-viewport">
+            <div class="c-servicescontainer__item">
+                <% include ./src/includes/services %>
+            </div>
+            
+            <div class="c-servicescontainer__item">
+                <% include ./src/includes/details %>
+            </div>
+        </div>
+    </div>
     
-    <% include ./src/includes/services %>
-    <% include ./src/includes/details %>
     <% include ./src/includes/membership %>
     <% include ./src/includes/contact %>
     <% include ./src/includes/careers %>

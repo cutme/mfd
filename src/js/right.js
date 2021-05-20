@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded',function() {
                
                 //document.getElementsByClassName('js-topbar')[0] ? topbar() : false;
                 
-                
                 document.getElementById('vision') ? vision() : false;
                 document.getElementById('esg') ? esg() : false;
                 document.getElementById('value') ? value() : false;
@@ -131,6 +130,29 @@ document.addEventListener('DOMContentLoaded',function() {
     };
 */
     
+    const services = function() {
+        
+        const container = document.getElementById('servicescontainer');
+        const viewport = container.getElementsByClassName('js-viewport')[0];
+        
+        const toggleDetails = document.getElementsByClassName('js-toggleDetails');
+
+        const toggleView = function(e) {
+        	e.preventDefault() ? e.preventDefault() : e.preventDefault = false;        	
+
+            if (viewport.classList.contains('details-visible')) {
+            	viewport.classList.remove('details-visible')
+        	} else {
+            	viewport.classList.add('details-visible')
+            	window.gototarget(document.getElementById('servicescontainer'));
+        	}
+        };
+        
+        for (let i = 0; i < toggleDetails.length; i++) {
+            toggleDetails[i].addEventListener('click', toggleView);
+        }
+    };
+
     const value = function() {
         gsap.set('#value .o-right__page', { xPercent: 100 })
 
@@ -190,6 +212,8 @@ document.addEventListener('DOMContentLoaded',function() {
 */
 
     document.getElementById('partnership') ? partnership() : false;
+    document.getElementById('services') ? services() : false;
+    
     window.addEventListener('resize', checkWidth);
     checkWidth();
 

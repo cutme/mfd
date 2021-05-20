@@ -7,24 +7,47 @@ Swiper.use([ EffectFade, Navigation, Pagination, Autoplay, Thumbs ]);
 document.addEventListener('DOMContentLoaded',function() {
     
     window.fleet = function() {
+        
+        const content = document.getElementsByClassName('js-fleetContentSlider')[0],
+              details = document.getElementsByClassName('js-fleetDetailsSlider')[0],
+              nav = document.getElementsByClassName('js-fleetNavSlider')[0];
 	    
-	    const swiperNav = new Swiper(document.getElementsByClassName('js-fleetNavSlider')[0], {
+	    const swiperNav = new Swiper(nav, {
     	    freeMode: true,
             slidesPerView: 'auto',
             speed: 500,
             slidesOffsetBefore: 190,
             watchSlidesVisibility: true,
             watchSlidesProgress: true,
+            
         });
         
-        const swiperContent = new Swiper(document.getElementsByClassName('js-fleetContentSlider')[0], {
-            slidesPerView: 1,
-            speed: 600,
-            thumbs: {
-              swiper: swiperNav,
-            },
-            autoHeight: true
-        });
+        if (content) {
+            
+            const swiperDetails = new Swiper(details, {
+                slidesPerView: 1,
+                speed: 600,
+                autoHeight: true,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                },
+            });
+            
+            const swiperContent = new Swiper(content, {
+                slidesPerView: 1,
+                speed: 600,
+                thumbs: {
+                   swiper: swiperNav,
+                },
+                autoHeight: true,
+                on: {
+                    transitionEnd: function() {
+                        console.log( swiperDetails.slideTo(swiperContent.activeIndex) );
+                    }
+                },
+            });
+        }
     };
 
     window.value = function() {

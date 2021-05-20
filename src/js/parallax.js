@@ -9,21 +9,22 @@ document.addEventListener('DOMContentLoaded',function() {
     
     const init = function() {
 
-
-            let bg = parallax.querySelector(".js-img"); 
-            
-            bg.style.backgroundPosition = `50% ${innerHeight / 2 + 400}px`;
+        let bg = parallax.querySelector(".js-img"); 
         
-            gsap.to(bg, {
-                backgroundPosition: `50% ${-innerHeight / 2 + 400}px`,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: parallax,
-                    scrub: true,
-                }
-            });
+        bg.style.backgroundPosition = `50% ${innerHeight / 2 + 400}px`;
+    
+        gsap.to(bg, {
+            backgroundPosition: `50% ${-innerHeight / 2 + 400}px`,
+            ease: "none",
+            scrollTrigger: {
+                trigger: parallax,
+                scrub: true,
+            }
+        });
     };
 
-    parallax ? init() : false;
+    if (window.innerWidth >= 1024) {
+        parallax ? init() : false;
+    }
 
 }, false)

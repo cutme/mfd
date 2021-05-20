@@ -1,7 +1,6 @@
 $accordion: 1352;
 
 .c-details {
-    @extend %rel;
     overflow: hidden;
     
     @media ( max-width: $tablet_portrait - 1px ) {
@@ -35,6 +34,7 @@ $accordion: 1352;
         
         h3 {
             transform: scale3d(-1, -1, 1) translate3d(120px, -20%, 0);
+            cursor: pointer;
             
             @media ( max-width: $base + px ) {
     	        transform: scale3d(-1, -1, 1) translate3d( base(120), -20%, 0);
@@ -342,6 +342,12 @@ $accordion: 1352;
                     .o-cols__item {
                         padding-bottom: 15px;
                         padding-left: 25px;
+                        
+                        &:first-of-type {
+                            h3 {
+                                cursor: pointer;
+                            }
+                        }
                         
                         &:last-of-type {
                             justify-content: flex-start;
