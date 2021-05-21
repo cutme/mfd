@@ -1,12 +1,27 @@
 .c-fleet2 {
+
     padding-top: 110px;
     
+@media ( min-width: $tablet + px ) {
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+}
+
     @media ( max-width: $base + px ) {
     	@include responsive-padding-top(base(110), rem(30));
     }
     
     &__content {
-        justify-content: flex-end;
+
+@media ( min-width: $tablet + px ) {
+display: flex;
+margin: auto 0 0 0;
+flex: 1;
+flex-wrap: wrap;
+justify-content: space-between;	
+}
+    
 
         img {
             margin: 0 0 30px auto;
@@ -124,6 +139,12 @@
     }
 
     
+.o-container {
+@media ( min-width: $tablet + px ) {
+margin: 0;
+}
+}
+
     .o-header {
         margin-bottom: 50px;
 
@@ -162,4 +183,18 @@
         	display: none;
         }
     }
+    
+.swiper-container{
+    &--content {
+        @media ( min-width: $tablet + px ) {
+            margin: auto;
+        }
+    }
+    
+    &--details {
+        @media ( min-width: $tablet + px ) {
+            margin: auto 0 0 0;	
+        }
+    }
+}
 }
