@@ -102,34 +102,76 @@ document.addEventListener('DOMContentLoaded',function() {
                     topbar.classList.add('is-green');
                 }
             },
-
             
             onLeave: function() {
-                console.log('leave');
                 topbar.classList.remove('is-green');
             },
             
             onLeaveBack: function() {
-                console.log('leave back');
-                
                 topbar.classList.remove('is-green');
             }            
         });
     };
     
-   /*
- const topbar = function() {
-        topbarGsap = ScrollTrigger.create({
-            id: 'topbar',
-            trigger: ".js-topbar",
-            start: "top top", 
-            pin: true, 
-            endTrigger:"html",
-            end:"bottom bottom"
+/*
+
+    let p = 0;
+    let scrollbar = document.getElementsByClassName('js-scrollbar')[0];
+    let scrollbar_point = scrollbar.getElementsByTagName('li');
+
+    const act = function(current_section) {
+        if (current_section === 'hero') {
+                    
+            for (let i = 0; i < scrollbar_point.length; i++) {
+                scrollbar_point[i].classList.remove('is-actived');
+            }
+            
+        } else {
+            
+            for (let i = 0; i < scrollbar_point.length; i++) {
+                scrollbar_point[i].classList.remove('is-actived');
+            }
+            
+            scrollbar.getElementsByClassName(current_section)[0].classList.add('is-actived');
+        }
+    }
+
+    gsap.utils.toArray(".js-point").forEach(function(section) {
+        
+        ScrollTrigger.create({
+            
+            trigger: section,
+
+            onEnter: function(e) {
+                let current_section = section.id;
+                
+                console.log(current_section);
+                
+                act(current_section);
+            },
+            
+            
+            onEnterBack: function() {
+                let current_section = section.id;
+
+                act(current_section);
+            },
+            
+            onLeaveBack: function() {
+               
+                   
+                for (let i = 0; i < scrollbar_point.length; i++) {
+                    scrollbar_point[i].classList.remove('is-actived');
+                }               
+            },
         });
-    };
-*/
+        
+        p ++;
+
+    });  
     
+    
+*/    
     const services = function() {
         
         const container = document.getElementById('servicescontainer');
@@ -185,7 +227,7 @@ document.addEventListener('DOMContentLoaded',function() {
                 start: "top top",
                 snap: {
     				snapTo: "labels",
-                    delay: 0, 
+                    delay: 0
                 },
             }
         })
