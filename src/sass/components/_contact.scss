@@ -2,6 +2,7 @@
     @extend %rel; z-index: 10;
     padding-top: 120px;
     color: black;
+    overflow: hidden;
     
 	@media ( max-width: $base + px ) {
     	@include responsive-padding-top(base(120), rem(30));
@@ -151,13 +152,18 @@
 
             .o-cols__item {
                 
-                @media ( max-width: $smartphone + px ) {
+                @media ( max-width: $smartphone + 1px ) {
                     width: 100%;
                 }
                 
                 .c-map {
+                    
+                    @media ( min-width: $smartphone + 1px ) {
+                        margin-right: -20px;
+                    }
+                    
                     @media ( max-width: $smartphone + px ) {   
-                        width: calc(100% + 20px);
+                        width: calc(100% + 40px);
                         margin: 0 0 0 -20px;
                     }
                 }
@@ -193,6 +199,12 @@
                                 margin: 0 0 0 auto;
                             }
                         }
+                    }
+                }
+                
+                &:last-of-type {
+                    @media ( max-width: $tablet_portrait - 1px ) {
+                        padding: 0;
                     }
                 }
             }

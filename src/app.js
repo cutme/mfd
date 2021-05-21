@@ -8,6 +8,7 @@ require('./js/polyfills.js');
 require('./js/helpers.js');
 require('./js/init.js');
 require('./js/ismobile.js');
+require('./js/map.js');
 require('./js/nav.js');
 require('./js/parallax.js');
 require('./js/right.js');

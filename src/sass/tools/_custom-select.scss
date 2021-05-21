@@ -126,6 +126,7 @@
         }
         font-weight: $thin;
         -webkit-transition: all 0.2s;
+        opacity: .5;
         
         @media ( max-width: $base + px ) {
         	@include responsive-font( base(45), rem(20) );
@@ -143,8 +144,7 @@
         &.has-focus, 
         &.is-selected.has-focus {
             border-bottom-color: transparent;
-
-            opacity: .6;
+            opacity: 1;
         }
         
         &.disabled {

@@ -13,9 +13,11 @@
     a {
         white-space: nowrap;
 
+/*
         &:hover {
             color: $c-green-01;
         }
+*/
         
     	&[href^="tel:"] {
         	white-space: nowrap;
