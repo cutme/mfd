@@ -28,17 +28,7 @@
         letter-spacing: 1px;
         line-height: 1.5em;
         text-transform: uppercase;
-        font-size: rem(15);
-    }
-    
-    a {
-        &:hover {
-            //color: $c-green-01;
-            
-            .is-green & {
-               // color: black;
-            }
-        }
+        font-size: rem(14.2);
     }
     
     &__lang {

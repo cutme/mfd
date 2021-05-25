@@ -8,7 +8,6 @@
     overflow: hidden;
     
     @media ( max-width: $base + px ) {
-//    	@include responsive-padding-top(base(150), rem(30));
     	@include responsive-padding-top(base(180), rem(30));
     	@include responsive-padding-bottom(base(200), rem(50));
     }
@@ -40,9 +39,8 @@
     &__info {
         @extend %flex;
         height: 100%;
-        align-items: flex-end;
         max-width: 440px;
-        padding-bottom: 5%;
+        padding-top: 50%;
         
         @media ( max-width: $tablet - 1px ) {
         	padding-left: 20px;

@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded',function() {
               slogans_li = slogans.getElementsByTagName('li'),
               info = el.getElementsByClassName('js-info')[0],
               info_li = info.getElementsByTagName('li');
+              
+        let def_pos;
 
         const fadeOut = function() {
 
@@ -19,6 +21,28 @@ document.addEventListener('DOMContentLoaded',function() {
             for (let i = 0; i < slogans_li.length; i++) {
                 slogans_li[i].classList.remove('is-active');
             }
+
+            clearTimeout(def_pos);
+            def_pos = setTimeout(function() {
+                let ex = 0;
+                
+                for (let i = 0; i < info_li.length; i++) {
+                    if (info_li[i].classList.contains('is-active')) {
+                        ex = 1;
+                        break;
+                    }
+                }
+
+                if (ex != 1) {
+                    slogans_li[0].classList.add('is-active');
+                    info_li[0].classList.add('is-active');
+                    
+                    setTimeout(function() {
+                        info_li[0].classList.add('is-visible');
+                    }, 100);
+                } 
+                
+            }, 500);
         };
 
         const actionIn = function(e) {

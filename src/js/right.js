@@ -64,6 +64,8 @@ document.addEventListener('DOMContentLoaded',function() {
     };
     
     const esg = function() {
+        const el = document.getElementById('esg2');
+        
         gsap.set('#esg .o-right__page', { xPercent: 100 })
 
         esgTimeline = gsap.timeline({
@@ -73,12 +75,27 @@ document.addEventListener('DOMContentLoaded',function() {
                 pin: true,
                 scrub: 1,
                 start: 'top top',
+                snap: {
+    				snapTo: "labels",
+                    delay: 0
+                },
+                onSnapComplete: function() {
+                    el.classList.add('is-visible');
+                },
+                onLeave: function() {
+                    el.classList.remove('is-visible');
+                },
+                onLeaveBack: function() {
+                    el.classList.remove('is-visible');
+                },
+                onEnterBack: function() {
+                    el.classList.add('is-visible');
+                },
             }
         })
-        .to('#esg .o-right__page', { xPercent: 0 })
-        .to({}, { duration: 0.5 }) 
+        .to('#esg .o-right__page', { xPercent: 0 }).addLabel('esg-02')
+        .to({}, { duration: 0.5 })
     };
-
 
     const partnership = function() {
         
@@ -195,6 +212,39 @@ document.addEventListener('DOMContentLoaded',function() {
         }
     };
 
+    const value0 = function() {
+        const el = document.getElementById('value0');
+
+        valueTimeline = gsap.timeline({
+            scrollTrigger: {
+                id: 'value',
+                trigger: "#value0",
+                scrub: 1,
+//                start: "top+=100% top",
+                snap: {
+    				snapTo: "labels",
+                    delay: 0, 
+                },
+                onEnter: function() {
+                    console.log('enter')
+                    el.classList.add('is-visible');
+                },
+              /*
+  onLeave: function() {
+                    el.classList.remove('is-visible');
+                    console.log('leave');
+                },
+                onEnterBack: function() {
+                    el.classList.add('is-visible');
+                    console.log('enterback');
+                },
+*/
+            }
+        })
+        .from('#value0 .c-value0__photo', { opacity: 0 }).addLabel('value-00')
+        .to({}, { duration: 0.5 })
+    };
+    
     const value = function() {
         gsap.set('#value .o-right__page', { xPercent: 100 })
 
@@ -212,7 +262,7 @@ document.addEventListener('DOMContentLoaded',function() {
             }
         })
         .to('#value .o-right__page', { xPercent: 0 }).addLabel('value-02')
-
+        .to({}, { duration: 0.5 })
     };
 
     const vision = function() {
@@ -232,29 +282,12 @@ document.addEventListener('DOMContentLoaded',function() {
             }
         })
         .to('#vision .o-right__page', { xPercent: 0 }).addLabel('vision-02')
-    };
-    
-/*
-    const vision = function() {
-        gsap.set('#vision .o-right__page', { xPercent: 100 })
-
-        visionTimeline = gsap.timeline({
-            scrollTrigger: {
-                id: 'vision',
-                trigger: "#vision",
-                pin: true,
-                scrub: 1,
-                start: "top top",
-                end: () => '+=100%'
-            }
-        })
-        .to('#vision .o-right__page', { xPercent: 0 })
         .to({}, { duration: 0.5 }) 
     };
-*/
 
     document.getElementById('partnership') ? partnership() : false;
     document.getElementById('services') ? services() : false;
+    document.getElementById('value0') ? value0() : false;
     
     window.addEventListener('resize', checkWidth);
     checkWidth();

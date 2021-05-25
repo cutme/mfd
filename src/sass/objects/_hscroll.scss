@@ -12,10 +12,10 @@
             padding-left: 100%;    
             animation: marquee 40s linear infinite;
             line-height: 1em;
-            font-size: rem(45);
-            
+            font-size: rem(39);
+
             @media ( max-width: $base + px ) {
-            	@include responsive-font(base(45), rem(25));
+            	@include responsive-font(base(39), rem(25));
             }
         }
         

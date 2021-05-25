@@ -26,7 +26,9 @@
         margin: 0;
        
         &__item {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             padding-bottom: 40px;
+            
             
             @media ( max-width: $smartphone_portrait + px ) {
                 padding-bottom: 20px;
@@ -36,7 +38,7 @@
                 padding-left: 0;
 
                 @media ( min-width: $tablet + px ) {
-                    border-right: 2px solid $c-gray-02;
+                    border-right: 2px solid transparent;
                     padding-left: grid(125, $base - 2 * 104);
                     padding-right: grid(104, $base - 2 * 104);;                	
                 }
@@ -60,11 +62,12 @@
             &:after {
                 @extend %abs-pseudo;
                 @extend %abs-x;
+                transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
                 top: 100%;
                 width: 206px;
                 height: 82px;
                 background-color: $c-gray-01;
-                transform: translate3d(-50%, -50%, 0);
+                transform: translate3d(-50%, -50%, 0) scale3d(0, 0, 0);
                 
                 @media ( max-width: $base + px ) {
                 	@include responsive-width(base(206), rem(0));
@@ -85,7 +88,7 @@
         &--second {            
             .o-cols__item {
                 padding-top: 80px;
-                border-top: 2px solid $c-gray-02;
+                border-top: 2px solid transparent;
                 
                 @media ( max-width: $base + px ) {
                 	@include responsive-padding-top(base(80), rem(20));
@@ -118,6 +121,22 @@
             padding: {
                 left: 74px;
                 right: 74px;
+            }
+        }
+    }
+    
+    &.is-visible {
+        .o-cols {
+            &__item {
+                border-color: $c-gray-02;
+            }
+            
+            &--first {
+                @extend %rel;
+
+                &:after {
+                    transform: translate3d(-50%, -50%, 0) scale3d(1, 1, 1);
+                }
             }
         }
     }

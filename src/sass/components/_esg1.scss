@@ -21,7 +21,7 @@
     }
 
     &__landscape {
-        @extend %gray;
+       // @extend %gray;
         
         img {
             width: 100%;
@@ -41,7 +41,7 @@
         
         &__item {
             &:first-of-type {
-                @extend %gray;
+                //@extend %gray;
 
                 @media ( max-width: $tablet_portrait - 1px ) {
                     width: 100%;

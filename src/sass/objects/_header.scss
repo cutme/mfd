@@ -11,11 +11,7 @@
 
         span {
             &:not(.nowrap) {
-                -webkit-text-stroke-width: 2px;
-                
-                @media ( max-width: $tablet - 1px ) {
-                    -webkit-text-stroke-width: 1px;                	
-                }
+                -webkit-text-stroke-width: 1px;
                             
                 .bg-gray & {
                     -webkit-text-fill-color: transparent;
