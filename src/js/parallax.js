@@ -11,15 +11,21 @@ document.addEventListener('DOMContentLoaded',function() {
 
         let bg = parallax.querySelector(".js-img"); 
         
-        bg.style.backgroundPosition = `50% ${innerHeight / 2 + 400}px`;
-    
+        bg.style.backgroundPosition = `50% ${innerHeight / 2}px`;
+
         gsap.to(bg, {
-            backgroundPosition: `50% ${-innerHeight / 2 + 400}px`,
+            backgroundPosition: `50% ${-innerHeight / 2}px`,
             ease: "none",
             scrollTrigger: {
                 trigger: parallax,
                 scrub: true,
-            }
+                start: "top bottom-=100%",
+                end: 'bottom+=100%',
+                onEnter: function() {
+                    console.log('enter parallax')
+                },
+            },      
+            
         });
     };
 

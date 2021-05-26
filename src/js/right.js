@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded',function() {
         topbarHeight = 0,
         valueTimeline,
         visionTimeline;
-        
+    
+    const topbar = document.getElementsByClassName('js-topbar')[0];
     
     const checkWidth = function() {
         
@@ -79,9 +80,14 @@ document.addEventListener('DOMContentLoaded',function() {
     				snapTo: "labels",
                     delay: 0
                 },
-                onSnapComplete: function() {
-                    el.classList.add('is-visible');
+                onUpdate: function(e) {
+                    console.log(e.progress)
+                    
+                    if (e.progress >= 0.48) {
+                        el.classList.add('is-visible');
+                    } 
                 },
+                
                 onLeave: function() {
                     el.classList.remove('is-visible');
                 },
@@ -98,9 +104,6 @@ document.addEventListener('DOMContentLoaded',function() {
     };
 
     const partnership = function() {
-        
-        const topbar = document.getElementsByClassName('js-topbar')[0];
-        let topbar_height = topbar.clientHeight;
         
         ScrollTrigger.create({
             id: 'partnership',
@@ -215,12 +218,28 @@ document.addEventListener('DOMContentLoaded',function() {
     const value0 = function() {
         const el = document.getElementById('value0');
 
+        gsap.from('#value0 .c-value0__photo i', {
+            scrollTrigger: {
+                trigger: '#value0',
+                scrub: 1,
+                start: "top bottom-=270%",
+                end: 'bottom-=300%',
+                onEnter: function() {
+                    console.log('enter value0')
+                    //el.classList.add('is-visible');
+                },
+            },      
+            opacity: 0,
+            yPercent: 100
+        });
+/*
+        
         valueTimeline = gsap.timeline({
             scrollTrigger: {
                 id: 'value',
                 trigger: "#value0",
                 scrub: 1,
-//                start: "top+=100% top",
+                start: "top+=200% center",
                 snap: {
     				snapTo: "labels",
                     delay: 0, 
@@ -229,20 +248,12 @@ document.addEventListener('DOMContentLoaded',function() {
                     console.log('enter')
                     el.classList.add('is-visible');
                 },
-              /*
-  onLeave: function() {
-                    el.classList.remove('is-visible');
-                    console.log('leave');
-                },
-                onEnterBack: function() {
-                    el.classList.add('is-visible');
-                    console.log('enterback');
-                },
-*/
+ 
             }
         })
-        .from('#value0 .c-value0__photo', { opacity: 0 }).addLabel('value-00')
+        .to('#value0 .c-value0__photo', { opacity: 0 }).addLabel('value-00')
         .to({}, { duration: 0.5 })
+*/
     };
     
     const value = function() {
@@ -258,6 +269,25 @@ document.addEventListener('DOMContentLoaded',function() {
                 snap: {
     				snapTo: "labels",
                     delay: 0, 
+                },
+                onEnter: function() {
+                    if (!topbar.classList.contains('is-lightgray')) {
+                        topbar.classList.add('is-lightgray');
+                    }
+                },
+                
+                onEnterBack: function() {
+                    if (!topbar.classList.contains('is-lightgray')) {
+                        topbar.classList.add('is-lightgray');
+                    }
+                },
+                
+                onLeave: function() {
+                    topbar.classList.remove('is-lightgray');
+                },
+                
+                onLeaveBack: function() {
+                    topbar.classList.remove('is-lightgray');
                 },
             }
         })
@@ -275,6 +305,7 @@ document.addEventListener('DOMContentLoaded',function() {
                 pin: true,
                 scrub: 1,
                 start: "top top",
+                end: "+=100%",
                 snap: {
     				snapTo: "labels",
                     delay: 0

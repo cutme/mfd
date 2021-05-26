@@ -16,6 +16,10 @@
         color: black;        
     }
     
+    &.is-lightgray {
+        background-color: $c-gray-02;
+    }
+    
     @media ( max-width: $base + px ) {
     	@include responsive-height(base(110), rem(100));
     }

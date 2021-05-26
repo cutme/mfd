@@ -2,6 +2,11 @@
     @extend %rel;
     padding-top: 110px;
     
+    @media ( min-width: $tablet + px ) {
+    	max-height: 100vh;
+    	overflow: hidden;
+    }
+    
     @media ( max-width: $base + px ) {
     	@include responsive-padding-top(base(110), rem(30));
     }
