@@ -23,14 +23,6 @@ document.addEventListener('DOMContentLoaded',function() {
         
         if (gs === true) {
             if (window.innerWidth <= 1023) {            
-/*
-                if (topbarGsap !== undefined) {
-                    ScrollTrigger.getById("topbar").kill(true);                
-                    gs = false;
-                
-                    console.log('disable gsap topbar');
-                }
-*/
                 
                 if (visionTimeline !== undefined) {
                     ScrollTrigger.getById("vision").kill(true);                
@@ -81,8 +73,6 @@ document.addEventListener('DOMContentLoaded',function() {
                     delay: 0
                 },
                 onUpdate: function(e) {
-                    console.log(e.progress)
-                    
                     if (e.progress >= 0.48) {
                         el.classList.add('is-visible');
                     } 
@@ -132,66 +122,7 @@ document.addEventListener('DOMContentLoaded',function() {
             }            
         });
     };
-    
-/*
-
-    let p = 0;
-    let scrollbar = document.getElementsByClassName('js-scrollbar')[0];
-    let scrollbar_point = scrollbar.getElementsByTagName('li');
-
-    const act = function(current_section) {
-        if (current_section === 'hero') {
-                    
-            for (let i = 0; i < scrollbar_point.length; i++) {
-                scrollbar_point[i].classList.remove('is-actived');
-            }
-            
-        } else {
-            
-            for (let i = 0; i < scrollbar_point.length; i++) {
-                scrollbar_point[i].classList.remove('is-actived');
-            }
-            
-            scrollbar.getElementsByClassName(current_section)[0].classList.add('is-actived');
-        }
-    }
-
-    gsap.utils.toArray(".js-point").forEach(function(section) {
-        
-        ScrollTrigger.create({
-            
-            trigger: section,
-
-            onEnter: function(e) {
-                let current_section = section.id;
-                
-                console.log(current_section);
-                
-                act(current_section);
-            },
-            
-            
-            onEnterBack: function() {
-                let current_section = section.id;
-
-                act(current_section);
-            },
-            
-            onLeaveBack: function() {
-               
-                   
-                for (let i = 0; i < scrollbar_point.length; i++) {
-                    scrollbar_point[i].classList.remove('is-actived');
-                }               
-            },
-        });
-        
-        p ++;
-
-    });  
-    
-    
-*/    
+  
     const services = function() {
         
         const container = document.getElementById('servicescontainer');
@@ -224,10 +155,6 @@ document.addEventListener('DOMContentLoaded',function() {
                 scrub: 1,
                 start: "top bottom-=270%",
                 end: 'bottom-=300%',
-                onEnter: function() {
-                    console.log('enter value0')
-                    //el.classList.add('is-visible');
-                },
             },      
             opacity: 0,
             yPercent: 100

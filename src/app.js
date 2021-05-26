@@ -12,6 +12,7 @@ require('./js/map.js');
 require('./js/nav.js');
 require('./js/parallax.js');
 require('./js/right.js');
+require('./js/scrollbar.js');
 require('./js/topbar.js');
 require('./js/tabs.js');
 require('./js/vision.js');

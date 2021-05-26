@@ -4,13 +4,8 @@
 
     <% include ./src/includes/loader %>
     <% include ./src/includes/topbar %>
+    <% include ./src/includes/scrollbar %>
     <% include ./src/includes/hero %>
-
-    <ul class="o-scrollbar js-scrollbar">
-        <li class="js-scrollbarpoint vision"></li>
-        <li class="js-scrollbarpoint partnership"></li>
-        <li class="js-scrollbarpoint usps"></li>
-    </ul>
 
     <div class="o-right js-point" id="vision">
         <% include ./src/includes/vision-1 %>
@@ -25,7 +20,7 @@
     <% include ./src/includes/usps %>
     <% include ./src/includes/team %>
     
-    <div class="o-right" id="esg">
+    <div class="o-right js-point" id="esg">
         <% include ./src/includes/esg-1 %>
         
         <div class="o-right__page">
