@@ -59,7 +59,7 @@
             transform: translate3d(10px, 0, 0);
             
             @media ( max-width: $base + px ) {
-            	@include responsive-font(base(24), rem(14));
+            	//@include responsive-font(base(24), rem(14));
             }
 
             &:not(.is-active) {

@@ -4,8 +4,11 @@
     text-transform: uppercase;
     font-size: rem(15);
     
+    //60125
+    
     @media ( max-width: $base + px ) {
-    	@include responsive-font(base(15), rem(12));
+//    	@include responsive-font(base(15), rem(12));
+        @include responsive-font(base(11.6), rem(10));
     }
     
     @media ( min-width: $tablet + px ) {

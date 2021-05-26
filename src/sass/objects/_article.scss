@@ -3,7 +3,9 @@
         line-height: 1.5em;
 
         @media ( max-width: $base + px ) {
-        	@include responsive-font(base(24), rem(14));
+        	//@include responsive-font(base(24), rem(14));
+        	@include responsive-font(base(19.2), rem(14));
+        	
         }
     }
 }
