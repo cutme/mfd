@@ -21,3 +21,5 @@ require('./js/vision.js');
 require('./img/value/slide-m.jpg');
 require('./img/value/slide-f.jpg');
 require('./img/value/slide-d.jpg');
+
+require('./img/icons/arrow-down.svg');

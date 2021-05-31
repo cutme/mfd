@@ -89,7 +89,23 @@ document.addEventListener('DOMContentLoaded',function() {
                 styles: mapStyle,
                 disableDefaultUI: true,
                 zoom: 14
-            })            
+            })
+            
+            const icon = {
+				url: el.getAttribute('data-marker'),
+				size: new google.maps.Size(60, 60), // scaled size
+				origin: new google.maps.Point(0,0), // origin
+				anchor: new google.maps.Point(5, 60), // anchor
+				scaledSize: new google.maps.Size(60, 60)
+			};
+			
+			const marker = new google.maps.Marker({
+				position: new google.maps.LatLng(lat, lng),
+				map: map,
+				zIndex: 999,
+				animation: google.maps.Animation.DROP,
+				icon: icon
+			});
 
         }).catch(function (error) {
             console.error(error)
