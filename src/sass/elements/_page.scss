@@ -1,4 +1,15 @@
 body {
 	width: 100%;
+	min-height: 100%;
 	background-color: $c-gray-01;
+	
+	&.subsite {
+    	@extend %flex;
+    	@extend %flex-column;
+	}
+}
+
+
+html {
+    height: 100%;
 }

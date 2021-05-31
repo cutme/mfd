@@ -1,0 +1,22 @@
+.c-single {
+    flex: 1;
+    padding: {
+        top: 220px;
+        bottom: 120px;
+    }
+    
+    @media ( max-width: $base + px ) {
+    	@include responsive-padding-top(base(220), rem(120));
+    	@include responsive-padding-bottom(base(120), rem(40));
+    }
+    
+    @media ( max-width: $tablet - 1px ) {
+    	padding: {
+        	bottom: 50px;
+        }
+    }
+    
+    .o-header {
+        margin-bottom: 2em;
+    }
+}

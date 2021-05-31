@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pl-PL" class="no-js">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta charset="UTF-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <meta name="robots" content="noindex, nofollow">
+    <title>MDF Rail</title>
+    
+    <style>        
+        .c-loader {
+            position: absolute; left: 0; top: 0; 
+            z-index: 200; 
+            width: 100%; 
+            height: 100%; 
+            background-color: #34494C; 
+        }        
+
+        .c-loader__bar {
+        	position: absolute;
+        	z-index: 10;
+        	top: 0;
+        	left: 50%;
+            width: 2px;
+            height: 0;
+            background: #03FF69;
+        	transform: translateX(-50%);
+    	    transition: width 0.3s ease-out, height 0.3s ease-out 0.2s;
+        }
+    </style>
+    
+    <script>
+           
+        window.RealProgress = (function () {
+            var exports = {
+                onResourceLoad: null,
+                onProgress: null,
+                onLoad: null
+            };
+        
+            var _total = 0
+            ,   _loaded = 0
+            ,   _windowLoaded = false
+            ,   _boundElements = []
+            ,   _pendingResources = []
+            ,   _options = {
+                    regex: function (tag, attr) {
+                        return new RegExp("<" + tag + "[^>]*" + attr + "\s*\=\s*[\'\"]([^\'\"]+)[\'\"][^>]*>", "gi");
+                    },
+                    untracked: [],
+                    tags: {
+                        "link": "href",
+                        "iframe": "src",
+                        "source": "src",
+                        "script": "src",
+                        "img": "src"
+                    }
+                };
+        
+            function _isUntracked(subject) {
+                var list = _options.untracked;
+        
+                for (var i = 0; i < list.length; i++) {
+                    if (
+                        (
+                            typeof list[i] == "string" &&
+                            list[i] == subject
+                        ) ||
+                        (
+                            typeof list[i] == "object" &&
+                            list[i] instanceof RegExp &&
+                            typeof subject == "string" &&
+                            subject.match(list[i])
+                        )
+                    ) {
+                        return true;
+                    }
+                }
+        
+                return false;
+            }
+        
+            function _bindElements() {
+                var elems, attr;
+        
+                for (var t in _options.tags) {
+                    elems = document.getElementsByTagName(t);
+        
+                    for (var i = 0; i < elems.length; i++) {
+                        attr = elems[i].getAttribute(_options.tags[t]);
+        
+                        if (_boundElements.indexOf(elems[i]) === -1) {
+                            _boundElements.push(elems[i]);
+                            elems[i].addEventListener("load", _onLoadHandler(attr, t));
+                        }
+                    }
+                }
+            }
+        
+            function _onLoadHandler(attr, tag) {
+                var hasAttr = (typeof attr == "string")
+                ,   tracked = !_isUntracked(attr);
+        
+                if (tracked && hasAttr) {
+                    _pendingResources.push(attr);
+                }
+        
+                return function () {
+                    if (tracked && hasAttr) {
+                        _loaded++;
+                        _dispatchProgress();
+        
+                        if (typeof exports.onResourceLoad == "function") {
+                            exports.onResourceLoad(attr);
+                        }
+        
+                        var index = _pendingResources.indexOf(attr);
+                        if (index > -1) {
+                            _pendingResources.splice(index, 1);
+                        }
+                    }
+        
+                    if (tag == "script") {
+                        setTimeout(_bindElements, 0);
+                    }
+                };
+            }
+        
+            function _getResources(html) {
+                var match, regex;
+        
+                for (var tag in _options.tags) {
+                    regex = _options.regex(tag, _options.tags[tag]);
+        
+                    while (1) {
+                        match = regex.exec(html);
+        
+                        if (match != null && match.length && !_isUntracked(match[1])) {
+                            _total++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        
+            function _dispatchProgress() {
+                if (typeof exports.onProgress == "function") {
+                    exports.onProgress(_windowLoaded ? 1 : (_total > 0 ? (_loaded / _total) : 0));
+                }
+            }
+        
+            exports.init = function (opts) {
+                if (typeof opts == "object") {
+                    for (var k in opts) {
+                        _options[k] = opts[k];
+                    }
+                }
+        
+                var req = new XMLHttpRequest();
+                req.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        _getResources(this.responseText);
+                        _dispatchProgress();
+                    }
+                };
+                req.open("GET", document.location.href);
+                req.send(null);
+        
+                window.addEventListener("load", function () {
+                    _windowLoaded = true;
+                    _dispatchProgress();
+        
+                    if (typeof exports.onLoad == "function") {
+                        exports.onLoad(_pendingResources);
+                    }
+                
+                    _boundElements = [];
+                });
+        
+                setTimeout(_bindElements, 0);
+            };
+        
+            return exports;
+        })();
+        
+        (function () {
+            var _loaded = []
+            ,   _progress = 0
+            ,   _loadedPara = null
+            ,   _loadingBar = null;
+        
+            function render() {
+                _loadingBar = _loadingBar || document.getElementById("bar");
+        
+                if (_loadingBar) {
+                    _loadingBar.style.height = (_progress * 100) + "%";
+                }
+            }
+        
+            RealProgress.onResourceLoad = function (name) {
+                _loaded.push(name.split("/").pop());
+            };
+        
+            RealProgress.onProgress = function (progress) {
+                _progress = progress;
+                render();
+            };
+        
+            RealProgress.onLoad = function (uncaptured) {                
+                 setTimeout(function() {
+                    
+                    const loading = document.getElementById('loading');
+            
+                    document.documentElement.removeAttribute('style');
+                    document.documentElement.classList.add('is-loaded');
+                    
+                    setTimeout(function() {
+                       document.documentElement.classList.add('show-logo');
+                       document.documentElement.classList.add('is-ready');
+                       loading.remove();
+                    }, 500);
+                    
+                }, 850);
+
+            };
+        })(); 
+        
+        RealProgress.init({
+            untracked: [
+                "js/app_.js",
+            ]
+        });
+    </script>
+      
+    <script>
+        document.documentElement.className = document.documentElement.className.replace("no-js","js");
+        document.documentElement.setAttribute('style', 'overflow: hidden');
+    </script>
+<link href="css/style.css" rel="stylesheet"></head>
+
+
+<body class="subsite">
+<noscript>Your browser does not support JavaScript!</noscript>
+
+    
+    <div class="c-loader" id="loading">
+        <div id="bar" class="c-loader__bar"></div>
+    </div>
+
+    
+    <div class="c-topbar js-topbar">
+        <div class="o-container">
+            <a href="index.html" class="o-logo">
+                <img src="img/logos/mfd--white.svg" alt="mfdrail" class="desktop desktop--white">
+                <img src="img/logos/mfd--black.svg" alt="mfdrail" class="desktop desktop--black">
+                <img src="img/logos/mfd--simple--white.svg" alt="mfdrail" class="mobile mobile--white">
+                <img src="img/logos/mfd--simple--black.svg" alt="mfdrail" class="mobile mobile--black">
+            </a>
+            
+            
+        <nav class="c-nav js-nav">
+            <ul class="c-nav__menu js-menu">
+                <li>
+                    <a href="#about">About</a>
+                </li>
+                
+                <li>
+                    <a href="#fleet">Fleet</a>
+                </li>
+                
+                <li>
+                    <a href="#services">Services</a>
+                </li>
+                
+                <li>
+                    <a href="#membership">Memberships</a>
+                </li>
+                
+                <li>
+                    <a href="#career">Career</a>
+                </li>
+            </ul>
+            
+            <ul class="c-nav__lang">
+                <li class="current-item">
+                    <a href="#">en</a>
+                </li>
+                
+                <li>
+                    <a href="#">de</a>
+                </li>
+            </ul>
+        </nav>
+
+            
+            <div class="o-hamburger js-hamburger"></div>
+        </div>
+    </div>
+
+    
+    <div class="c-single">
+        <div class="o-container">
+            
+            <article class="o-article">
+                <header class="o-header">
+                    <h2>Term of use</h2>
+                </header>
+                
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus velit urna, scelerisque in commodo ut, eleifend sed libero. Donec egestas at metus in aliquet. Fusce condimentum mollis finibus. Maecenas semper orci nec nisl accumsan sollicitudin. Duis hendrerit mi sit amet diam elementum consequat. Pellentesque maximus fringilla urna sit amet pharetra. Proin nec neque sit amet mi maximus tempus. Donec ut malesuada velit. Sed id libero lorem.</p>
+
+<p>&nbsp;</p>
+
+<p>Pellentesque non lorem dolor. Sed laoreet dolor vestibulum, consequat tellus in, eleifend urna. Suspendisse aliquam condimentum odio, a mattis justo imperdiet dictum. Etiam vulputate iaculis tellus, sit amet gravida neque volutpat non. Mauris congue massa vel dolor elementum, sed blandit mi tempor. In nec ipsum dolor. Sed vitae ornare ex, sed iaculis leo. Nam varius urna at magna aliquet, consectetur bibendum ex faucibus. Nunc id nibh sit amet nisl porta suscipit. Maecenas eu varius nibh. Suspendisse vulputate convallis velit quis ullamcorper. Praesent aliquam quam enim, a rhoncus lectus consequat maximus. Vestibulum et ante suscipit, viverra mi at, mattis elit. Praesent molestie ullamcorper risus et molestie. Cras lobortis commodo elementum. Duis ut porta purus.</p>
+
+<p>&nbsp;</p>
+
+<p>Praesent convallis interdum lectus, nec tincidunt purus efficitur eget. Curabitur iaculis turpis vitae dui congue ornare. Morbi a imperdiet purus. Sed accumsan vitae orci sed semper. Etiam imperdiet pellentesque odio, sed suscipit elit cursus non. Ut molestie suscipit sollicitudin. Aliquam ornare sollicitudin feugiat. Quisque feugiat leo sit amet lobortis eleifend. Integer in mi dolor. Duis nec viverra tellus, imperdiet finibus magna. Etiam eleifend tortor velit, eu vehicula dolor iaculis non.</p>
+
+<p>&nbsp;</p>
+
+<p>Morbi condimentum, dolor nec fringilla rhoncus, erat arcu pulvinar sem, a varius arcu justo a augue. Curabitur pellentesque erat velit, sed tincidunt metus condimentum a. Proin ac quam ut lacus vehicula porta at non augue. Sed sed lacus quis nibh accumsan fermentum at ut lectus. Morbi vestibulum finibus mauris, nec volutpat arcu mollis at. Quisque eget pretium elit. Mauris placerat, urna cursus vestibulum hendrerit, lorem purus faucibus augue, id consectetur diam odio quis massa. Mauris dictum porta libero sit amet suscipit. Nam lacus magna, faucibus efficitur elit lobortis, venenatis dapibus nisi. In eget sem nibh. Donec nulla urna, finibus quis bibendum at, feugiat vitae felis. Quisque nec eleifend velit.</p>
+
+<p>&nbsp;</p>
+
+<p>Suspendisse eu viverra dui. Mauris accumsan iaculis lobortis. Etiam convallis libero mi, in vehicula felis venenatis vitae. Suspendisse a sodales mauris, ac scelerisque neque. Morbi a faucibus velit. In viverra turpis turpis, id porta mauris sodales sed. Cras sit amet est in nunc semper sodales. Etiam pretium nibh vel est euismod feugiat. Ut vitae gravida justo. Ut felis nibh, ornare at odio eu, porta ultricies nulla. Vestibulum finibus consectetur purus sed auctor. Cras ligula lectus, rhoncus sed faucibus non, eleifend nec mi. Sed eu aliquam justo.</p>
+            </article>
+            
+        </div>
+    </div>
+
+    
+    <footer class="c-footer">
+        <div class="o-container">
+            <h2 class="o-section">
+                <img src="img/logos/mfd--simple--white.svg" width="125" height="50" alt="mfd">
+            </h2> 
+
+            <div class="o-wrap o-wrap--2">
+                <div class="o-cols o-cols--4">
+                    <div class="o-cols__item">
+                        <p><strong>MFD Rail GmbH</strong></p>
+                    </div>
+                    
+                    <div class="o-cols__item">
+                       <address>
+                            <p>Grundstrasse 12</p>
+                            <p>CH-6343 Rotkreuz</p>
+                       </address>
+                    </div>
+                    
+                    <div class="o-cols__item">
+                        <p>O/ <a href="tel:0041415312424">+41 41 531 24 24</a></p>
+                        <p>E/ <a href="mailto:info@mfdrail.ch">info@mfdrail.ch</a></p>
+                    </div>
+                    
+                    <div class="o-cols__item">
+                       <p><a href="#">LINKEDIN</a>/ <a href="#">MFD Rail</a></p>
+                    </div>
+                </div> 
+
+
+                <div class="o-cols o-cols--2">
+                    <div class="o-cols__item o-cols__item--copyrights">
+                        <p>Copyright &copy 2021 MFD Rail GmbH.</p>
+                        <p>All Rights Reserved</p>
+                    </div>
+                    
+                    <div class="o-cols__item o-cols__item--links">
+                        <div class="o-cols o-cols--2">
+                            <div class="o-cols__item o-cols__item--nav">
+                                <nav class="c-footer__nav">
+                                    <ul>
+                                        <li>
+                                            <a href="term-of-use.html">Term of Use</a>
+                                        </li>
+                                        
+                                        <li>
+                                            <a href="privacy.html">Privacy Information Notice</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                                
+                            <div class="o-cols__item o-cols__item--design">
+                                <p class="c-footer__design">
+                                    <a href="https://morgenstudio.de/pl/" rel="noopener" target="_blank">Design by MORGEN</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+<script src="js/app.js"></script></body>
+</html>

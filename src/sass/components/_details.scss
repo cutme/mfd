@@ -3,6 +3,22 @@ $accordion: 1352;
 .c-details {
     overflow: hidden;
     
+    .o-lessbtn {
+        @extend %abs;
+        top: 0; left: 0;
+        
+        transform: scaleX(-1) translateX(95px);
+        font-size: rem(40);
+        
+        @media ( max-width: $base + px ) {
+            transform: scaleX(-1) translateX(base(115));            
+        }
+        
+        @media ( max-width: $tablet - 1px ) {
+        	display: none;
+        }
+    } 
+    
     @media ( max-width: $tablet_portrait - 1px ) {
         padding-top: 50px;
     }
@@ -108,6 +124,7 @@ $accordion: 1352;
     
     &__header {
         @extend %flex;
+        @extend %rel;
 
         p {
             opacity: .5;
@@ -407,18 +424,35 @@ $accordion: 1352;
                 }
                 
                 .swiper-button-prev,
+                .swiper-button-prev--details,
                 .swiper-button-next {
                     &:before {
                         top: -10px;
                     }
                 }
                 
-                .swiper-button-prev {
+                .swiper-button-prev,
+                .swiper-button-prev--details, {
                     margin: 0;
                 }
 
                 .swiper-button-next {
                     margin: 0 0 0 auto;
+                }
+                
+                .swiper-button-prev--details {
+                    display: none;
+                    cursor: pointer;
+                }
+                
+                &.first-slide {
+                    .swiper-button-prev {
+                        display: none;
+                    }
+
+                    .swiper-button-prev--details {
+                        display: block;
+                    }
                 }
             }
             
@@ -585,12 +619,13 @@ $accordion: 1352;
                 
                 &:before {
                     @extend %abs-pseudo; z-index: -1;
-                    @extend %anim;
+//                    @extend %anim;
+                    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
                     left: 0; top: 0;
                     width: 100%; height: 100%;
                     background-color: $c-gray-02;
-                    transform: scale3d(1, 0, 1);
-                    transform-origin: bottom;
+                    transform: scale3d(0, 1, 1);
+                    transform-origin: left;
                 }
             }
             
@@ -703,7 +738,7 @@ $accordion: 1352;
                 
                 &:hover {
                     h4 {
-                        background-color: $c-green-01;
+                        //background-color: $c-green-01;
                         color: black;
                     }
                 }

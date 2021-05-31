@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded',function() {
         
         document.getElementsByClassName('js-servicestSlider')[0] ? window.services() : false;
         
+        document.getElementById('contact') ? window.contact() : false;
+        document.getElementById('fleet2') ? window.fleet2() : false;
+        
   //      document.documentElement.removeAttribute('style');
     //    document.documentElement.classList.add('is-loaded');
 

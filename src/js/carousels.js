@@ -14,12 +14,16 @@ document.addEventListener('DOMContentLoaded',function() {
 	    
 	    const swiperNav = new Swiper(nav, {
     	    freeMode: true,
+    	    slidesOffsetBefore: 20,
             slidesPerView: 'auto',
             speed: 500,
-            slidesOffsetBefore: 190,
             watchSlidesVisibility: true,
             watchSlidesProgress: true,
-            
+            breakpoints: {
+                1025: {
+                    slidesOffsetBefore: 190,
+                }
+            }
         });
         
         if (content) {
@@ -51,15 +55,26 @@ document.addEventListener('DOMContentLoaded',function() {
     };
 
     window.value = function() {
-        
-        const chars = document.getElementsByClassName('js-valuechars')[0];
 
-        const swiperBg = new Swiper(document.getElementsByClassName('js-valueBgSlider')[0], {
+        window.swiperValueBg = new Swiper(document.getElementsByClassName('js-valueBgSlider')[0], {
             slidesPerView: 1,
             speed: 500,
         });
         
-        const swiperContent = new Swiper(document.getElementsByClassName('js-valueContentSlider')[0], {
+        window.changeChars = function(index) {
+            
+            const chars = document.getElementsByClassName('js-valuechars')[0];
+
+            window.swiperValueBg.slideTo(index);
+            window.swiperValueContent.slideTo(index);
+
+            chars.classList.remove('step-0', 'step-1', 'step-2');
+            chars.classList.add('step-'+index);
+            
+            console.log(index);
+        }
+        
+        window.swiperValueContent = new Swiper(document.getElementsByClassName('js-valueContentSlider')[0], {
             effect: 'fade',
             fadeEffect: {
                 crossFade: true
@@ -70,10 +85,14 @@ document.addEventListener('DOMContentLoaded',function() {
             },
             on: {
                 slideChange: function(e) {
-                    swiperBg.slideTo(e.activeIndex)
-
-                    chars.classList.remove('step-0', 'step-1', 'step-2');
-                    chars.classList.add('step-'+e.activeIndex);
+                    
+                    if (window.innerWidth < 1024) {
+                        window.changeChars(e.activeIndex);
+                        
+                        //swiperValueBg.slideTo(e.activeIndex)
+                        //chars.classList.remove('step-0', 'step-1', 'step-2');
+                        //chars.classList.add('step-'+e.activeIndex);
+                    }
                 }
             },
             spaceBetween: 30,
@@ -82,19 +101,34 @@ document.addEventListener('DOMContentLoaded',function() {
         });
     };
     
-    
     window.services = function() {
         
-        const swiperServices = new Swiper(document.getElementsByClassName('js-servicestSlider')[0], {
+        const el = document.getElementsByClassName('js-servicestSlider')[0],
+              nav = el.getElementsByClassName('js-detailsNav')[0];
+        
+        const swiperServices = new Swiper(el, {
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
             speed: 500,
             slidesPerView: 1,
+            on: {
+                init: function(e) {
+                    //let idx = e.activeIndex;
+                },
+
+                transitionStart: function(e) {
+                    let idx = e.activeIndex;
+                    
+                    if (idx === 0) {
+                        nav.classList.add('first-slide');
+                    } else {
+                        nav.classList.remove('first-slide');
+                    }
+                }
+            },            
         });
     };
-
-    
 
 }, false)

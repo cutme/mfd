@@ -13,6 +13,9 @@
   -moz-osx-font-smoothing: grayscale;
   }
 }
+.icon-cookies:before {
+  content: "\e903";
+}
 .icon-arrow-right:before {
   content: "\e900";
 }

@@ -1,6 +1,7 @@
 .c-team {
     padding-top: 140px;
-    padding-bottom: 2380px;
+    padding-bottom: 120px;
+    //padding-bottom: 2380px;
     
 /*
     @media ( min-width: $tablet + px ) {
@@ -10,7 +11,7 @@
 
     @media ( max-width: $base + px ) {
         @include responsive-padding-top(base(140), rem(100));
-    	@include responsive-padding-bottom(base(280), rem(100));
+    	@include responsive-padding-bottom(base(120), rem(100));
     }
     
     @media ( max-width: $tablet - 1px ) {

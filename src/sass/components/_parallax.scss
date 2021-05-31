@@ -11,8 +11,11 @@
             image: url(../img/parallax/train-with-logo.jpg);
             size: cover;
             repeat: no-repeat;
-            attachment: fixed;
             position: center;
+        }
+        
+        .desktop & {
+            background-attachment: fixed;
         }
     }
 }

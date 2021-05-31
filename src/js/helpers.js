@@ -32,38 +32,41 @@ import customSelect from 'custom-select';
     
             const cstSel = customSelect(select);
             
-            const departments = document.getElementsByClassName('js-departments')[0],
-                  departments__address = departments.getElementsByTagName('li');
-
-
-            for (let i = 0; i < select.length; i ++) {
-
-                cstSel[i].container.addEventListener('custom-select:open', (e) => { 
-                    e.target.parentNode.style.position = 'relative';
-                    e.target.parentNode.style.zIndex = '5';
-                });
-                
-                cstSel[i].container.addEventListener('custom-select:close', (e) => { 
-                    e.target.parentNode.removeAttribute('style');
-                });
-                
-                // Contact Departments section
-                
-                cstSel[i].select.addEventListener('change', (e) => { 
-                    let target = cstSel[i].value;
+            const departments = document.getElementsByClassName('js-departments')[0];
+            
+            if (departments) {
+            
+                const departments__address = departments.getElementsByTagName('li');
+    
+                for (let i = 0; i < select.length; i ++) {
+    
+                    cstSel[i].container.addEventListener('custom-select:open', (e) => { 
+                        e.target.parentNode.style.position = 'relative';
+                        e.target.parentNode.style.zIndex = '5';
+                    });
                     
-                    for (let i = 0; i < departments__address.length; i++) {
+                    cstSel[i].container.addEventListener('custom-select:close', (e) => { 
+                        e.target.parentNode.removeAttribute('style');
+                    });
+                    
+                    // Contact Departments section
+                    
+                    cstSel[i].select.addEventListener('change', (e) => { 
+                        let target = cstSel[i].value;
                         
-                        if (departments__address[i].classList.contains('is-active') ) {
-                            departments__address[i].classList.remove('is-active', 'is-visible');
-
-                            departments__address[target].classList.add('is-active');
-                            setTimeout(function() {
-                                departments__address[target].classList.add('is-visible');
-                            }, 10);
-                        }                        
-                    }
-                });
+                        for (let i = 0; i < departments__address.length; i++) {
+                            
+                            if (departments__address[i].classList.contains('is-active') ) {
+                                departments__address[i].classList.remove('is-active', 'is-visible');
+    
+                                departments__address[target].classList.add('is-active');
+                                setTimeout(function() {
+                                    departments__address[target].classList.add('is-visible');
+                                }, 10);
+                            }                        
+                        }
+                    });
+                }
             }
         };
                 

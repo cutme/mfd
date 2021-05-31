@@ -4,12 +4,19 @@ gsap.registerPlugin(ScrollToPlugin);
 
 document.addEventListener('DOMContentLoaded',function() {
 
-    window.gototarget = function(src) {
+    window.gototarget = function(src, off) {
         
         document.documentElement.classList.add('no-anim');
 
         let target = src,
-            topbar_height = document.getElementsByClassName('js-topbar')[0].clientHeight;
+            topbar_height = document.getElementsByClassName('js-topbar')[0].clientHeight,
+            offset = 0;
+            
+        if (off != undefined) {
+            offset = off;
+        } else {
+            offset = topbar_height;
+        }
         
         const action = function(obj) {            
             
@@ -20,7 +27,7 @@ document.addEventListener('DOMContentLoaded',function() {
             gsap.to(window, { 
                 duration: 2, scrollTo: { 
                     y: target, 
-                    offsetY: topbar_height
+                    offsetY: offset
                 }, 
                 ease: Power4.easeOut,
                 onComplete: function() {

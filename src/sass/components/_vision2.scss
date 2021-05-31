@@ -40,7 +40,7 @@
         @extend %flex;
         height: 100%;
         max-width: 440px;
-        padding-top: 50%;
+        padding-top: 70%;
         
         @media ( max-width: $tablet - 1px ) {
         	padding-left: 20px;
@@ -58,8 +58,9 @@
             @extend %anim;
             transform: translate3d(10px, 0, 0);
             
-            @media ( max-width: $base + px ) {
-            	//@include responsive-font(base(24), rem(14));
+            @media ( max-width: $tablet + px ) {
+                font-size: rem(18);
+            	//@include responsive-font(base(19.2), rem(14));
             }
 
             &:not(.is-active) {

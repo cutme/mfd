@@ -1,15 +1,10 @@
 .c-topbar {
     @include z-index(topbar);
     @extend %abs;
-    //@extend %anim;
     left: 0; bottom: 1px;
     width: 100%;
     height: 110px;
     background-color: $c-gray-01;
-    
-    //transition: all .5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    //transform: translate3d(0, 100%, 0);
-    //opacity: 0;
     
     &.is-green {
         background-color: $c-green-01;
@@ -32,6 +27,12 @@
     }
     
     &.is-fixed {
+        position: fixed;
+        left: 0;
+        top: 0;
+    }
+    
+    .subsite & {
         position: fixed;
         left: 0;
         top: 0;

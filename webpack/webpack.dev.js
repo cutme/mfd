@@ -29,6 +29,8 @@ app.use ((req, res, next) => {
 
 const templateFileMapper = [
     { template: "./src/index.ejs", file: "index.html" },
+    { template: "./src/privacy.ejs", file: "privacy.html" },
+    { template: "./src/term-of-use.ejs", file: "term-of-use.html" },
 ]
 
 

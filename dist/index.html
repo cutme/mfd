@@ -216,8 +216,6 @@
             
                     document.documentElement.removeAttribute('style');
                     document.documentElement.classList.add('is-loaded');
-            
-                    //window.anims();
                     
                     setTimeout(function() {
                        document.documentElement.classList.add('show-logo');
@@ -225,7 +223,7 @@
                        loading.remove();
                     }, 500);
                     
-                }, 350);
+                }, 850);
 
             };
         })(); 
@@ -318,6 +316,9 @@
 
     
     <div class="c-hero js-point bg-gray" id="hero">
+        
+        <div class="o-indicator"></div>
+        
         <div class="c-hero__lead o-header">
             <h1>
                 Modal
@@ -524,12 +525,14 @@
                 </li>
             </ul>
             
+<!--
             <ul class="o-hscroll__marquee o-hscroll__marquee--2">
                 <li>
                     <span>Fresh blood</span> <span>Greenfield approach</span> <span>Expertise</span> <span>Pure play intermodal</span> <span>Flexible leases</span>
                     <span>Fresh blood</span> <span>Greenfield approach</span> <span>Expertise</span> <span>Pure play intermodal</span> <span>Flexible leases</span>
                 </li>
             </ul>
+-->
         </div>
     </div>
 
@@ -549,18 +552,6 @@
                 
                 <div class="o-cols__item">
                     <ul class="c-team__people">
-                        <li>
-                            <figure>
-                                <div class="photo">
-                                    <img src="img/team/fabian.jpg" alt="fabian" width="307" height="497">
-                                </div>
-                                
-                                <figcaption>
-                                    <p>FABIAN STADLER</p>
-                                    <p>CEO / Managing Partner</p>
-                                </figcaption>
-                            </figure>
-                        </li>
                         
                         <li>
                             <figure>
@@ -587,6 +578,23 @@
                                 </figcaption>
                             </figure>
                         </li>
+                        
+                        <li>
+                            <figure>
+                                <div class="photo">
+                                    <img src="img/team/fabian.jpg" alt="fabian" width="307" height="497">
+                                </div>
+                                
+                                <figcaption>
+                                    <p>FABIAN STADLER</p>
+                                    <p>CEO / Managing Partner</p>
+                                </figcaption>
+                            </figure>
+                        </li>
+                        
+                        
+                        
+                        
 
                         <li>
                             <figure>
@@ -678,8 +686,6 @@
 
     
     <div class="c-value0 js-point" id="value0">
-        <h2 class="o-section">Value proposition</h2>
-
         <div class="c-value0__photo">
             <i></i>
             <img src="img/value/landscape.jpg" alt="landscape" width="1929" height="860">
@@ -889,7 +895,7 @@ Bring transparency and flexibility into leasing and maintenance concepts.</p>
     </div>
 
     
-    <div class="c-fleet2 bg-green">
+    <div class="c-fleet2 bg-green" id="fleet2">
         <div class="o-container">
             <h2 class="o-section">Fleet</h2>
 
@@ -1201,8 +1207,9 @@ CHARGE OF MAINTENANCE</h2>
 
                 <div class="c-details__container">
                     <div class="c-details__models c-details__models--desktop">
-
+                        
                         <div class="c-details__header">
+                            <a href="#" class="o-lessbtn icon-arrow-right js-toggleDetails"></a>
                             <p>none-mileage related services</p>
                             <p>mileage related services</p>
                         </div>
@@ -1683,8 +1690,9 @@ for your account</li>
                                 </div>
                             </div>
                             
-                            <nav class="o-nav">
+                            <nav class="o-nav js-detailsNav first-slide">
                                 <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-prev--details js-toggleDetails"></div>
                                 <div class="swiper-button-next"></div>
                             </nav>
                         </div>
@@ -2002,7 +2010,7 @@ for your account</li>
     </div>
     
         
-    <div class="c-careers bg-green">
+    <div class="c-careers bg-green" id="career">
         <div class="o-container">
             <h2 class="o-section">Careers</h2>
 
@@ -2078,11 +2086,11 @@ for your account</li>
                                 <nav class="c-footer__nav">
                                     <ul>
                                         <li>
-                                            <a href="#">Term of Use</a>
+                                            <a href="term-of-use.html">Term of Use</a>
                                         </li>
                                         
                                         <li>
-                                            <a href="#">Privacy Information Notice</a>
+                                            <a href="privacy.html">Privacy Information Notice</a>
                                         </li>
                                     </ul>
                                 </nav>

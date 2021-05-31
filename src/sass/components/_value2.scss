@@ -242,7 +242,9 @@
     }
     
     .o-nav {
-        
+        @media ( min-width: $tablet + px ) {
+        	display: none;
+        }
         
         @media ( max-width: $smartphone + px ) {
         	padding: 0;

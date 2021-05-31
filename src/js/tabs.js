@@ -43,8 +43,21 @@ document.addEventListener('DOMContentLoaded',function() {
 
             for (let j = 0; j < navItem.length; j ++) {
                 navItem[j].addEventListener('click', function() {
-                    showTab(thisindex(this), contentItem, navItem);
-                    this.classList.add('is-active');
+                    
+                    if (window.innerWidth < 1024) {
+                        showTab(thisindex(this), contentItem, navItem);
+                        this.classList.add('is-active');
+                    }
+                });
+                
+                navItem[j].addEventListener('mouseover', function() {
+                    
+                    if (window.innerWidth >= 1024) {
+                        if (!this.classList.contains('is-active')) {
+                            showTab(thisindex(this), contentItem, navItem);
+                        }
+                        this.classList.add('is-active');
+                    }
                 });
             }
         }
